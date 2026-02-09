@@ -1,0 +1,102 @@
+% LaTeX Template for USAJobs resume builder-style federal resume
+\documentclass[letterpaper,12pt]{fed-res}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=NoCommon}
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+%	HEADING INFORMATION
+%-------------------------------------------------------------------------------
+\begin{center}
+    \textbf{\Huge \scshape ((( resume.name|latex_escape )))} \\ \vspace{1pt}
+    ((( resume.address|latex_escape ))) \\ \vspace{1pt}
+    ((( resume.phone|latex_escape ))) ((% if resume.cell_phone %)) $|$ ((( resume.cell_phone|latex_escape ))) ((% endif %)) $|$ ((( resume.email|latex_escape )))
+\end{center}
+
+\vspace{5pt}
+((% if resume.announcement_number %))
+ANNOUNCEMENT NUMBER: ((( resume.announcement_number|latex_escape ))) \\ \vspace{1pt}
+((% endif %))
+Veteran's Preference: ((( resume.veterans_preference|default('N/A')|latex_escape ))) $|$ Federal Employment Status: ((( resume.federal_employment_status|default('N/A')|latex_escape ))) $|$ Citizenship: ((( resume.citizenship|default('US')|latex_escape )))
+
+%-------------------------------------------------------------------------------
+%	RESUME CONTENT
+%-------------------------------------------------------------------------------
+
+%-----------WORK EXPERIENCE----------- 
+\section{Work Experience}
+((% for exp in resume.experience %))
+\textbf{((( exp.company|latex_escape )))} \hfill ((( exp.start_date|latex_escape ))) -- ((( exp.end_date|latex_escape )))\\
+\textit{((( exp.title|latex_escape )))} \hfill ((( exp.location|latex_escape )))\\
+Supervisor: ((( exp.supervisor|default('N/A')|latex_escape ))) ((( exp.phone|default('')|latex_escape ))) \quad\textbar\quad ((( exp.hours_per_week|default('')|latex_escape ))), ((( exp.salary|default('')|latex_escape )))\\
+
+((% if exp.details %))
+((( exp.details|latex_escape )))\\
+((% endif %))
+
+\begin{itemize}[leftmargin=0.2in, itemsep=2pt, topsep=2pt]
+((% for bullet in exp.bullets %))
+  \item ((( bullet|latex_escape )))
+((% endfor %))
+\end{itemize}
+\vspace{0.5em}
+((% endfor %))
+
+%-----------EDUCATION----------- 
+\section{Education}
+((% for edu in resume.education %))
+\textbf{((( edu.school|latex_escape )))} \hfill ((( edu.date|latex_escape )))\\
+\textit{((( edu.degree|latex_escape )))} ((% if edu.gpa %)) (GPA: ((( edu.gpa ))) ) ((% endif %)) \hfill ((( edu.location|default('')|latex_escape )))\\
+((% if edu.focus %))
+Focus: ((( edu.focus|latex_escape )))\\
+((% endif %))
+\vspace{0.5em}
+((% endfor %))
+
+%-----------JOB RELATED TRAINING-----------
+((% if resume.training or resume.certifications %))
+\section{Job Related Training \& Certifications}
+\begin{itemize}[leftmargin=0.2in, itemsep=2pt]
+((% for item in resume.training %))
+  \item ((( item|latex_escape )))
+((% endfor %))
+((% for item in resume.certifications %))
+  \item ((( item|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+
+%-----------AWARDS-----------
+((% if resume.awards %))
+\section{Honors \& Awards}
+\begin{itemize}[leftmargin=0.2in, itemsep=2pt]
+((% for award in resume.awards %))
+  \item ((( award|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+
+%-----------SKILLS-----------
+((% if resume.skills or resume.technical_skills %))
+\section{Skills}
+\begin{description}[leftmargin=0.2in]
+     ((% if resume.skills %))
+     \item[General:] ((( resume.skills|join(', ')|latex_escape )))
+     ((% endif %))
+     ((% if resume.technical_skills %))
+       ((% for cat, list in resume.technical_skills.items() %))
+         \item[((( cat|latex_escape ))):] ((( list|join(', ')|latex_escape )))
+       ((% endfor %))
+     ((% endif %))
+\end{description}
+((% endif %))
+
+%-----------ADDITIONAL INFORMATION-----------
+((% if resume.additional_info %))
+\section{Additional Information}
+((( resume.additional_info|latex_escape )))
+((% endif %))
+
+\end{document}

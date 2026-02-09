@@ -1,0 +1,6 @@
+pdfplumber
+argparse
+pathlib
+jinja2
+rapidfuzz
+python-docx

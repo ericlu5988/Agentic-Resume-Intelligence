@@ -1,0 +1,18 @@
+#!/bin/bash
+# Agent Run Interface (ARI) - Standardized execution wrapper
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Ensure the image is built
+if [[ "$(docker images -q resume-tools:latest 2> /dev/null)" == "" ]]; then
+    echo "Building tool container..."
+    docker build -t resume-tools "$SCRIPT_DIR"
+fi
+
+# Run the tool in Docker
+docker run --rm \
+    -v "$PROJECT_ROOT:/app" \
+    -w "/app" \
+    --user $(id -u):$(id -g) \
+    resume-tools "$@"

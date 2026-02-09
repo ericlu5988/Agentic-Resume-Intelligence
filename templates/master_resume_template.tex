@@ -1,0 +1,156 @@
+\documentclass[9pt]{article}
+
+% ---------------------------------------------------------
+% USER CONFIGURATION
+% ---------------------------------------------------------
+\newcommand{\myname}{((( resume.name|latex_escape )))}
+\newcommand{\myclearance}{((( resume.clearance|latex_escape )))}
+\newcommand{\mylocation}{((( resume.location|latex_escape )))}
+\newcommand{\myphone}{((( resume.phone|latex_escape )))}
+\newcommand{\myemail}{((( resume.email|latex_escape )))}
+\newcommand{\mylinkedin}{((( resume.linkedin|latex_escape )))}
+
+% ---------------------------------------------------------
+% FONT & FORMATTING
+% ---------------------------------------------------------
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{ebgaramond}
+
+\usepackage{enumitem}
+\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt}
+
+\usepackage{multicol}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\usepackage{setspace}
+\singlespacing
+ 
+\setlength{\parindent}{0pt}
+\setstretch{1.05}
+
+% Bullet formatting
+\setlist[itemize]{leftmargin=0.3in, itemsep=2pt}
+
+\usepackage{titlesec}
+
+% Section formatting
+\titleformat*{\section}{\centering\large\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+
+% ---------------------------------------------------------
+% CUSTOM ENVIRONMENTS / COMMANDS
+% ---------------------------------------------------------
+
+% Consistent list environment for resume bullets
+\newenvironment{resumeItemList}{%
+  \begin{itemize}[leftmargin=0.25in, itemsep=2pt, topsep=2pt]
+}{%
+  \end{itemize}
+}
+
+% Handy macro for role header lines:
+\newcommand{\role}[5]{%
+  \textbf{#1} -- #2 \quad\textbar\quad \textit{\textbf{#3}} \quad\textbar\quad #4 -- #5%
+}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% HEADER
+% ---------------------------------------------------------
+\begin{center}
+    {\Large \textbf{\myname}}\\[4pt]
+    \myclearance \quad\textbar\quad \mylocation \\
+    \myphone \quad\textbar\quad \href{mailto:\myemail}{\myemail} \quad\textbar\quad \href{https://\mylinkedin}{\mylinkedin}
+\end{center}
+
+\vspace{0.5em}
+\hrule
+\vspace{0.75em}
+
+% ---------------------------------------------------------
+\section*{PROFESSIONAL SUMMARY}
+
+((( resume.summary|latex_escape )))
+
+% ---------------------------------------------------------
+((% if resume.skills %))
+\section*{SKILLS}
+
+\setlength{\columnsep}{1em}
+\begin{multicols}{3}
+\begin{itemize}[leftmargin=*, rightmargin=0pt, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+\small
+((% for skill in resume.skills %))
+  \item ((( skill|latex_escape )))
+((% endfor %))
+\end{itemize}
+\end{multicols}
+((% endif %))
+
+% ---------------------------------------------------------
+\section*{PROFESSIONAL EXPERIENCE}
+
+((% for exp in resume.experience %))
+\role{((( exp.company|latex_escape )))}{((( exp.location|latex_escape )))}{((( exp.title|latex_escape )))}{((( exp.start_date|latex_escape )))}{((( exp.end_date|latex_escape )))}
+((% if exp.details %))\\ \small{\textit{((( exp.details|latex_escape )))}}((% endif %))
+\begin{resumeItemList}
+((% for bullet in exp.bullets %))
+  \item {((( bullet|latex_escape )))}
+((% endfor %))
+\end{resumeItemList}
+\vspace{0.5em}
+((% endfor %))
+
+% ---------------------------------------------------------
+\section*{EDUCATION}
+
+\begin{center}
+((% for edu in resume.education %))
+\textbf{((( edu.degree|latex_escape )))} \quad\textbar\quad ((( edu.school|latex_escape ))) \quad\textbar\quad ((( edu.date|latex_escape ))) ((% if edu.gpa %))\quad\textbar\quad GPA: ((( edu.gpa )))((% endif %))\\
+((% if edu.focus %))\textit{Focus: ((( edu.focus|latex_escape )))}\\((% endif %))
+((% endfor %))
+\end{center}
+
+% ---------------------------------------------------------
+\section*{CERTIFICATIONS}
+
+\begin{multicols}{2}
+\small
+\begin{itemize}[leftmargin=0.15in]
+((% for cert in resume.certifications %))
+  \item ((( cert|latex_escape )))
+((% endfor %))
+\end{itemize}
+\end{multicols}
+
+% ---------------------------------------------------------
+((% if resume.technical_skills %))
+\section*{TECHNICAL SKILLS}
+
+\begin{center}
+\small
+((% for cat, skills in resume.technical_skills.items() -%))
+\textbf{((( cat|latex_escape )))} \quad\textbar\quad ((( skills|map('latex_escape')|join(' • ') )))\\
+((% endfor %))
+\end{center}
+((% endif %))
+
+% ---------------------------------------------------------
+((% if resume.awards %))
+\section*{AWARDS \& RECOGNITION}
+
+\begin{center}
+\small
+((% for award in resume.awards -%))
+((( award|latex_escape )))\\
+((% endfor %))
+\end{center}
+((% endif %))
+
+\end{document}

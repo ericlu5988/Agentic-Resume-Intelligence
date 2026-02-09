@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+
+% ---------------------------------------------------------
+% USER CONFIGURATION
+% ---------------------------------------------------------
+\newcommand{\myname}{((( resume.name|latex_escape )))}
+\newcommand{\mycontact}{((( resume.contact|latex_escape )))}
+
+% ---------------------------------------------------------
+% FONT & FORMATTING
+% ---------------------------------------------------------
+\usepackage[margin=0.75in]{geometry}
+\usepackage{helvet} % Standard sans-serif similar to Arial/Calibri
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, parsep=0pt, topsep=2pt, partopsep=0pt}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{titlesec}
+
+% Minimalist section formatting to mimic Word headers
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\begin{document}
+
+% ---------------------------------------------------------
+% HEADER
+% ---------------------------------------------------------
+\begin{center}
+    {\huge \textbf{\myname}}\\[6pt]
+    \mycontact
+\end{center}
+
+\vspace{1em}
+
+% ---------------------------------------------------------
+% DYNAMIC SECTIONS
+% ---------------------------------------------------------
+((% for section in resume.sections %))
+\section*{((( section.title|upper|latex_escape )))}
+((% if section.content %))
+((( section.content )))
+((% endif %))
+
+((% if section.list_items %))
+\begin{itemize}[leftmargin=0.25in]
+((% for item in section.list_items %))
+  \item ((( item|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+
+\vspace{0.5em}
+((% endfor %))
+
+\end{document}
