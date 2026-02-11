@@ -1,6 +1,7 @@
 # Staging Area
 imports/*
 !imports/.gitkeep
+!imports/johnny_silverhand.pdf
 
 # Data Sources & LaTeX Artifacts
 data/json/*
@@ -51,6 +52,7 @@ __pycache__/
 *.toc
 # Ignore PDFs globally EXCEPT our whitelisted examples
 *.pdf
+!imports/johnny_silverhand.pdf
 !outputs/resume/johnny_silverhand.pdf
 !outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf
 *.synctex.gz
