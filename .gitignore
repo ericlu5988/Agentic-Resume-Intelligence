@@ -1,7 +1,6 @@
 # Personal Data & Master JSONs
 data/*
 !data/masters/
-!data/masters/*.json
 !data/masters/.gitkeep
 
 # Staging Area for Raw Resumes
