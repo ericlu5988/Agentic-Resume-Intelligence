@@ -17,50 +17,22 @@ def compile_latex(tex_file_path):
 
     print(f"Compiling {filename} in {work_dir}...")
 
-    # Detect if running inside docker
-    in_docker = os.path.exists('/.dockerenv')
-
-    if in_docker:
-        print("Detected Docker environment, running xelatex locally...")
-        local_cmd = [
-            "xelatex", "-interaction=nonstopmode", f"-jobname={jobname}", filename
-        ]
-        try:
-            result = subprocess.run(local_cmd, cwd=work_dir, capture_output=True, text=True)
-            if result.returncode != 0:
-                print("LaTeX compilation failed.")
-                print("STDOUT:", result.stdout)
-                print("STDERR:", result.stderr)
-                return False
-        except Exception as e:
-            print(f"An error occurred during local compilation: {e}")
+    # Assumes we are running in an environment with xelatex (via ARI)
+    local_cmd = [
+        "xelatex", "-interaction=nonstopmode", f"-jobname={jobname}", filename
+    ]
+    
+    try:
+        # Run twice for cross-references if needed
+        result = subprocess.run(local_cmd, cwd=work_dir, capture_output=True, text=True)
+        if result.returncode != 0:
+            print("LaTeX compilation failed.")
+            print("STDOUT:", result.stdout)
+            print("STDERR:", result.stderr)
             return False
-    else:
-        # Check if docker is available
-        try:
-            subprocess.run(["docker", "--version"], capture_output=True, check=True)
-        except (subprocess.CalledProcessError, FileNotFoundError):
-            print("Error: Docker is not installed or not in PATH.")
-            return False
-
-        docker_cmd = [
-            "docker", "run", "--rm",
-            "-v", f"{work_dir}:/work",
-            "-w", "/work",
-            "texlive/texlive",
-            "xelatex", "-interaction=nonstopmode", f"-jobname={jobname}", filename
-        ]
-        try:
-            print("Running LaTeX compilation via Docker...")
-            result = subprocess.run(docker_cmd, capture_output=True, text=True)
-            if result.returncode != 0:
-                print("LaTeX compilation failed.")
-                print("STDOUT:", result.stdout)
-                print("STDERR:", result.stderr)
-                return False
-        except Exception as e:
-            print(f"An error occurred during docker compilation: {e}")
-            return False
+    except Exception as e:
+        print(f"An error occurred during compilation: {e}")
+        return False
 
     pdf_file = work_dir / f"{jobname}.pdf"
     if pdf_file.exists():
@@ -76,7 +48,7 @@ def compile_latex(tex_file_path):
         return False
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Compile a LaTeX file using Docker.")
+    parser = argparse.ArgumentParser(description="Compile a LaTeX file.")
     parser.add_argument("tex_file", help="Path to the .tex file to compile")
     args = parser.parse_args()
 

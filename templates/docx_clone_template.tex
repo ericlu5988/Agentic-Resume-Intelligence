@@ -1,16 +1,22 @@
-\documentclass[10pt]{article}
+\documentclass[10pt,letterpaper]{article}
 
 % ---------------------------------------------------------
 % USER CONFIGURATION
 % ---------------------------------------------------------
 \newcommand{\myname}{((( resume.name|latex_escape )))}
-\newcommand{\mycontact}{((( resume.contact|latex_escape )))}
+\newcommand{\myphone}{((( resume.phone|latex_escape )))}
+\newcommand{\myemail}{((( resume.email|latex_escape )))}
+\newcommand{\mylocation}{((( resume.location|latex_escape )))}
+\newcommand{\mylinkedin}{((( resume.linkedin|latex_escape )))}
+((% if resume.clearance %))
+\newcommand{\myclearance}{((( resume.clearance|latex_escape )))}
+((% endif %))
 
 % ---------------------------------------------------------
 % FONT & FORMATTING
 % ---------------------------------------------------------
 \usepackage[margin=0.75in]{geometry}
-\usepackage{helvet} % Standard sans-serif similar to Arial/Calibri
+\usepackage{helvet} 
 \renewcommand{\familydefault}{\sfdefault}
 
 \usepackage{enumitem}
@@ -20,7 +26,7 @@
 \usepackage{parskip}
 \usepackage{titlesec}
 
-% Minimalist section formatting to mimic Word headers
+% Minimalist section formatting
 \titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
 \titlespacing*{\section}{0pt}{12pt}{6pt}
 
@@ -30,20 +36,67 @@
 % HEADER
 % ---------------------------------------------------------
 \begin{center}
-    {\huge \textbf{\myname}}\\[6pt]
-    \mycontact
+    {\huge \textbf{\myname}}\\[4pt]
+    ((( [myphone, myemail, mylocation, mylinkedin]|select|join(' \quad\textbar\quad ') )))
+    ((% if resume.clearance %))
+    \\[2pt] \textbf{\myclearance}
+    ((% endif %))
 \end{center}
 
-\vspace{1em}
+\vspace{0.5em}
 
 % ---------------------------------------------------------
-% DYNAMIC SECTIONS
+% PROFESSIONAL SUMMARY
 % ---------------------------------------------------------
-((% for section in resume.sections %))
-\section*{((( section.title|upper|latex_escape )))}
-((% if section.content %))
-((( section.content )))
+((% if resume.summary %))
+\section*{PROFESSIONAL SUMMARY}
+((( resume.summary|latex_escape )))
 ((% endif %))
+
+% ---------------------------------------------------------
+% SKILLS
+% ---------------------------------------------------------
+((% if resume.skills %))
+\section*{SKILLS}
+((( resume.skills|join(' \textbullet{} ')|latex_escape )))
+((% endif %))
+
+% ---------------------------------------------------------
+% EXPERIENCE
+% ---------------------------------------------------------
+\section*{PROFESSIONAL EXPERIENCE}
+((% for exp in resume.experience %))
+\textbf{((( exp.company|latex_escape )))} \hfill ((( exp.start_date|latex_escape ))) -- ((( exp.end_date|latex_escape ))) \\
+\textit{((( exp.title|latex_escape )))} \hfill ((( exp.location|latex_escape )))
+
+((% if exp.details %))
+\textit{((( exp.details|latex_escape )))}
+((% endif %))
+
+\begin{itemize}[leftmargin=0.25in]
+((% for bullet in exp.bullets %))
+  \item ((( bullet|latex_escape )))
+((% endfor %))
+\end{itemize}
+\vspace{0.5em}
+((% endfor %))
+
+% ---------------------------------------------------------
+% EDUCATION
+% ---------------------------------------------------------
+\section*{EDUCATION}
+((% for edu in resume.education %))
+\textbf{((( edu.school|latex_escape )))} \hfill ((( edu.date|latex_escape ))) \\
+((( edu.degree|latex_escape ))) ((% if edu.gpa %)) (GPA: ((( edu.gpa ))) ) ((% endif %)) \hfill ((( edu.location|default('')|latex_escape )))
+((% endfor %))
+
+% ---------------------------------------------------------
+% CUSTOM SECTIONS (FOR AGENT-LED MAPPING)
+% ---------------------------------------------------------
+((% if resume.custom_sections %))
+((% for section in resume.custom_sections %))
+\section*{((( section.title|upper|latex_escape )))}
+((( section.content )))
 
 ((% if section.list_items %))
 \begin{itemize}[leftmargin=0.25in]
@@ -52,8 +105,27 @@
 ((% endfor %))
 \end{itemize}
 ((% endif %))
-
 \vspace{0.5em}
 ((% endfor %))
+((% endif %))
+
+% ---------------------------------------------------------
+% OTHER
+% ---------------------------------------------------------
+((% if resume.certifications %))
+\section*{CERTIFICATIONS}
+\begin{itemize}[leftmargin=0.25in]
+((% for cert in resume.certifications %))
+  \item ((( cert|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+
+((% if resume.technical_skills %))
+\section*{TECHNICAL SKILLS}
+((% for cat, skills in resume.technical_skills.items() %))
+\textbf{((( cat|latex_escape )))}: ((( skills|join(' \textbullet{} ')|latex_escape ))) \\
+((% endfor %))
+((% endif %))
 
 \end{document}

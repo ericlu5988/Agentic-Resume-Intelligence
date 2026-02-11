@@ -94,6 +94,22 @@ Focus: ((( edu.focus|latex_escape )))\\
 ((% endif %))
 
 %-----------ADDITIONAL INFORMATION-----------
+((% if resume.custom_sections %))
+((% for section in resume.custom_sections %))
+\section{((( section.title|latex_escape )))}
+((( section.content|latex_escape )))
+
+((% if section.list_items %))
+\begin{itemize}[leftmargin=0.2in, itemsep=2pt]
+((% for item in section.list_items %))
+  \item ((( item|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+\vspace{0.5em}
+((% endfor %))
+((% endif %))
+
 ((% if resume.additional_info %))
 \section{Additional Information}
 ((( resume.additional_info|latex_escape )))

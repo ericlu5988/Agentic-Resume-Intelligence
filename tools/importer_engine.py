@@ -5,56 +5,19 @@ import argparse
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
-def escape_latex(text):
-    """
-    Escapes special LaTeX characters using raw string literals to prevent 
-    backslash collisions (e.g., \t interpreted as tab).
-    """
-    if not isinstance(text, str):
-        return text
-    
-    # We remove the bullet from here because modern LaTeX handles UTF-8 bullets
-    # and we want to join skills with literal bullets in the template.
-    mapping = {
-        '&': r'\&',
-        '%': r'\%',
-        '$': r'\$',
-        '#': r'\#',
-        '_': r'\_',
-        '{': r'\{',
-        '}': r'\}',
-        '~': r'\textasciitilde{}',
-        '^': r'\textasciicircum{}',
-        '\\': r'\textbackslash{}',
-        '|': r'\textbar{}',
-    }
-    text = "".join(mapping.get(c, c) for c in text)
-    
-    # Disable problematic ligatures for fidelity audit matching
-    ligature_map = {
-        'ff': 'f{f}',
-        'fi': 'f{i}',
-        'fl': 'f{l}',
-        'ffi': 'f{f}{i}',
-        'ffl': 'f{f}{l}',
-    }
-    for k, v in ligature_map.items():
-        text = text.replace(k, v)
-        
-    return text
+# Import shared utils
+sys.path.append(str(Path(__file__).parent))
+from lib.utils import escape_latex, validate_master_path
 
 def run_engine(data_path, template_path, output_path):
     # Path Validation: Enforce Source of Truth
-    data_p = Path(data_path).resolve()
-    if "data/masters" not in str(data_p):
-        print(f"WARNING: Source JSON '{data_path}' is outside 'data/masters/'.", file=sys.stderr)
-        print("This violates the 'Source of Truth' standard.", file=sys.stderr)
+    data_p = validate_master_path(data_path)
 
-    # Load data with explicit UTF-8
-    with open(data_path, 'r', encoding='utf-8') as f:
+    # Load data
+    with open(data_p, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    # Self-healing: Unwrap "resume" key if it's the sole root to prevent nesting errors
+    # Self-healing
     if "resume" in data and len(data) == 1:
         data = data["resume"]
 
@@ -76,7 +39,7 @@ def run_engine(data_path, template_path, output_path):
     # Render
     rendered = template.render(resume=data)
 
-    # Save with explicit UTF-8
+    # Save
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(rendered)
     print(f"Successfully generated: {output_path}")

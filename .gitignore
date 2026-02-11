@@ -1,0 +1,40 @@
+# Personal Data & Master JSONs
+data/*
+!data/masters/
+!data/masters/*.json
+!data/masters/.gitkeep
+
+# Staging Area for Raw Resumes
+imports/*
+!imports/.gitkeep
+
+# Tailored Outputs (PDFs, Strategy Dossiers, LaTeX)
+output/*
+!output/.gitkeep
+
+# Agent Runtime Data
+.gemini/
+.claude/
+.windsurf/
+
+# Environment & Secrets
+.env
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# LaTeX Auxiliary Files
+*.aux
+*.log
+*.out
+*.toc
+*.pdf
+*.synctex.gz
+
+# OS Specific
+.DS_Store
+Thumbs.db

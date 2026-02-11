@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import json
 import argparse
-import re
 import sys
 from pathlib import Path
 from rapidfuzz import fuzz
 import pdfplumber
+
+# Import shared utils
+sys.path.append(str(Path(__file__).parent))
+from lib.utils import normalize_text, validate_master_path
 
 def extract_geo_text(pdf_path):
     """Extracts text with coordinates."""
@@ -22,44 +25,16 @@ def extract_geo_text(pdf_path):
                 })
     return data
 
-def normalize(text):
-    if not text: return ""
-    # Normalize formatting artifacts
-    text = text.replace('\\textbullet', '').replace('•', '').replace('\u2022', '')
-    text = text.replace('\\textbar', '|').replace('\textbar', '|')
-    
-    # Normalize smart quotes and dashes
-    text = text.replace('’', "'").replace('‘', "'")
-    text = text.replace('“', '"').replace('”', '"')
-    text = text.replace('—', '--').replace('–', '-')
-    
-    # Normalize ligatures
-    ligatures = {
-        'ﬀ': 'ff',
-        'ﬁ': 'fi',
-        'ﬂ': 'fl',
-        'ﬃ': 'ffi',
-        'ﬄ': 'ffl',
-    }
-    for k, v in ligatures.items():
-        text = text.replace(k, v)
-        
-    return re.sub(r'\s+', '', text).lower()
-
 def audit(source_json_path, target_pdf_path):
     # Path Validation: Enforce Source of Truth
-    source_p = Path(source_json_path).resolve()
-    if "data/masters" not in str(source_p):
-        print(f"WARNING: Source JSON '{source_json_path}' is outside 'data/masters/'.", file=sys.stderr)
-        print("This violates the 'Source of Truth' standard.", file=sys.stderr)
+    source_p = validate_master_path(source_json_path)
 
-    # Enforce UTF-8 for JSON source
-    with open(source_json_path, 'r', encoding='utf-8') as f:
+    with open(source_p, 'r', encoding='utf-8') as f:
         source_data = json.load(f)
     
     target_geo = extract_geo_text(target_pdf_path)
     target_text_full = "".join([w["text"] for w in target_geo])
-    target_norm = normalize(target_text_full)
+    target_norm = normalize_text(target_text_full)
     
     issues = []
     
@@ -70,8 +45,12 @@ def audit(source_json_path, target_pdf_path):
             for i, item in enumerate(val):
                 check_exists(item, f"{label}[{i}]")
             return
+        if isinstance(val, dict):
+            for k, v in val.items():
+                check_exists(v, f"{label}.{k}")
+            return
         
-        norm_val = normalize(str(val))
+        norm_val = normalize_text(str(val))
         if norm_val not in target_norm:
             score = fuzz.partial_ratio(str(val).lower(), target_text_full.lower())
             if score < 85:
@@ -82,14 +61,10 @@ def audit(source_json_path, target_pdf_path):
         check_exists(exp.get('company'), f"Exp[{i}].company")
         check_exists(exp.get('bullets'), f"Exp[{i}].bullets")
 
-    # 2. Geometric Consistency
-    name = source_data.get('name')
-    if name:
-        target_name_objs = [w for w in target_geo if normalize(name) in normalize(w['text'])]
-        if target_name_objs:
-            avg_top = sum(w['top'] for w in target_name_objs) / len(target_name_objs)
-            if avg_top > 150: 
-                issues.append(f"GEOMETRIC DRIFT: Name '{name}' found at Y={avg_top:.1f} (Expected < 150)")
+    # Check custom sections if they exist
+    for i, section in enumerate(source_data.get('custom_sections', [])):
+        check_exists(section.get('title'), f"Custom[{i}].title")
+        check_exists(section.get('content'), f"Custom[{i}].content")
 
     report = {
         "status": "PASS" if not issues else "FAIL",

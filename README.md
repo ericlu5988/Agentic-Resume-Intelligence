@@ -27,7 +27,8 @@ Most AI resume tools rewrite your history or hallucinate experience. **Agentic R
 ---
 
 ## 🧩 The SAT Architecture
-This repository separates concerns to ensure accuracy and reproducibility:
+This repository separates concerns to ensure accuracy and reproducibility. For a deep dive into the design philosophy, development standards, and cross-platform logic, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
+
 - **Skills (The Instructions)**: Domain-specific SOPs (Standard Operating Procedures) in `skills/`.
 - **Agents (The Decision-Maker)**: Coordination logic (Gemini CLI, Claude Code, Windsurf, etc.).
 - **Tools (The Execution)**: Deterministic Python scripts in `tools/` executed via the **Agent Run Interface (ARI)**.
@@ -43,11 +44,12 @@ ALL tools MUST be executed via the ARI wrapper to ensure LaTeX and Python depend
 ## 🏗️ Standardized Data Flow
 The system enforces a strict "Source of Truth" standard to prevent data drift:
 
-`Import (PDF/DOCX) -> data/masters/ (JSON) -> templates/ (TeX) -> output/ (PDF) -> Audit`
+`imports/ (PDF/DOCX) -> data/masters/ (JSON) -> templates/ (TeX) -> output/ (PDF) -> Audit`
 
-1.  **data/masters/**: Immutable JSON "Sources of Truth". This is the only place baseline content lives.
-2.  **templates/**: LaTeX Blueprints (`.tex` and `.cls`). This contains the presentation logic only.
-3.  **output/**: Final PDF production, strategy dossiers, and audit logs.
+1.  **imports/**: Staging area for your existing resumes.
+2.  **data/masters/**: Immutable JSON "Sources of Truth".
+3.  **templates/**: LaTeX Blueprints (.tex and .cls).
+4.  **output/**: Final PDF production and audit logs.
 
 ---
 
@@ -79,22 +81,14 @@ This repository is optimized for use with AI agents.
    git clone https://github.com/ericlu5988/Agentic-Resume-Intelligence.git
    cd Agentic-Resume-Intelligence
    ```
-2. **Build the Tool Container**:
+2. **Initialize Workspace**:
+   ```bash
+   python3 tools/setup.py --gemini  # Use --gemini flag if using Gemini CLI
+   ```
+3. **Build the Tool Container**:
    The ARI auto-builds on first run, but you can pre-build it:
    ```bash
-   docker build -t resume-tools tools/
-   ```
-3. **Configuration**:
-   ```bash
-   chmod +x tools/ari
-   mkdir -p data/masters output
-   ```
-4. **Enable Skills (Gemini CLI)**:
-   ```bash
-   mkdir -p .gemini/skills
-   cp -r skills/* .gemini/skills/
-   /skills reload
-   /skills enable career-strategist resume-tailor-pro pdf-resume-importer docx-resume-importer
+   python3 tools/ari.py --help
    ```
 
 ---
