@@ -8,14 +8,12 @@ class TestImporterRegression(unittest.TestCase):
         """
         Ensures the engine produces character-perfect output compared to the Gold Master.
         """
-        project_root = Path(__file__).parent.parent.parent
-        json_path = "data/masters/Jon_Dix_master.json"
-        template_path = "templates/master_resume_template.tex"
-        gold_master_path = "tools/tests/gold_master_jon_dix.tex"
+        json_path = "data/json/johnny_silverhand.json"
+        template_path = "templates/built-in/default_template.tex"
+        gold_master_path = "data/latex/johnny_silverhand.tex"
         temp_output_path = "tools/tests/temp_regression_output.tex"
 
         # Run the engine
-        # We call the script directly since we are already inside the ARI/Docker environment when running tests
         cmd = [
             "python3", 
             "tools/importer_engine.py",

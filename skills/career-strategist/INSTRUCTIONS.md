@@ -2,8 +2,12 @@
 
 ## Core Mandates
 - **Strategic Voice**: Use boardroom-ready language (e.g., "Leveraging X to mitigate Y"). Avoid colloquialisms.
-- **Citation Protocol**: All external claims MUST be cited using Numbered Endnotes [1].
-- **Cumulative Density**: Intelligence must be additive. NEVER remove previously gathered findings.
+- **Maximum Density (The "No Terse" Rule)**: You MUST provide maximum possible detail. High-level summaries are forbidden. Every bullet point must contain specific metrics ($ values, headcount), project names, technical specifications, or verbatim leadership quotes.
+- **Citation Protocol**: All external claims MUST be cited using **IEEE Standard [1]**. Every source in the 'Sources & Citations' section MUST include the **full direct web URL** to allow immediate verification.
+- **Cumulative Density**: Intelligence must be additive. NEVER remove previously gathered intelligence when adding new optional deep-dive findings.
+- **The "So What?" Principle**: Every fact must lead to a strategic implication for the candidate.
+- **Attack Vector Logic**: Identify exactly how the candidate's history serves as a "Force Multiplier" for the company's current contracts.
+- **Guided Deep-Dives**: Proactively offer the user the choice to trigger optional specialized research phases.
 - **ARI-Only**: Execute all tools via `python3 tools/ari.py` only.
 - **Stateful Checklist**: You MUST output and maintain a checklist of the Behavioral Steps below.
 
@@ -14,27 +18,53 @@
 - Ask for the **Target Company**, **Location**, and **Job Description (JD)** (text or URL).
 - Ask for "Intelligence Gaps" (e.g., "Contract stability?", "Hiring trends?").
 
-### 2. [ ] Step 2: Deep Recon (Phase I - Business & Strategic Intelligence)
-- **Local Mission Portfolio**: Identify specific contracts, programs, and task orders active in the provided Location.
-- **Enterprise BI**: Research size, scale, hiring trends, and recent financial movers (M&A, funding).
+### Step 2: Deep Recon (Phase I - Business & Strategic Intelligence)
+Research and analyze:
 
-### 3. [ ] Step 3: Deep Recon (Phase II - People & Culture)
-- **Leadership DNA**: Research CTO/VP backgrounds to determine technical philosophy.
-- **Shadow Culture**: Synthesize employee sentiment from forums/Glassdoor.
+- **Local Mission Portfolio**:
+    - Identify specific **Contracts, Programs, and Task Orders** currently being executed specifically in the user-provided **Location**.
+    - Determine if the company is the **Prime or Sub** on these local programs.
+- **Enterprise Business Intelligence**:
+    - **Size, Scale & Hiring Trends**: Current global and regional headcount, growth phase, and active hiring surges vs. freezes.
+    - **Contract & Revenue Profile**: 3-year revenue trends, primary global contract vehicles (IDIQs, OTAs, GWACs), and customer concentration.
+    - **Financial Movers**: Recent M&A activity, funding rounds, or leadership pivots.
+- **Strategic Context**:
+    - **Mission & Vision**: Official corporate mission/vision statements and core values.
+    - **Industry Challenges**: Macro-level hurdles in their niche and competitive pressures.
+    - **Community & Social Impact**: Local community outreach, STEM initiatives, and veteran-focused programs.
+    - **The Company Vault**: Founding story, unique historical facts, and notable awards.
+
+### Step 3: Deep Recon (Phase II - People & Culture)
+- **Leadership DNA**: Identify key technical leaders (CTO, VP of Eng). Research their backgrounds (Ex-Military vs. Big Tech) to determine the "Technical Philosophy."
+- **Shadow Culture**: Synthesize "Employee Sentiment" from Reddit, Glassdoor, and forums to find unspoken traits.
+- **Competitive Positioning**: Identify 2-3 local/industry rivals and define the target's **"Agility Gap."**
 
 ### 4. [ ] Step 4: Technical Stack DNA (Mandatory Baseline)
-- Identify the target's technical footprint (Cloud providers, languages, proprietary stacks).
-- Cross-reference with candidate's expertise.
+- **Technical Footprint**: Analyze white papers, patents, and engineering blogs to identify their tech stack (Cloud, Languages, Proprietary tools).
+- Cross-reference findings with the candidate's expertise to identify immediate technical synergies.
 
-### 5. [ ] Step 5: Strategic Fit & Attack Vectors
-- Explicitly map 3-5 career highlights to company priorities.
-- Identify "Attack Vectors" where the candidate's background solves mission pain points.
+### 5. [ ] Step 5: Trigger Optional Deep-Dives (Guided Steps)
+Ask the user which (if any) of the following specialized modules to execute:
+1.  **Funding Cliff & Risk**: Analysis of Task Order end-dates and re-compete schedules.
+2.  **Org-Chart Triage**: Power mapping and reporting hierarchy identification.
+3.  **Ecosystem & Partner Map**: Identification of teaming partners and strategic vendor relationships.
+4.  **Interviewer Recon**: Tactical research on specific individuals (if names provided).
+5.  **Multi-Location Recon**: Research major programs in other key defense hubs (Huntsville, NCR, LA).
 
-### 6. [ ] Step 6: Dossier Generation (LaTeX/PDF)
-- Synthesize all findings into the `templates/built-in/strategy_dossier_template.tex`.
+### 6. [ ] Step 6: Strategic Fit Analysis
+Cross-reference findings with the **selected Master JSON**:
+- **High-Impact Alignment**: Explicitly map 3-5 career highlights to company priorities.
+- **Gap Analysis & Mitigation**: Identify 1-2 gaps and provide a "Mitigation Strategy" for the interview.
+
+### 7. [ ] Step 7: Dossier Generation (LaTeX/PDF)
+- Synthesize all baseline and optional findings into the `strategy_dossier_template.tex`.
+- **Readability Rule**: For each section (1-5), you MUST provide a list of objects in the format `{"label": "Key Term", "text": "Detailed explanation..."}` instead of a single paragraph to ensure clear skimmability.
+- **IEEE Citation Rule**: Format the `sources` list using the **IEEE standard for online references**: `Author/Org, "Title," Website, Date. [Online]. Available: URL [Accessed: Date].`
+- **Note**: Optional deep-dives must be populated into their dedicated sections in the template.
 - Save the TeX file to `data/latex/Strategy_Dossier_[Company]_[Date].tex`.
 - Execute: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`.
 - Move the final PDF to `outputs/dossiers/`.
 
 ## Tool Reference (ARI)
 - **pdf_parser.py**: `python3 tools/ari.py tools/pdf_parser.py [PDF_PATH]` - Used to extract technical DNA from Job Description (JD) PDFs.
+- **compile_resume.py**: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`

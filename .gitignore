@@ -1,18 +1,33 @@
-# Data Sources & LaTeX Artifacts
-data/*
-.tmp/*
+# Staging Area
 imports/*
+!imports/.gitkeep
+
+# Data Sources & LaTeX Artifacts
+data/json/*
+!data/json/.gitkeep
+!data/json/johnny_silverhand.json
+!data/json/palantir_johnny_silverhand_dossier.json
+
+data/latex/*
+!data/latex/.gitkeep
+!data/latex/johnny_silverhand.tex
+!data/latex/Strategy_Dossier_Palantir_Silverhand.tex
+
+.tmp/*
 
 # All Outputs
-outputs/*
+outputs/resume/*
+!outputs/resume/.gitkeep
+!outputs/resume/johnny_silverhand.pdf
+
+outputs/dossiers/*
+!outputs/dossiers/.gitkeep
+!outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf
 
 # Templates (Only built-in are tracked)
 templates/*
 !templates/built-in/
 !templates/built-in/**
-
-# Keep directories tracked via .gitkeep
-!**/ .gitkeep
 
 # Agent Runtime Data
 .gemini/
@@ -34,7 +49,10 @@ __pycache__/
 *.log
 *.out
 *.toc
+# Ignore PDFs globally EXCEPT our whitelisted examples
 *.pdf
+!outputs/resume/johnny_silverhand.pdf
+!outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf
 *.synctex.gz
 
 # OS Specific

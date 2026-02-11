@@ -6,6 +6,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{ebgaramond}
 \usepackage[hidelinks]{hyperref}
+\usepackage{xurl} % Allow long URLs to break anywhere
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -18,15 +19,15 @@
 % Header/Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\footnotesize 	extcolor{gray}{Mission Intelligence Dossier: ((( company|latex_escape )))}}
-head{\footnotesize 	extcolor{gray}{((( date|latex_escape )))}}
-\cfoot{	hepage}
-enewcommand{\headrulewidth}{0.4pt}
+\lhead{\footnotesize \textcolor{gray}{Mission Intelligence Dossier: ((( resume.company|latex_escape )))}}
+\rhead{\footnotesize \textcolor{gray}{((( resume.date|latex_escape )))}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
 
 % Section Styles
-	itleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[	itlerule]
-	itlespacing*{\section}{0pt}{12pt}{8pt}
-	itleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
+\titleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{8pt}
+\titleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
 
 % ---------------------------------------------------------
 \begin{document}
@@ -37,52 +38,140 @@
 \begin{titlepage}
     \centering
     \vspace*{2cm}
-    {\Huge \bfseries 	extcolor{briefblue}{Mission Intelligence Dossier}}\[1cm]
-    {\huge ((( company|latex_escape )))}\[0.5cm]
-    {\Large ((( location|latex_escape )))}\[2cm]
+    {\Huge \bfseries \textcolor{briefblue}{Mission Intelligence Dossier}}
+    
+    \vspace{1cm}
+    {\huge ((( resume.company|latex_escape )))}
+    
+    \vspace{0.5cm}
+    {\Large ((( resume.location|latex_escape )))}
     
     \vfill
     \begin{flushleft}
-    	extbf{Prepared for:} ((( candidate_name|latex_escape )))
-    	extbf{Date:} ((( date|latex_escape )))
-    	extbf{Classification:} Confidential Intelligence / For Interview Prep Only
+    \textbf{Prepared for:} ((( resume.candidate_name|latex_escape )))\\
+    \textbf{Date:} ((( resume.date|latex_escape )))\\
+    \textbf{Classification:} Confidential Intelligence / For Interview Prep Only
     \end{flushleft}
 \end{titlepage}
 
 % ---------------------------------------------------------
 \section*{Executive Summary}
-((( executive_summary|latex_escape )))
+((( resume.executive_summary|latex_escape )))
 
 % ---------------------------------------------------------
 \section*{1. Local Mission Portfolio}
-((( local_mission_portfolio|latex_escape )))
+((% if resume.local_mission_portfolio is string %))
+((( resume.local_mission_portfolio|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.local_mission_portfolio %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
 
 % ---------------------------------------------------------
 \section*{2. Enterprise Business Intelligence}
-((( enterprise_bi|latex_escape )))
+((% if resume.enterprise_bi is string %))
+((( resume.enterprise_bi|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.enterprise_bi %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
 
 % ---------------------------------------------------------
-\section*{3. Technical Stack DNA}
-((( technical_stack_dna|latex_escape )))
+\section*{3. People, Culture \& Strategic Context}
+((% if resume.strategic_context is string %))
+((( resume.strategic_context|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.strategic_context %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
 
 % ---------------------------------------------------------
-\section*{4. Strategic Context \& Culture}
-((( strategic_context|latex_escape )))
+\section*{4. Technical Stack DNA}
+((% if resume.technical_stack_dna is string %))
+((( resume.technical_stack_dna|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.technical_stack_dna %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
 
 % ---------------------------------------------------------
 \section*{5. Strategic Fit \& Attack Vectors}
-((( strategic_fit|latex_escape )))
+((% if resume.strategic_fit is string %))
+((( resume.strategic_fit|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.strategic_fit %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
 
 % ---------------------------------------------------------
-\section*{6. Interview Reconnaissance}
-((( interview_recon|latex_escape )))
+% OPTIONAL DEEP DIVES
+% ---------------------------------------------------------
+((% if resume.funding_risk %))
+\section*{6. Funding Cliff \& Risk Analysis}
+((% if resume.funding_risk is string %))
+((( resume.funding_risk|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.funding_risk %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+((% endif %))
+
+((% if resume.org_chart %))
+\section*{7. Organizational Hierarchy (Triage)}
+((% if resume.org_chart is string %))
+((( resume.org_chart|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.org_chart %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+((% endif %))
+
+((% if resume.ecosystem_map %))
+\section*{8. Ecosystem \& Partner Map}
+((% if resume.ecosystem_map is string %))
+((( resume.ecosystem_map|latex_escape )))
+((% else %))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for item in resume.ecosystem_map %))
+  \item \textbf{((( item.label|latex_escape )))}: ((( item.text|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endif %))
+((% endif %))
 
 % ---------------------------------------------------------
-\section*{7. Sources \& Citations}
+\section*{Interview Reconnaissance}
+((( resume.interview_recon|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{Sources \& Citations}
+{\raggedright
 \begin{enumerate}[label={[\arabic*]}]
-((% for source in sources %))
+((% for source in resume.sources %))
     \item ((( source|latex_escape )))
 ((% endfor %))
 \end{enumerate}
+}
 
 \end{document}

@@ -1,0 +1,79 @@
+{
+  "name": "Johnny Silverhand",
+  "real_name": "Robert John Linder",
+  "birth_date": "November 16, 1988",
+  "clearance": "Ex-Military (Deserter)",
+  "location": "Night City",
+  "phone": "N/A - Off-Grid",
+  "email": "burnitdown@samurai.nc",
+  "linkedin": "N/A - Anti-Corporate",
+  "summary": "Iconic Rockerboy, SAMURAI frontman, and anti-corporate revolutionary. Combat veteran of the Second Central American War (Nicaragua) with extensive experience in tactical sabotage, adversary emulation, and mass-market psychological operations. Known for high-impact social engineering through chrome-rock and orchestrating the 2023 Arasaka Tower 'Night City Holocaust'. Dedicated to dismantling corporate hegemony and exposing the 'Soulkiller' program. Note: Some historical accounts may vary due to engram memory unreliability.",
+  "skills": [
+    "Charismatic Leadership (+10)",
+    "Tactical Sabotage & Demolitions",
+    "Lead Guitar & Songwriting (+10)",
+    "Combat Proficiency (Malorian 3516 / CQC)",
+    "Cybernetic Integration & Interface Plugs",
+    "Hacking & Cyberdeck Operations"
+  ],
+  "experience": [
+    {
+      "company": "Militech (Militech-led Raid on Arasaka Tower)",
+      "location": "Night City",
+      "title": "Tactical Team Leader",
+      "start_date": "Aug 2023",
+      "end_date": "Aug 2023",
+      "bullets": [
+        "Co-led a Militech-backed assault on Arasaka Tower to deliver a 5-kiloton tactical nuke, effectively ending the Fourth Corporate War.",
+        "Coordinated with Morgan Blackhand and Rogue Amendiares for high-stakes urban infiltration and rooftop extraction.",
+        "Executed search and rescue mission for Alt Cunningham's consciousness within the Arasaka mainframe under intense combat conditions."
+      ]
+    },
+    {
+      "company": "SAMURAI",
+      "location": "Night City",
+      "title": "Frontman & Lead Guitar",
+      "start_date": "2003",
+      "end_date": "2008",
+      "bullets": [
+        "Co-founded the legendary chrome-rock band SAMURAI, achieving international fame and platinum record status.",
+        "Composed and performed 'Chippin' In', 'Never Fade Away', and 'A Like Supreme' - anthems of the anti-establishment movement.",
+        "Utilized global tours to broadcast anti-corporate messages and shift public perception of veterans disillusioned by war."
+      ]
+    },
+    {
+      "company": "U.S. Marine Corps (2nd Marine Division)",
+      "location": "Nicaragua",
+      "title": "Infantryman",
+      "start_date": "2003",
+      "end_date": "2003",
+      "bullets": [
+        "Deployed to the Second Central American War, participating in high-intensity jungle warfare and tactical raids.",
+        "Lost left arm in combat; successfully integrated a silver prosthetic, establishing the 'Silverhand' operational identity.",
+        "Exposed government corruption in the 2009 solo album 'SINS of Your Brothers' after deserting service."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Streets of Night City / Nomad Clans",
+      "degree": "Tactical Survival & Combat Training",
+      "date": "1988--2003",
+      "focus": "Small Arms, Survivalism, and Music Theory"
+    }
+  ],
+  "technical_skills": {
+    "Offensive Operations": ["Tactical Sabotage", "System Infiltration", "Demolitions", "Red Teaming"],
+    "Cyberware": ["Chromed Left Arm", "Sandevistan Boost", "Cyberoptics", "Interface Plugs"],
+    "Artistic": ["Lead Guitar", "Composition (+10)", "Mass Influence"]
+  },
+  "certifications": [
+    "DCRT (DoD Certified Red Team) --- Equivalent",
+    "SAMURAI Platinum Record (Multi-year)"
+  ],
+  "awards": [
+    "Night City Legend (Posthumous)",
+    "Breathtaking Achievement (Apparel Collection)",
+    "Ghost Story Status (Arasaka Corporation internal lore)"
+  ]
+}

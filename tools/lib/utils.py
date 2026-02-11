@@ -17,14 +17,19 @@ def escape_latex(text):
         '_': r'\_',
         '{': r'\{',
         '}': r'\}',
-        '~': r'	extasciitilde{}',
-        '^': r'	extasciicircum{}',
-        '': r'	extbackslash{}',
-        '|': r'	extbar{}',
+        '~': r'\textasciitilde{}',
+        '^': r'\textasciicircum{}',
+        '\\': r'\textbackslash{}',
+        '|': r'\textbar{}',
     }
     
-    # Apply mapping
+    # Apply mapping character by character
     text = "".join(mapping.get(c, c) for c in text)
+
+    # Normalize smart quotes and dashes for LaTeX compatibility
+    text = text.replace('’', "'").replace('‘', "'")
+    text = text.replace('“', '"').replace('”', '"')
+    text = text.replace('—', '--').replace('–', '-')
     
     # Disable problematic ligatures for fidelity audit matching
     ligature_map = {
@@ -44,8 +49,8 @@ def validate_master_path(path_str):
     Enforces the 'Source of Truth' standard for JSON files.
     """
     p = Path(path_str).resolve()
-    if "data/masters" not in str(p):
-        print(f"WARNING: Path '{path_str}' is outside 'data/masters/'.", file=sys.stderr)
+    if "data/json" not in str(p):
+        print(f"WARNING: Path '{path_str}' is outside 'data/json/'.", file=sys.stderr)
         print("This violates the 'Source of Truth' standard.", file=sys.stderr)
     return p
 
@@ -54,8 +59,10 @@ def normalize_text(text):
     Normalizes text for comparison (removing artifacts, ligatures, etc.)
     """
     if not text: return ""
-    text = text.replace('	extbullet', '').replace('•', '').replace('\u2022', '')
-    text = text.replace('	extbar', '|').replace('	extbar', '|')
+    # Remove common LaTeX markers that might be in the source
+    text = text.replace('\\textbullet', '').replace('•', '').replace('\u2022', '')
+    text = text.replace('\\textbar', '|').replace('\textbar', '|')
+    
     text = text.replace('’', "'").replace('‘', "'")
     text = text.replace('“', '"').replace('”', '"')
     text = text.replace('—', '--').replace('–', '-')

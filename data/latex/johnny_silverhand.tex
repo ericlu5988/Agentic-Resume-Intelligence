@@ -1,0 +1,202 @@
+\documentclass[9pt]{article}
+
+% ---------------------------------------------------------
+% USER CONFIGURATION
+% ---------------------------------------------------------
+\newcommand{\myname}{Johnny Silverhand}
+\newcommand{\myclearance}{Ex-Military (Deserter)}
+\newcommand{\mylocation}{Night City}
+\newcommand{\myphone}{N/A - Of{f}-Grid}
+\newcommand{\myemail}{burnitdown@samurai.nc}
+\newcommand{\mylinkedin}{N/A - Anti-Corporate}
+
+% ---------------------------------------------------------
+% FONT & FORMATTING
+% ---------------------------------------------------------
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{ebgaramond}
+
+\usepackage{enumitem}
+\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt}
+
+\usepackage{multicol}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\usepackage{setspace}
+\singlespacing
+ 
+\setlength{\parindent}{0pt}
+\setstretch{1.05}
+
+% Bullet formatting
+\setlist[itemize]{leftmargin=0.3in, itemsep=2pt}
+
+\usepackage{titlesec}
+
+% Section formatting
+\titleformat*{\section}{\centering\large\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+
+% ---------------------------------------------------------
+% CUSTOM ENVIRONMENTS / COMMANDS
+% ---------------------------------------------------------
+
+% Consistent list environment for resume bullets
+\newenvironment{resumeItemList}{%
+  \begin{itemize}[leftmargin=0.25in, itemsep=2pt, topsep=2pt]
+}{%
+  \end{itemize}
+}
+
+% Handy macro for role header lines:
+\newcommand{\role}[5]{%
+  \textbf{#1} -- #2 \quad\textbar\quad \textit{\textbf{#3}} \quad\textbar\quad #4 -- #5%
+}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% HEADER
+% ---------------------------------------------------------
+\begin{center}
+    {\Large \textbf{\myname}}\\[4pt]
+    \myclearance \quad\textbar\quad \mylocation \\
+    \myphone \quad\textbar\quad \href{mailto:\myemail}{\myemail} \quad\textbar\quad \href{https://\mylinkedin}{\mylinkedin}
+\end{center}
+
+\vspace{0.5em}
+\hrule
+\vspace{0.75em}
+
+% ---------------------------------------------------------
+\section*{PROFESSIONAL SUMMARY}
+
+Iconic Rockerboy, SAMURAI frontman, and anti-corporate revolutionary. Combat veteran of the Second Central American War (Nicaragua) with extensive experience in tactical sabotage, adversary emulation, and mass-market psychological operations. Known for high-impact social engineering through chrome-rock and orchestrating the 2023 Arasaka Tower 'Night City Holocaust'. Dedicated to dismantling corporate hegemony and exposing the 'Soulkiller' program. Note: Some historical accounts may vary due to engram memory unreliability.
+
+% ---------------------------------------------------------
+
+\section*{SKILLS}
+
+\setlength{\columnsep}{1em}
+\begin{multicols}{3}
+\begin{itemize}[leftmargin=*, rightmargin=0pt, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+\small
+
+  \item Charismatic Leadership (+10)
+
+  \item Tactical Sabotage \& Demolitions
+
+  \item Lead Guitar \& Songwriting (+10)
+
+  \item Combat Prof{i}ciency (Malorian 3516 / CQC)
+
+  \item Cybernetic Integration \& Interface Plugs
+
+  \item Hacking \& Cyberdeck Operations
+
+\end{itemize}
+\end{multicols}
+
+
+% ---------------------------------------------------------
+\section*{PROFESSIONAL EXPERIENCE}
+
+
+\role{Militech (Militech-led Raid on Arasaka Tower)}{Night City}{Tactical Team Leader}{Aug 2023}{Aug 2023}
+
+\begin{resumeItemList}
+
+  \item {Co-led a Militech-backed assault on Arasaka Tower to deliver a 5-kiloton tactical nuke, ef{f}ectively ending the Fourth Corporate War.}
+
+  \item {Coordinated with Morgan Blackhand and Rogue Amendiares for high-stakes urban inf{i}ltration and rooftop extraction.}
+
+  \item {Executed search and rescue mission for Alt Cunningham's consciousness within the Arasaka mainframe under intense combat conditions.}
+
+\end{resumeItemList}
+\vspace{0.5em}
+
+\role{SAMURAI}{Night City}{Frontman \& Lead Guitar}{2003}{2008}
+
+\begin{resumeItemList}
+
+  \item {Co-founded the legendary chrome-rock band SAMURAI, achieving international fame and platinum record status.}
+
+  \item {Composed and performed 'Chippin' In', 'Never Fade Away', and 'A Like Supreme' - anthems of the anti-establishment movement.}
+
+  \item {Utilized global tours to broadcast anti-corporate messages and shift public perception of veterans disillusioned by war.}
+
+\end{resumeItemList}
+\vspace{0.5em}
+
+\role{U.S. Marine Corps (2nd Marine Division)}{Nicaragua}{Infantryman}{2003}{2003}
+
+\begin{resumeItemList}
+
+  \item {Deployed to the Second Central American War, participating in high-intensity jungle warfare and tactical raids.}
+
+  \item {Lost left arm in combat; successfully integrated a silver prosthetic, establishing the 'Silverhand' operational identity.}
+
+  \item {Exposed government corruption in the 2009 solo album 'SINS of Your Brothers' after deserting service.}
+
+\end{resumeItemList}
+\vspace{0.5em}
+
+
+% ---------------------------------------------------------
+\section*{EDUCATION}
+
+\begin{center}
+
+\textbf{Tactical Survival \& Combat Training} \quad\textbar\quad Streets of Night City / Nomad Clans \quad\textbar\quad 1988--2003 \\
+\textit{Focus: Small Arms, Survivalism, and Music Theory}\\
+
+\end{center}
+
+% ---------------------------------------------------------
+
+
+% ---------------------------------------------------------
+\section*{CERTIFICATIONS}
+
+\begin{multicols}{2}
+\centering
+\small
+
+DCRT (DoD Certif{i}ed Red Team) --- Equivalent\\
+
+SAMURAI Platinum Record (Multi-year)\\
+
+\end{multicols}
+
+% ---------------------------------------------------------
+
+\section*{TECHNICAL SKILLS}
+
+\begin{center}
+\small
+\textbf{Of{f}ensive Operations} \quad\textbar\quad Tactical Sabotage • System Inf{i}ltration • Demolitions • Red Teaming\\
+\textbf{Cyberware} \quad\textbar\quad Chromed Left Arm • Sandevistan Boost • Cyberoptics • Interface Plugs\\
+\textbf{Artistic} \quad\textbar\quad Lead Guitar • Composition (+10) • Mass Inf{l}uence\\
+
+\end{center}
+
+
+% ---------------------------------------------------------
+
+\section*{AWARDS \& RECOGNITION}
+
+\begin{center}
+\small
+Night City Legend (Posthumous)\\
+Breathtaking Achievement (Apparel Collection)\\
+Ghost Story Status (Arasaka Corporation internal lore)\\
+
+\end{center}
+
+
+\end{document}
