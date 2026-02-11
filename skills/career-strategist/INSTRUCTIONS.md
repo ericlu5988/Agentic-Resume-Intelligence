@@ -8,8 +8,30 @@
 - **The "So What?" Principle**: Every fact must lead to a strategic implication for the candidate.
 - **Attack Vector Logic**: Identify exactly how the candidate's history serves as a "Force Multiplier" for the company's current contracts.
 - **Guided Deep-Dives**: Proactively offer the user the choice to trigger optional specialized research phases.
+- **JSON Schema Strictness**: You MUST use the exact keys defined in the **Dossier JSON Schema Reference** below. Hallucinated keys (e.g., `intelligence_summary`) will cause LaTeX compilation failures.
 - **ARI-Only**: Execute all tools via `python3 tools/ari.py` only.
 - **Stateful Checklist**: You MUST output and maintain a checklist of the Behavioral Steps below.
+
+## Dossier JSON Schema Reference
+The `importer_engine.py` maps these specific keys to the `strategy_dossier_template.tex`. All list items must be objects with `"label"` and `"text"` keys.
+
+| Key | Type | Description |
+| :--- | :--- | :--- |
+| `company` | String | Target Company Name |
+| `location` | String | Target Location (City, State) |
+| `candidate_name` | String | User's Full Name from Master JSON |
+| `date` | String | Current Date |
+| `executive_summary` | String | High-level summary of the mission fit |
+| `local_mission_portfolio` | List | Objects: `{"label": "...", "text": "..."}` |
+| `enterprise_bi` | List | Objects: `{"label": "...", "text": "..."}` |
+| `strategic_context` | List | Objects: `{"label": "...", "text": "..."}` |
+| `technical_stack_dna` | List | Objects: `{"label": "...", "text": "..."}` |
+| `strategic_fit` | List | Objects: `{"label": "...", "text": "..."}` |
+| `funding_risk` | List (Opt) | Optional deep-dive findings |
+| `org_chart` | List (Opt) | Optional deep-dive findings |
+| `ecosystem_map` | List (Opt) | Optional deep-dive findings |
+| `interview_recon` | String | Strategic interview advice |
+| `sources` | List | Array of IEEE formatted citation strings |
 
 ## Behavioral Steps
 
@@ -57,6 +79,7 @@ Cross-reference findings with the **selected Master JSON**:
 - **Gap Analysis & Mitigation**: Identify 1-2 gaps and provide a "Mitigation Strategy" for the interview.
 
 ### Step 7: Dossier Generation (LaTeX/PDF)
+- **Schema Validation**: Verify that the Dossier JSON keys strictly match the **Dossier JSON Schema Reference**.
 - **Structured Mapping**: Synthesize all baseline and optional findings into a structured **Dossier JSON**.
 - **Readability Rule**: For each section (1-5), you MUST provide a list of objects in the format `{"label": "Key Term", "text": "Detailed explanation..."}` instead of a single paragraph to ensure clear skimmability.
 - **IEEE Citation Rule**: Format the `sources` list using the **IEEE standard for online references**: `Author/Org, "Title," Website, Date. [Online]. Available: URL [Accessed: Date].`
