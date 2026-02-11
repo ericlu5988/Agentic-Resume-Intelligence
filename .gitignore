@@ -1,6 +1,7 @@
 # Data Sources & LaTeX Artifacts
 data/*
 .tmp/*
+imports/*
 
 # All Outputs
 outputs/*

@@ -42,15 +42,15 @@ python3 tools/ari.py [tool_name.py] [args]
 ---
 
 ## 🏗️ Standardized Data Flow
-The system enforces a strict "Source of Truth" standard to prevent data drift:
+The system distinguishes between **digitization** (one-time) and **tailoring** (per job).
 
-`imports/ -> data/json/ -> data/latex/ -> outputs/resume/ -> Audit`
+`imports/ -> Digitization -> data/latex/ (The Living Master) -> Tailoring -> outputs/resume/`
 
-1.  **imports/**: Staging area for your existing resumes (PDF/DOCX).
-2.  **data/json/**: Immutable JSON "Sources of Truth".
-3.  **templates/built-in/**: Core LaTeX Blueprints (Default, Minimalist, Federal).
-4.  **data/latex/**: Generated LaTeX source files.
-5.  **outputs/resume/**: Final PDF production and audit logs.
+1.  **Digitization (Entry Points)**:
+    - **Legacy**: Place existing PDF/DOCX resumes in `imports/` to be converted.
+    - **LaTeX Native**: If you already have a LaTeX resume, place it directly in `data/latex/`.
+2.  **The Living Master**: Your `.tex` file in `data/latex/` is your primary workspace. **You should tweak this file to match exactly how you want your resume to look before any tailoring occurs.**
+3.  **Tailoring (Targeting)**: When targeting a specific job, the agent surgically edits your "Living Master" LaTeX to match the job description, saving the result to `outputs/resume/`.
 
 ---
 

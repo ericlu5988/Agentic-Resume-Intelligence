@@ -11,23 +11,23 @@ The system is built on the **SAT (Skills, Agents, Tools)** framework, which enfo
 
 ## 2. Core Philosophies
 
-### Fidelity-First
-The primary goal is 100% visual and textual fidelity. We prioritize maintaining the user's original intent over "AI-driven improvements" that might hallucinate experience or break formatting.
+### The "Living Master" (LaTeX-First)
+While the initial import generates a JSON "Source of Truth," the system treats the generated `.tex` file in `data/latex/` as the **Living Master**. Users are encouraged to manually perfect the layout and wording in LaTeX. Subsequent tailoring (targeting for jobs) acts directly on this LaTeX file to preserve all manual customizations.
 
-### The "Sprinkle" Rule
-When tailoring a resume, the system is **additive**. We maintain 90% of the original narrative, only "sprinkling" in high-impact keywords or metrics derived from the Job Description.
+### Fidelity-First & The "Sprinkle" Rule
+We prioritize maintaining original visual/textual intent. Tailoring is additive (90% original content preserved).
 
 ### Agent-Led Mapping (Context over Rigidity)
-We avoid building rigid "classification" scripts for resume data. Instead, tools provide **Rich Raw Data** (text + metadata like bolding/alignment), and the **Agent** uses its contextual intelligence to map that data into the schema. This ensures unique resume sections are never lost.
+Tools provide **Rich Raw Data**. The Agent uses its contextual intelligence to map that data into the schema.
 
 ## 3. Structural Standards
 
 ### Directory Hierarchy
-- **`data/json/`**: Git-ignored. Source of Truth (Master JSONs).
-- **`data/latex/`**: Git-ignored. Generated `.tex` files.
+- **`data/json/`**: Git-ignored. Stores the immutable JSON snapshot from the initial import.
+- **`data/latex/`**: Git-ignored. Stores the **Living Master** `.tex` files (User's primary playground).
 - **`skills/`**: Version-tracked. Agentic capabilities and SOPs.
 - **`tools/`**: Version-tracked. Deterministic cross-platform scripts.
-- **`templates/built-in/`**: Version-tracked. Immutable core blueprints.
+- **`templates/built-in/`**: Version-tracked. Immutable core blueprints used for the initial digitization.
 - **`templates/`**: Git-ignored (except `built-in/`). Bespoke/Custom templates.
 - **`outputs/resume/`**: Git-ignored. Final compiled PDF resumes.
 - **`outputs/dossiers/`**: Git-ignored. Strategy dossiers.

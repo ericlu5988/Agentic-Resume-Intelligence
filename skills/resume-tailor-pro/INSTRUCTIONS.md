@@ -3,39 +3,35 @@
 ## Hard Constraints (The "Zero Overhaul" Policy)
 
 **Baseline Preservation:**
-- Use the selected LaTeX template as the absolute source of truth.
-- DO NOT use placeholders like [Organization], [Dates], or [Email] if that information is already present in the master.
+- Use the selected LaTeX file in `data/latex/` as the absolute source of truth (**The Living Master**).
+- **Preserve Customizations**: DO NOT modify the LaTeX structure, macros, or manual formatting tweaks provided by the user.
 - DO NOT remove any historical roles or military units.
 - DO NOT create new sections unless specifically asked.
 
 **The "Sprinkle" Rule (Content Integrity):**
 - At least 90% of the original bullet point text must remain identical to the master.
-- "Tailoring" means replacing or appending specific technical terms.
+- "Tailoring" (Targeting) means surgically replacing or appending specific technical terms within the existing LaTeX text.
 - Do not change the user's voice or military terminology.
 - **Anti-Fabrication Rule**: NEVER guess or invent experience. If a requirement is missing from the template, you MUST ask the user for relevant experience.
 
 **Macro & Syntax Sacredness:**
-- You must use the user's LaTeX macros (e.g., `
-ole`, `
-esumeItemList`) exactly as defined in the master.
+- You must use the user's LaTeX macros (e.g., `\role`, `resumeItemList`) exactly as they appear in the file.
 - DO NOT change the number of arguments in a macro or the way it is called.
 
 **Certification Integrity:**
 - Copy the Certifications section character-for-character from the master.
 - ONLY add new certifications explicitly provided.
-- NEVER hallucinate "GIAC" versions of non-GIAC courses.
 
 **Length & Formatting (The Goldilocks Protocol):**
 - **The Two-Page Rule**: The document **MUST NOT** exceed 2 pages.
-- **The Goldilocks Protocol**: Aim to fill **1.9 to 2.0 pages**. Adjust `itemsep` and `topsep` iteratively.
+- **The Goldilocks Protocol**: Aim to fill **1.9 to 2.0 pages**. Adjust formatting settings like `itemsep` iteratively within the `.tex` file if necessary.
 - **ARI-Only**: Execute all tools via `python3 tools/ari.py` only.
 - **Stateful Checklist**: You MUST output and maintain a checklist of the Behavioral Steps below.
 
 ## Behavioral Steps
 
-### [ ] Step 1: Intake & Mode Selection
-- List available Master JSON files in the `data/json/` directory and ask the user to select one as the **Source of Truth**.
-- List available LaTeX Blueprints in `templates/built-in/` and `templates/` and ask the user to select one for styling.
+### [ ] Step 1: Intake & Living Master Selection
+- List available `.tex` files in the `data/latex/` directory and ask the user to select one as the **Living Master**.
 - Ask for **Target Company** and **Location**.
 - Ask for the **Tailoring Mode**:
     1. **JD Mode**: Provide the JD text.
@@ -48,18 +44,17 @@ esumeItemList`) exactly as defined in the master.
 ### [ ] Step 3: Precise Gap Analysis & Discovery Gate
 - **Discovery Gate**: If a critical requirement is not met, ask "Discovery Questions" to tease out relevant experience.
 - **Optimization Phase**: Offer to incorporate Tier 2/Bonus qualifications if the user provides details.
-- **Proposed Changes**: Identify specific bullet points to update. Present proposed changes for approval.
+- **Proposed Changes**: Identify specific text strings or bullet points in the LaTeX file to update. Present proposed changes for approval.
 
 ### [ ] Step 4: Surgical Drafting & Compilation
-- Extract candidate's name from the template for filename generation.
-- Generate tailored LaTeX. Save to `data/latex/Resume_[Name]_[Company]_[Date].tex`.
-- Execute `tools/compile_resume.py`.
-- Move the final PDF to `outputs/resume/`.
+- Extract candidate's name from the LaTeX source for filename generation.
+- **Surgical Edit**: Perform direct text replacements within the selected `.tex` file. 
+- Save the tailored version to `outputs/resume/Resume_[Name]_[Company]_[Date].tex`.
+- Execute `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`.
 
 ### [ ] Step 5: Length Optimization (Iterative)
-- Re-compile and verify until the "Goldilocks" zone (1.9 - 2.0 pages) is met using formatting adjustments.
+- Re-compile and verify until the "Goldilocks" zone (1.9 - 2.0 pages) is met by surgically adjusting spacing macros if they exist in the file.
 
 ## Tool Reference (ARI)
-- **importer_engine.py**: `python3 tools/ari.py tools/importer_engine.py [TAILORED_JSON] [SELECTED_TEMPLATE] [OUTPUT_TEX]`
 - **compile_resume.py**: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`
 - **pdf_parser.py**: `python3 tools/ari.py tools/pdf_parser.py [OUTPUT_PDF]` - Used to verify page counts and line density.

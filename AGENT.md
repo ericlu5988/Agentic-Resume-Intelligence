@@ -17,7 +17,7 @@ You are operating within the **SAT Architecture** (Skills, Agents, Tools). Refer
     - Mark steps as `[x]` as they are completed.
 3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns (Checklist Rule, Python-First, Structural Hierarchy).
 4.  **Template Selection Gate**: During import workflows, you must present available templates and recommend one before proceeding to generation.
-5.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline. This is the only place baseline content lives.
+5.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline from the initial import. However, the system treats `.tex` files in `data/latex/` as the **Living Master**. Tailoring/Targeting MUST act directly on these LaTeX files to preserve manual user customizations.
 
 ## File Structure
 
