@@ -48,6 +48,27 @@ def setup_workspace(gemini_sync=False):
         except Exception as e:
             print(f"Failed to sync skills: {e}")
 
+    # 3. Generate Bootstrap DNA for agents
+    print("\nGenerating Bootstrap DNA...")
+    dna_file = project_root / ".tmp" / "BOOTSTRAP_DNA.md"
+    agent_md = project_root / "AGENT.md"
+    arch_md = project_root / "ARCHITECTURE.md"
+    
+    try:
+        with open(dna_file, "w") as f:
+            f.write("# ARI BOOTSTRAP DNA\n\n")
+            if agent_md.exists():
+                f.write(f"## FROM: {agent_md.name}\n")
+                f.write(agent_md.read_text())
+                f.write("\n\n---\n\n")
+            if arch_md.exists():
+                f.write(f"## FROM: {arch_md.name}\n")
+                f.write(arch_md.read_text())
+                f.write("\n")
+        print(f"  - Created: .tmp/{dna_file.name}")
+    except Exception as e:
+        print(f"Failed to generate DNA: {e}")
+
     print("\nWorkspace setup complete.")
 
 if __name__ == "__main__":

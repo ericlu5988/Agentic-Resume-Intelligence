@@ -8,6 +8,8 @@ Refer to **AGENT.md** for the core SAT Architecture, file structure, and project
 
 ### 1. Planning & Execution
 
+- **Bootstrap Mandate**: Before executing ANY task, you MUST read **AGENT.md** and **ARCHITECTURE.md**. These files contain the system's "DNA." Understanding the SAT Architecture and "Living Master" principle is non-negotiable.
+
 - **The PLAN: Protocol**: When the user requests a plan or starts a prompt with `PLAN:`, you must provide a detailed strategy following the **Planning Protocol** and **Stateful Checklist Mandate** in `AGENT.md`.
 
 - **CLI Warning**: DO NOT use `/plan` (it is a reserved Gemini CLI command). Always use `PLAN:` or natural language.

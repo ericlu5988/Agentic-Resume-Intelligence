@@ -4,6 +4,9 @@ Refer to **AGENT.md** for the core SAT Architecture, file structure, and project
 
 ## Claude-Specific Operations
 
+### 0. Bootstrap Mandate
+- **System DNA**: Before executing ANY task, you MUST read **AGENT.md** and **ARCHITECTURE.md**. Understanding the SAT Architecture and "Living Master" principle is non-negotiable for maintaining system integrity.
+
 ### 1. Planning & Execution
 - **Planning-First**: Adhere strictly to the **Planning Protocol** in `AGENT.md`. For any request that isn't a simple question, provide a plan and wait for approval.
 
