@@ -1,93 +1,57 @@
 # Agentic Resume Intelligence
 
-> **Stop manually editing LaTeX. Start winning interviews with research-backed resumes.**
+> **From legacy documents to boardroom-ready intelligence. Win interviews with data-backed resumes.**
 
-**Agentic Resume Intelligence** is a native AI agent skill-set designed to surgically tailor LaTeX resumes for specific job descriptions or networking scenarios. Unlike simple GPT wrappers, this system uses a formal **SAT (Skills, Agents, Tools) Architecture** that performs real-time research, enforces hard-requirement verification, and maintains 100% formatting integrity.
-
----
-
-## 🚀 The Hook: Why this is different
-Most AI resume tools rewrite your history or hallucinate experience. **Agentic Resume Intelligence** operates on three core principles within this agentic framework:
-1. **The "Sprinkle" Rule**: It maintains 90% of your original narrative, only replacing or appending high-impact technical terms and metrics.
-2. **The Discovery Gate**: If a job requirement is missing, the agent is **forbidden from guessing**. It will stop and ask you targeted questions to "tease out" relevant experience.
-3. **Intelligence-Driven**: It researches local company contracts, mission priorities, and leadership DNA to align your resume with a company's specific footprint.
+**Agentic Resume Intelligence (ARI)** is a specialized AI agent framework designed to automate the most painful parts of the job search: digitization, deep research, and surgical tailoring. It moves you beyond generic AI rewrites into a high-fidelity **LaTeX-First** workflow where you maintain 100% control over your design while the agent handles the targeting.
 
 ---
 
-## ✨ Features
-- **High-Fidelity Digitization**: 
-    - **PDF Importer**: Geometric-aware extraction for digital PDFs.
-    - **DOCX Importer**: Topological extraction (bold, italics, alignment) for Word documents.
-- **JD Mode**: Precision alignment with "Required" vs. "Preferred" qualifications from any Job Description.
-- **Networking Mode**: Tailor for a company and location even without a JD using real-time intelligence.
-- **Career Strategist**: Deep-dive intelligence gathering to assess company fit, contract stability, and interview "Attack Vectors."
-- **Dockerized Compilation**: One-click PDF generation using a standardized LaTeX environment via ARI.
-- **Privacy-First**: Automatically ignores your personal data and tailored outputs from version control.
+## ⚡ High-Impact Features
+
+### 1. Pain-Free Digitization
+Move your legacy resumes into the modern era instantly. Our geometric-aware parsers extract every detail from your **PDF** or **DOCX** files, preserving bolding, alignment, and structure to establish your "Living Master" LaTeX resume.
+
+### 2. Executive Intelligence Dossiers
+Don't just apply—dominate the conversation. The agent performs real-time research into your target company's contracts (TITAN, Maven, etc.), technical stack, and leadership DNA, outputting a **beautiful, boardroom-ready PDF dossier** with full IEEE-style citations for verification.
+
+### 3. Surgical Targeting (Tailoring)
+Target specific roles without losing your voice. The agent surgically "sprinkles" high-impact keywords and metrics into your **Living Master LaTeX** file, ensuring you pass the ATS while maintaining 90% of your original narrative and 100% of your custom formatting.
+
+### 4. Deterministic Fidelity Audit
+Character-perfect accuracy. Every generated document is validated by a deterministic Python auditor to ensure a **Fidelity Score of 100**, guaranteeing that the AI never hallucinates your experience or breaks your layout.
 
 ---
 
-## 🧩 The SAT Architecture
-This repository separates concerns to ensure accuracy and reproducibility. For a deep dive into the design philosophy, development standards, and cross-platform logic, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
-
-- **Skills (The Instructions)**: Domain-specific SOPs (Standard Operating Procedures) in `skills/`.
-- **Agents (The Decision-Maker)**: Coordination logic (Gemini CLI, Claude Code, Windsurf, etc.).
-- **Tools (The Execution)**: Deterministic Python scripts in `tools/` executed via the **Agent Run Interface (ARI)**.
-
-### The Agent Run Interface (ARI)
-ALL tools MUST be executed via the ARI wrapper to ensure LaTeX and Python dependencies are met:
-```bash
-python3 tools/ari.py [tool_name.py] [args]
-```
+## 🏗️ The SAT Architecture
+This repository is built on the **SAT (Skills, Agents, Tools)** framework. For a deep dive into the design philosophy and development standards, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
 
 ---
 
 ## 🏗️ Standardized Data Flow
-The system distinguishes between **digitization** (one-time) and **tailoring** (per job).
+The system distinguishes between **digitization** (one-time) and **targeting** (per job).
 
-`imports/ -> Digitization -> data/latex/ (The Living Master) -> Tailoring -> outputs/resume/`
+`imports/ -> Digitization -> data/latex/ (The Living Master) -> Targeting -> outputs/resume/`
 
 1.  **Digitization (Entry Points)**:
     - **Legacy**: Place existing PDF/DOCX resumes in `imports/` to be converted.
     - **LaTeX Native**: If you already have a LaTeX resume, place it directly in `data/latex/`.
-2.  **The Living Master**: Your `.tex` file in `data/latex/` is your primary workspace. **You should tweak this file to match exactly how you want your resume to look before any tailoring occurs.**
-3.  **Tailoring (Targeting)**: When targeting a specific job, the agent surgically edits your "Living Master" LaTeX to match the job description, saving the result to `outputs/resume/`.
-
----
-
-## 🏗️ Complementary Skills
-This repository provides distinct agentic skills designed to be used in sequence:
-
-1. **Strategic Intelligence (`career-strategist`)**: The "Brain." Performs deep research into a company's financial health, contracts, and technical footprint.
-2. **Surgical Tailoring (`resume-tailor-pro`)**: The "Scalpel." Takes gathered intelligence and surgically "sprinkles" keywords into your LaTeX template.
-3. **Resume Importers (`pdf-resume-importer` & `docx-resume-importer`)**: The "Bridge." Converts legacy resumes into the structured JSON and LaTeX formats required by the system.
-
----
-
-## 🤖 For AI Agents
-This repository is optimized for use with AI agents. 
-- **Skills**: AI agents should use the metadata in `skills/*/SKILL.md` and follow the procedures in `skills/*/INSTRUCTIONS.md`.
-- **Context**: Agent-specific instructions are provided in `GEMINI.md` and `CLAUDE.md`.
+2.  **The Living Master**: Your `.tex` file in `data/latex/` is your primary workspace. **Perfect your design here once; it serves as the baseline for all future targeting.**
+3.  **Targeting (Tailoring)**: When targeting a job, the agent surgically edits your "Living Master" LaTeX to match the company's specific mission profile.
 
 ---
 
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
-- **AI Agent Framework**: Gemini CLI, Claude Code, or any agent capable of following markdown-based instructions.
+- **AI Agent Framework**: Gemini CLI, Claude Code, or any markdown-capable agent.
 - **Docker**: Required for deterministic tool execution and LaTeX compilation.
 
 ### Setup
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/ericlu5988/Agentic-Resume-Intelligence.git
-   cd Agentic-Resume-Intelligence
-   ```
-2. **Initialize Workspace**:
+1. **Initialize Workspace**:
    ```bash
    python3 tools/setup.py --gemini  # Use --gemini flag if using Gemini CLI
    ```
-3. **Build the Tool Container**:
-   The ARI auto-builds on first run, but you can pre-build it:
+2. **Build Tool Container**:
    ```bash
    python3 tools/ari.py --help
    ```
@@ -95,7 +59,7 @@ This repository is optimized for use with AI agents.
 ---
 
 ## 🧪 Testing
-Verify the deterministic logic of the tools using the integrated test suite via ARI:
+Verify the deterministic logic using the integrated test suite:
 ```bash
 python3 tools/ari.py -m unittest discover tools/tests
 ```
@@ -104,29 +68,14 @@ python3 tools/ari.py -m unittest discover tools/tests
 
 ## 📖 How to Use
 
-### 1. Import Your Existing Resume
-Place your resume in `imports/` and ask the agent to start the import:
-> *"Import my_resume.pdf from the imports folder"*
-The agent will perform a **Template Selection Gate**, recommending the best blueprint (Default, Minimalist, or Federal) or creating a **Bespoke Template** for you.
+### 1. Digitize
+Place your resume in `imports/` and say: *"Import my resume."* The agent will guide you through the **Template Selection Gate**.
 
-### 2. Gather Intelligence (Optional but Recommended)
-Ask the agent to start a research mission using the **Career Strategist** skill:
-> *"I'm targeting a role at [Company]. Let's start the Career Strategist workflow."*
-Strategy dossiers are saved to `outputs/dossiers/`.
+### 2. Research
+Identify a target and say: *"I have an interview at Palantir. Run the Career Strategist mission."* Strategy dossiers are saved to `outputs/dossiers/`.
 
-### 3. Tailor Your Resume
-Ask the agent to start a tailoring session using the **Resume Tailor Pro** skill:
-> *"I'm ready to tailor my resume. Let's start the Resume Tailor Pro workflow."*
-
-### 4. Review & Compile
-The agent will present proposed changes. Once approved, it will generate a new `.tex` file in `data/latex/` and automatically compile it into a professional `.pdf` in `outputs/resume/`.
-
----
-
-## 🔒 Privacy & Safety
-- **JSON Lockdown**: All personal content is stored in `data/json/` and is protected by `.gitignore`.
-- **Anti-Fabrication**: Hard-coded rules ensure your resume remains 100% honest.
-- **Ligature-Aware Auditing**: Every PDF is validated against its JSON source to ensure character-perfect fidelity (Score ≥ 95%).
+### 3. Target
+Once you have the intel, say: *"Target my resume for this Palantir role."* The agent will surgically update your LaTeX master and save the final PDF to `outputs/resume/`.
 
 ---
 *Created by Eric Lu for professionals who value precision over automation.*
