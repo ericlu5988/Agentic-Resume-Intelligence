@@ -8,7 +8,15 @@ def setup_workspace(gemini_sync=False):
     project_root = Path(__file__).parent.parent.resolve()
     
     # 1. Ensure standard directories exist
-    dirs = ["imports", "data/masters", "output", "templates"]
+    dirs = [
+        "imports", 
+        "data/json", 
+        "data/latex", 
+        "templates/built-in", 
+        "outputs/resume", 
+        "outputs/dossiers", 
+        ".tmp"
+    ]
     print("Initializing workspace directories...")
     for d in dirs:
         target = project_root / d

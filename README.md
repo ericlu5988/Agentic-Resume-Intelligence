@@ -36,7 +36,7 @@ This repository separates concerns to ensure accuracy and reproducibility. For a
 ### The Agent Run Interface (ARI)
 ALL tools MUST be executed via the ARI wrapper to ensure LaTeX and Python dependencies are met:
 ```bash
-./tools/ari [tool_name.py] [args]
+python3 tools/ari.py [tool_name.py] [args]
 ```
 
 ---
@@ -44,12 +44,13 @@ ALL tools MUST be executed via the ARI wrapper to ensure LaTeX and Python depend
 ## 🏗️ Standardized Data Flow
 The system enforces a strict "Source of Truth" standard to prevent data drift:
 
-`imports/ (PDF/DOCX) -> data/masters/ (JSON) -> templates/ (TeX) -> output/ (PDF) -> Audit`
+`imports/ -> data/json/ -> data/latex/ -> outputs/resume/ -> Audit`
 
-1.  **imports/**: Staging area for your existing resumes.
-2.  **data/masters/**: Immutable JSON "Sources of Truth".
-3.  **templates/**: LaTeX Blueprints (.tex and .cls).
-4.  **output/**: Final PDF production and audit logs.
+1.  **imports/**: Staging area for your existing resumes (PDF/DOCX).
+2.  **data/json/**: Immutable JSON "Sources of Truth".
+3.  **templates/built-in/**: Core LaTeX Blueprints (Default, Minimalist, Federal).
+4.  **data/latex/**: Generated LaTeX source files.
+5.  **outputs/resume/**: Final PDF production and audit logs.
 
 ---
 
@@ -96,7 +97,7 @@ This repository is optimized for use with AI agents.
 ## 🧪 Testing
 Verify the deterministic logic of the tools using the integrated test suite via ARI:
 ```bash
-./tools/ari -m unittest discover tools/tests
+python3 tools/ari.py -m unittest discover tools/tests
 ```
 
 ---
@@ -104,24 +105,26 @@ Verify the deterministic logic of the tools using the integrated test suite via 
 ## 📖 How to Use
 
 ### 1. Import Your Existing Resume
-Use the **PDF** or **DOCX Importer** to establish your "Source of Truth":
-> *"Import templates/my_resume.pdf"*
+Place your resume in `imports/` and ask the agent to start the import:
+> *"Import my_resume.pdf from the imports folder"*
+The agent will perform a **Template Selection Gate**, recommending the best blueprint (Default, Minimalist, or Federal) or creating a **Bespoke Template** for you.
 
 ### 2. Gather Intelligence (Optional but Recommended)
 Ask the agent to start a research mission using the **Career Strategist** skill:
 > *"I'm targeting a role at [Company]. Let's start the Career Strategist workflow."*
+Strategy dossiers are saved to `outputs/dossiers/`.
 
 ### 3. Tailor Your Resume
 Ask the agent to start a tailoring session using the **Resume Tailor Pro** skill:
 > *"I'm ready to tailor my resume. Let's start the Resume Tailor Pro workflow."*
 
 ### 4. Review & Compile
-The agent will present proposed changes. Once approved, it will generate a new `.tex` file and automatically compile it into a professional `.pdf` in `/output`.
+The agent will present proposed changes. Once approved, it will generate a new `.tex` file in `data/latex/` and automatically compile it into a professional `.pdf` in `outputs/resume/`.
 
 ---
 
 ## 🔒 Privacy & Safety
-- **Master Lockdown**: All personal content is stored in `data/masters/` and is protected by `.gitignore`.
+- **JSON Lockdown**: All personal content is stored in `data/json/` and is protected by `.gitignore`.
 - **Anti-Fabrication**: Hard-coded rules ensure your resume remains 100% honest.
 - **Ligature-Aware Auditing**: Every PDF is validated against its JSON source to ensure character-perfect fidelity (Score ≥ 95%).
 

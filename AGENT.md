@@ -15,19 +15,23 @@ You are operating within the **SAT Architecture** (Skills, Agents, Tools). Refer
     - Extract all steps into a markdown checklist `[ ]`.
     - Output this checklist at the start of the turn.
     - Mark steps as `[x]` as they are completed.
-3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns (Checklist Rule, Python-First, etc.).
-4.  **Source of Truth**: The `data/masters/` directory contains the immutable JSON baseline. This is the only place baseline content lives.
+3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns (Checklist Rule, Python-First, Structural Hierarchy).
+4.  **Template Selection Gate**: During import workflows, you must present available templates and recommend one before proceeding to generation.
+5.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline. This is the only place baseline content lives.
 
 ## File Structure
 
 ```
-imports/        # Staging area for raw resume files (PDF/DOCX)
-data/masters/   # JSON Sources of Truth (Protected Baseline)
-output/         # Strategy Dossiers & Final PDF Resumes
-skills/         # Packaged capabilities (Metadata + Instructions)
-tools/          # Python scripts for deterministic execution
-templates/      # LaTeX Resume Blueprints (.tex and .cls)
-.env            # API keys and secrets
+imports/            # Staging area for raw resumes
+data/json/          # [Ignored] Master JSON Sources
+data/latex/         # [Ignored] Generated TeX files
+skills/             # Packaged capabilities (Metadata + Instructions)
+tools/              # Python scripts for deterministic execution
+templates/built-in/ # Core LaTeX Blueprints (default, minimalist, federal)
+templates/          # Bespoke/Custom LaTeX templates
+outputs/resume/     # [Ignored] Final PDF Resumes
+outputs/dossiers/   # [Ignored] Strategic dossiers
+.tmp/               # [Ignored] Temporary artifacts
 ```
 
 ## How to Operate

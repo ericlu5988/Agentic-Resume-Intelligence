@@ -20,7 +20,27 @@ When tailoring a resume, the system is **additive**. We maintain 90% of the orig
 ### Agent-Led Mapping (Context over Rigidity)
 We avoid building rigid "classification" scripts for resume data. Instead, tools provide **Rich Raw Data** (text + metadata like bolding/alignment), and the **Agent** uses its contextual intelligence to map that data into the schema. This ensures unique resume sections are never lost.
 
-## 3. Development Standards
+## 3. Structural Standards
+
+### Directory Hierarchy
+- **`data/json/`**: Git-ignored. Source of Truth (Master JSONs).
+- **`data/latex/`**: Git-ignored. Generated `.tex` files.
+- **`skills/`**: Version-tracked. Agentic capabilities and SOPs.
+- **`tools/`**: Version-tracked. Deterministic cross-platform scripts.
+- **`templates/built-in/`**: Version-tracked. Immutable core blueprints.
+- **`templates/`**: Git-ignored (except `built-in/`). Bespoke/Custom templates.
+- **`outputs/resume/`**: Git-ignored. Final compiled PDF resumes.
+- **`outputs/dossiers/`**: Git-ignored. Strategy dossiers.
+- **`.tmp/`**: Git-ignored. Temporary processing scratchpad.
+
+## 4. The Template Selection Gate
+During the import process, agents MUST implement a Selection Gate:
+1. **Analyze**: Examine the source resume for structural cues (Federal keywords, Word-style formatting).
+2. **Present**: List all available templates in `templates/` and `templates/built-in/`.
+3. **Recommend**: Mark the recommended template with a reason.
+4. **Bespoke Action**: If built-in options are insufficient, analyze unique source features and generate a new `.tex` file in `templates/` using standard LaTeX packages.
+
+## 5. Development Standards
 
 ### Tool Standards
 - **Python-First**: All new tools must be written in Python for cross-platform compatibility.

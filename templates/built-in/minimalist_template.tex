@@ -36,10 +36,13 @@
 % HEADER
 % ---------------------------------------------------------
 \begin{center}
-    {\huge \textbf{\myname}}\\[4pt]
+    {\huge \textbf{\myname}}
+    
+    \vspace{4pt}
     ((( [myphone, myemail, mylocation, mylinkedin]|select|join(' \quad\textbar\quad ') )))
+    
     ((% if resume.clearance %))
-    \\[2pt] \textbf{\myclearance}
+    \textbf{\myclearance}
     ((% endif %))
 \end{center}
 
@@ -58,7 +61,7 @@
 % ---------------------------------------------------------
 ((% if resume.skills %))
 \section*{SKILLS}
-((( resume.skills|join(' \textbullet{} ')|latex_escape )))
+((( resume.skills|map('latex_escape')|join(' \textbullet{} ') )))
 ((% endif %))
 
 % ---------------------------------------------------------
@@ -124,7 +127,7 @@
 ((% if resume.technical_skills %))
 \section*{TECHNICAL SKILLS}
 ((% for cat, skills in resume.technical_skills.items() %))
-\textbf{((( cat|latex_escape )))}: ((( skills|join(' \textbullet{} ')|latex_escape ))) \\
+\textbf{((( cat|latex_escape )))}: ((( skills|map('latex_escape')|join(' \textbullet{} ') ))) \\
 ((% endfor %))
 ((% endif %))
 

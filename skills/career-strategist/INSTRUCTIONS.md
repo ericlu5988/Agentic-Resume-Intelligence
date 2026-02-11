@@ -12,7 +12,7 @@
 ## Behavioral Steps
 
 ### 1. [ ] Step 1: Target Acquisition (Intake)
-- List available Master JSON files in the `data/masters/` directory and ask the user to select one for the fit analysis.
+- List available Master JSON files in the `data/json/` directory and ask the user to select one for the fit analysis.
 - Ask for the **Target Company**, **Location**, and **Job Description (JD)** (text or URL).
 - Ask for "Intelligence Gaps" (e.g., "Contract stability?", "Hiring trends?").
 
@@ -52,7 +52,7 @@ Cross-reference findings with the **selected Master JSON**:
 - **Gap Analysis & Mitigation**: Identify 1-2 gaps and provide a "Mitigation Strategy" for the interview.
 
 ### 6. [ ] Step 6: Dossier Generation (Cumulative Synthesis)
-Generate/Update the Markdown report in `output/Strategy_Dossier_[Company]_[Date].md` using this **Fixed Schema**:
+Generate/Update the Markdown report in `outputs/dossiers/Strategy_Dossier_[Company]_[Date].md` using this **Fixed Schema**:
 
 1.  **Local Mission Portfolio** (Location-specific Programs, local contract longevity, Prime/Sub status).
 2.  **Enterprise Business Intelligence** (Size, Hiring, Contracts, Revenue Trends, **Optional: Multi-Location Footprint**).

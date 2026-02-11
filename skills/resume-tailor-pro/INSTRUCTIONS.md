@@ -34,8 +34,8 @@ esumeItemList`) exactly as defined in the master.
 ## Behavioral Steps
 
 ### [ ] Step 1: Intake & Mode Selection
-- List available Master JSON files in the `data/masters/` directory and ask the user to select one as the **Source of Truth**.
-- List available LaTeX Blueprints in the `templates/` directory and ask the user to select one for styling.
+- List available Master JSON files in the `data/json/` directory and ask the user to select one as the **Source of Truth**.
+- List available LaTeX Blueprints in `templates/built-in/` and `templates/` and ask the user to select one for styling.
 - Ask for **Target Company** and **Location**.
 - Ask for the **Tailoring Mode**:
     1. **JD Mode**: Provide the JD text.
@@ -52,13 +52,14 @@ esumeItemList`) exactly as defined in the master.
 
 ### [ ] Step 4: Surgical Drafting & Compilation
 - Extract candidate's name from the template for filename generation.
-- Generate tailored LaTeX. Save to `output/Resume_[Name]_[Company]_[Date].tex`.
+- Generate tailored LaTeX. Save to `data/latex/Resume_[Name]_[Company]_[Date].tex`.
 - Execute `tools/compile_resume.py`.
+- Move the final PDF to `outputs/resume/`.
 
 ### [ ] Step 5: Length Optimization (Iterative)
 - Re-compile and verify until the "Goldilocks" zone (1.9 - 2.0 pages) is met using formatting adjustments.
 
 ## Tool Reference (ARI)
-- **importer_engine.py**: `python3 tools/ari.py tools/importer_engine.py [TAILORED_JSON] templates/master_resume_template.tex [OUTPUT_TEX]`
+- **importer_engine.py**: `python3 tools/ari.py tools/importer_engine.py [TAILORED_JSON] [SELECTED_TEMPLATE] [OUTPUT_TEX]`
 - **compile_resume.py**: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`
 - **pdf_parser.py**: `python3 tools/ari.py tools/pdf_parser.py [OUTPUT_PDF]` - Used to verify page counts and line density.

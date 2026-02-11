@@ -1,15 +1,17 @@
-# Personal Data & Master JSONs
+# Data Sources & LaTeX Artifacts
 data/*
-!data/masters/
-!data/masters/.gitkeep
+.tmp/*
 
-# Staging Area for Raw Resumes
-imports/*
-!imports/.gitkeep
+# All Outputs
+outputs/*
 
-# Tailored Outputs (PDFs, Strategy Dossiers, LaTeX)
-output/*
-!output/.gitkeep
+# Templates (Only built-in are tracked)
+templates/*
+!templates/built-in/
+!templates/built-in/**
+
+# Keep directories tracked via .gitkeep
+!**/ .gitkeep
 
 # Agent Runtime Data
 .gemini/
@@ -26,7 +28,7 @@ __pycache__/
 *$py.class
 .pytest_cache/
 
-# LaTeX Auxiliary Files
+# LaTeX Auxiliary Files (Global)
 *.aux
 *.log
 *.out
