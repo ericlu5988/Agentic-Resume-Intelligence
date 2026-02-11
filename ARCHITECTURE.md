@@ -30,7 +30,7 @@ Tools provide **Rich Raw Data**. The Agent uses its contextual intelligence to m
 - **`templates/built-in/`**: Version-tracked. Immutable core blueprints used for the initial digitization.
 - **`templates/`**: Git-ignored (except `built-in/`). Bespoke/Custom templates.
 - **`outputs/resume/`**: Git-ignored. Final compiled PDF resumes.
-- **`outputs/dossiers/`**: Git-ignored. Strategy dossiers.
+- **`outputs/dossiers/`**: Git-ignored. High-fidelity PDF strategy dossiers generated from the `strategy_dossier_template.tex`.
 - **`.tmp/`**: Git-ignored. Temporary processing scratchpad.
 
 ## 4. The Template Selection Gate

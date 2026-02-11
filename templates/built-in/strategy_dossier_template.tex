@@ -1,0 +1,88 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{ebgaramond}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+
+% Professional Blue Theme
+\definecolor{briefblue}{RGB}{0, 51, 102}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize 	extcolor{gray}{Mission Intelligence Dossier: ((( company|latex_escape )))}}
+head{\footnotesize 	extcolor{gray}{((( date|latex_escape )))}}
+\cfoot{	hepage}
+enewcommand{\headrulewidth}{0.4pt}
+
+% Section Styles
+	itleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[	itlerule]
+	itlespacing*{\section}{0pt}{12pt}{8pt}
+	itleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% COVER PAGE
+% ---------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \bfseries 	extcolor{briefblue}{Mission Intelligence Dossier}}\[1cm]
+    {\huge ((( company|latex_escape )))}\[0.5cm]
+    {\Large ((( location|latex_escape )))}\[2cm]
+    
+    \vfill
+    \begin{flushleft}
+    	extbf{Prepared for:} ((( candidate_name|latex_escape )))
+    	extbf{Date:} ((( date|latex_escape )))
+    	extbf{Classification:} Confidential Intelligence / For Interview Prep Only
+    \end{flushleft}
+\end{titlepage}
+
+% ---------------------------------------------------------
+\section*{Executive Summary}
+((( executive_summary|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{1. Local Mission Portfolio}
+((( local_mission_portfolio|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{2. Enterprise Business Intelligence}
+((( enterprise_bi|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{3. Technical Stack DNA}
+((( technical_stack_dna|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{4. Strategic Context \& Culture}
+((( strategic_context|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{5. Strategic Fit \& Attack Vectors}
+((( strategic_fit|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{6. Interview Reconnaissance}
+((( interview_recon|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{7. Sources \& Citations}
+\begin{enumerate}[label={[\arabic*]}]
+((% for source in sources %))
+    \item ((( source|latex_escape )))
+((% endfor %))
+\end{enumerate}
+
+\end{document}
