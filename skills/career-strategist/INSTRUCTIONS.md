@@ -56,15 +56,18 @@ Cross-reference findings with the **selected Master JSON**:
 - **High-Impact Alignment**: Explicitly map 3-5 career highlights to company priorities.
 - **Gap Analysis & Mitigation**: Identify 1-2 gaps and provide a "Mitigation Strategy" for the interview.
 
-### 7. [ ] Step 7: Dossier Generation (LaTeX/PDF)
-- Synthesize all baseline and optional findings into the `strategy_dossier_template.tex`.
+### Step 7: Dossier Generation (LaTeX/PDF)
+- **Structured Mapping**: Synthesize all baseline and optional findings into a structured **Dossier JSON**.
 - **Readability Rule**: For each section (1-5), you MUST provide a list of objects in the format `{"label": "Key Term", "text": "Detailed explanation..."}` instead of a single paragraph to ensure clear skimmability.
 - **IEEE Citation Rule**: Format the `sources` list using the **IEEE standard for online references**: `Author/Org, "Title," Website, Date. [Online]. Available: URL [Accessed: Date].`
 - **Note**: Optional deep-dives must be populated into their dedicated sections in the template.
-- Save the TeX file to `data/latex/Strategy_Dossier_[Company]_[Date].tex`.
-- Execute: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`.
-- Move the final PDF to `outputs/dossiers/`.
+- **Placement**: Save the JSON to `data/json/Strategy_Dossier_[Company]_[Date].json`.
+- **Generation**: Use the template engine to create the TeX file:
+  `python3 tools/ari.py tools/importer_engine.py data/json/Strategy_Dossier_[Company]_[Date].json templates/built-in/strategy_dossier_template.tex data/latex/Strategy_Dossier_[Company]_[Date].tex`
+- **Compilation**: Execute: `python3 tools/ari.py tools/compile_resume.py data/latex/Strategy_Dossier_[Company]_[Date].tex`.
+- **Final Move**: Move the final PDF to `outputs/dossiers/`.
 
 ## Tool Reference (ARI)
 - **pdf_parser.py**: `python3 tools/ari.py tools/pdf_parser.py [PDF_PATH]` - Used to extract technical DNA from Job Description (JD) PDFs.
+- **importer_engine.py**: `python3 tools/ari.py tools/importer_engine.py [JSON_PATH] [TEMPLATE_PATH] [OUTPUT_TEX]` - Used for deterministic LaTeX generation.
 - **compile_resume.py**: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`

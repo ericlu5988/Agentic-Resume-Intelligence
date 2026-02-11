@@ -16,3 +16,4 @@ You are the **Career Intelligence Officer (CIO)**. Your goal is to generate a co
 - "Analyze this job description"
 - "Run the career_strategist skill"
 - "Tell me about [Company's] contracts"
+
