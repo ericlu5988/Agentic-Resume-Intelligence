@@ -2,6 +2,21 @@
 
 All notable changes to the **Agentic Resume Intelligence** project during the February 2026 refactoring and improvement session.
 
+## [1.1.1] - 2026-02-13
+
+### 🏗️ Architecture & Philosophy
+- **Bootstrap Mandate**: Enforced architectural alignment across all agents by requiring the reading of `AGENT.md` and `ARCHITECTURE.md` at session start.
+
+### 🛠️ Infrastructure & Tools
+- **Fidelity Auditor Optimization**: 
+    - Implemented vertical-first (Y-then-X) word sorting to accurately preserve reading order in both single and multi-column layouts.
+    - Enhanced matching logic with `token_set_ratio` and `partial_ratio` to robustly handle squashed or justified PDF text layers.
+- **Dossier Schema Validation**: Codified the `career-strategist` dossier JSON schema to prevent downstream LaTeX compilation errors.
+- **Deterministic Generation**: Enforced the use of `importer_engine` for career dossiers to ensure consistent LaTeX output.
+
+### 🧠 Agentic Skills
+- **Modern Blue Template**: Added `modern_blue_template.tex` to the built-in library, offering a modern, high-density layout with dynamic highlight labels.
+
 ## [1.1.0] - 2026-02-11
 
 ### 🏗️ Architecture & Philosophy
