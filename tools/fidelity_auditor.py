@@ -33,7 +33,12 @@ def audit(source_json_path, target_pdf_path):
         source_data = json.load(f)
     
     target_geo = extract_geo_text(target_pdf_path)
-    target_text_full = "".join([w["text"] for w in target_geo])
+    # Sort words by Page, then Top (vertical), then X-coordinate (horizontal)
+    # This preserves natural reading order for both single and multi-column
+    # (though multi-column needs more care, this is safer for full-width)
+    target_geo.sort(key=lambda w: (w["page"], w["top"], w["x0"]))
+    
+    target_text_full = " ".join([w["text"] for w in target_geo])
     target_norm = normalize_text(target_text_full)
     
     issues = []
@@ -51,10 +56,14 @@ def audit(source_json_path, target_pdf_path):
             return
         
         norm_val = normalize_text(str(val))
+        # Use partial_ratio or token_set_ratio which are robust to spacing/ordering
         if norm_val not in target_norm:
-            score = fuzz.partial_ratio(str(val).lower(), target_text_full.lower())
-            if score < 85:
-                issues.append(f"MISSING CONTENT [{label}]: '{val}' (Fuzzy: {score:.1f})")
+            score = fuzz.token_set_ratio(str(val).lower(), target_text_full.lower())
+            # Also try partial_ratio for cases where text is squashed (no spaces)
+            p_score = fuzz.partial_ratio(normalize_text(str(val)), target_norm)
+            best_score = max(score, p_score)
+            if best_score < 90:
+                issues.append(f"MISSING CONTENT [{label}]: '{val}' (Fuzzy: {best_score:.1f})")
 
     check_exists(source_data.get('name'), "Name")
     for i, exp in enumerate(source_data.get('experience', [])):

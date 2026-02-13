@@ -1,0 +1,250 @@
+\documentclass[10pt,letterpaper]{article}
+
+% ---------------------------------------------------------
+% PACKAGES & THEME
+% ---------------------------------------------------------
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet} % Helvetica/Arial style
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{amssymb} % For arrow symbols
+\usepackage{pifont}  % For dingbat symbols (➢)
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{soul} % For underlining
+
+% ---------------------------------------------------------
+% COLOR PALETTE
+% ---------------------------------------------------------
+\definecolor{resumeBlue}{RGB}{0, 78, 137}      % Main Section Header Blue
+\definecolor{darkBlue}{RGB}{0, 40, 90}        % Darker text for highlights
+\definecolor{lightGray}{RGB}{230, 230, 230}   % Light gray for Name/Role background
+\definecolor{subBarGray}{RGB}{192, 192, 192}  % Gray bar under section headers
+
+% Hyperref Setup for Blue Links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=resumeBlue,
+    filecolor=resumeBlue,
+    urlcolor=resumeBlue,
+}
+
+% ---------------------------------------------------------
+% CUSTOM MACROS
+% ---------------------------------------------------------
+
+% 1. Section Header: Blue Box
+\newcommand{\coloredsection}[1]{%
+    \vspace{0pt}
+    \begin{tcolorbox}[
+        colback=resumeBlue, 
+        colframe=resumeBlue, 
+        arc=0mm, 
+        boxrule=0pt, 
+        left=0pt, right=0pt, top=2pt, bottom=2pt,
+        width=\dimexpr\textwidth\relax,
+        enlarge left by=0mm,
+        enlarge right by=0mm,
+        halign=center
+    ]
+        \textbf{\large \textcolor{white}{\uppercase{#1}}}
+    \end{tcolorbox}
+    \vspace{-0pt}
+}
+
+% 2. Role Header: 4 Arguments, 2 Lines, Single Gray Box
+% #1: Company, #2: Location, #3: Title, #4: Dates
+\newcommand{\roleheader}[4]{%
+    \vspace{4pt} % Tighten spacing to next line
+    \noindent
+    \begin{tcolorbox}[
+        colback=lightGray,
+        colframe=lightGray,
+        arc=0mm,
+        boxrule=0pt,
+        left=4pt, right=4pt, top=1pt, bottom=1pt,
+        width=\dimexpr\textwidth\relax,
+        enlarge left by=0mm,
+        enlarge right by=0mm
+    ]
+        \textbf{#1} \hfill \textbf{#2} \\
+        \textbf{#3} \hfill \textbf{#4}
+    \end{tcolorbox}
+    \vspace{-2pt} % Tighten spacing to next line
+}
+
+% 3. Bullet List Style (Arrow: ➢)
+\newlist{arrowlist}{itemize}{1}
+\setlist[arrowlist]{
+    label={\textcolor{resumeBlue}{\scriptsize\ding{226}}}, 
+    leftmargin=0.25in, 
+    itemsep=1pt, 
+    topsep=2pt, 
+    parsep=0pt
+}
+
+% 4. Separator
+\newcommand{\headersep}{\ \textbar\ }
+
+% ---------------------------------------------------------
+% USER CONFIGURATION
+% ---------------------------------------------------------
+\newcommand{\myname}{((( resume.name|latex_escape )))}
+\newcommand{\myemail}{((( resume.email|latex_escape )))}
+\newcommand{\myphone}{((( resume.phone|latex_escape )))}
+\newcommand{\mylocation}{((( resume.location|latex_escape )))}
+\newcommand{\mylinkedin}{((( resume.linkedin|latex_escape )))}
+
+% ---------------------------------------------------------
+% DOCUMENT CONTENT
+% ---------------------------------------------------------
+\begin{document}
+
+% --- HEADER BLOCK (Name on Gray Background) ---
+\begin{tcolorbox}[
+    colback=lightGray,
+    colframe=lightGray,
+    arc=0mm,
+    boxrule=0pt,
+    width=\dimexpr\textwidth\relax,
+    halign=center,
+    top=2pt, bottom=2pt
+]
+    {\Huge \textbf{\textcolor{resumeBlue}{\myname}}}
+\end{tcolorbox}
+
+\vspace{-10pt}
+
+% --- CONTACT INFO (Blue Lines Sandwich) ---
+\begin{center}
+    % Blue Line Top (Thick)
+    \textcolor{resumeBlue}{\hrule height 2pt}
+    
+    % Contact Info
+    \small
+    \textbf{\textcolor{resumeBlue}{%
+    \mylocation 
+    \headersep 
+    \myphone 
+    \headersep 
+    \href{mailto:\myemail}{\myemail}
+    \headersep 
+    \href{https://\mylinkedin}{\mylinkedin}%
+    }}
+    \vspace{4pt}
+    % Blue Line Bottom (Thick)
+    \textcolor{resumeBlue}{\hrule height 2pt}
+\end{center}
+
+% --- TARGET JOB TITLE ---
+\coloredsection{((( resume.target_job_title|default('PROFESSIONAL SUMMARY')|upper|latex_escape )))}
+((% if resume.summary %))
+\small
+((( resume.summary|latex_escape )))
+((% endif %))
+
+% --- ROLE PREREQUISITES ---
+((% if resume.prerequisites %))
+\coloredsection{Role Prerequisites}
+\begin{tcolorbox}[
+    colback=lightGray,
+    colframe=lightGray,
+    arc=0mm,
+    boxrule=0pt,
+    width=\dimexpr\textwidth\relax,
+    halign=center,
+    top=4pt, bottom=4pt
+]
+    \textbf{((( resume.prerequisites|join(' | ')|latex_escape )))}
+\end{tcolorbox}
+((% endif %))
+
+% --- KEY SKILLS ---
+((% if resume.skills %))
+\coloredsection{Key Skills}
+\vspace{-4pt}
+\begin{multicols}{2}
+\noindent
+\small
+((% for skill in resume.skills %))
+\vspace{-3pt}
+\textcolor{black}{((( skill|latex_escape )))} \par
+\vspace{-3pt}
+((% endfor %))
+\end{multicols}
+\vspace{-4pt}
+((% endif %))
+
+% --- PROFESSIONAL EXPERIENCE ---
+\coloredsection{Professional Experience}
+
+((% for exp in resume.experience %))
+\vspace{-6pt}
+% 2-Line Header in Single Gray Box
+\roleheader{((( exp.company|latex_escape )))}{((( exp.location|latex_escape )))}{((( exp.title|latex_escape )))}{((( exp.start_date|latex_escape ))) -- ((( exp.end_date|latex_escape )))}
+
+% Role Summary
+((% if exp.details %))
+\vspace{2pt}
+\small ((( exp.details|latex_escape )))
+((% endif %))
+
+% Aligned Impact Highlights
+((% if exp.highlight_label %))
+\vspace{4pt}
+\noindent
+\textcolor{darkBlue}{\underline{\textbf{((( exp.highlight_label|latex_escape )))}}}
+((% endif %))
+
+\begin{arrowlist}
+((% for bullet in exp.bullets %))
+    \item ((( bullet|latex_escape )))
+((% endfor %))
+\end{arrowlist}
+
+\vspace{2pt}
+((% endfor %))
+
+% --- EDUCATION ---
+\coloredsection{Education}
+\begin{center}
+((% for edu in resume.education %))
+    \vspace{-2pt}
+    \textbf{((( edu.degree|latex_escape )))} -- \textbf{((( edu.school|latex_escape )))}, ((( edu.location|default('')|latex_escape )))\\
+    Graduated: ((( edu.date|latex_escape ))) ((% if edu.gpa %)) \headersep GPA: ((( edu.gpa )))((% endif %))
+    \vspace{-2pt}
+((% endfor %))
+\end{center}
+
+% --- CERTIFICATIONS ---
+((% if resume.certifications %))
+\coloredsection{Certifications}
+\vspace{-2pt}
+\begin{multicols}{2}
+\centering
+\small
+((% for cert in resume.certifications %))
+((( cert|latex_escape )))\\
+((% endfor %))
+\end{multicols}
+\vspace{-2pt}
+((% endif %))
+
+% --- TECHNICAL SKILLS ---
+((% if resume.technical_skills %))
+\coloredsection{Technical Skills}
+\begin{center}
+\small
+((% for cat, skills in resume.technical_skills.items() -%))
+\textbf{((( cat|latex_escape )))} \headersep ((( skills|map('latex_escape')|join(' $\cdot$ ') )))\\
+((% endfor %))
+\end{center}
+((% endif %))
+
+\end{document}
