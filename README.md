@@ -40,6 +40,17 @@ The system distinguishes between **digitization** (one-time) and **targeting** (
 
 ---
 
+## 🧪 System Baseline & Example
+To demonstrate the system's full capability, we provide a complete end-to-end example using the **Johnny Silverhand** persona. This showcases the transformation from a legacy document into a surgically-tailored executive output.
+
+1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf) (Raw document)
+2.  **Extracted JSON**: [data/json/johnny_silverhand.json](./data/json/johnny_silverhand.json) (Geometric-aware data)
+3.  **Living Master (LaTeX)**: [data/latex/johnny_silverhand.tex](./data/latex/johnny_silverhand.tex) (The editable master)
+4.  **Strategic Intelligence**: [outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf](./outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf) (Research)
+5.  **Tailored Result**: [outputs/resume/Resume_Johnny_Silverhand_Lockheed_Martin_2026-02-12.pdf](./outputs/resume/Resume_Johnny_Silverhand_Lockheed_Martin_2026-02-12.pdf) (Surgical output)
+
+---
+
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
