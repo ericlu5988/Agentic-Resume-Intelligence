@@ -247,4 +247,15 @@
 \end{center}
 ((% endif %))
 
+% --- CUSTOM SECTIONS ---
+((% if resume.custom_sections %))
+((% for section in resume.custom_sections %))
+\coloredsection{((( section.title|latex_escape )))}
+((% for item in section.content %))
+\small ((( item|latex_escape ))) \par
+\vspace{2pt}
+((% endfor %))
+((% endfor %))
+((% endif %))
+
 \end{document}
