@@ -14,7 +14,7 @@ data/latex/*
 !data/latex/johnny_silverhand.tex
 !data/latex/Strategy_Dossier_Palantir_Silverhand.tex
 
-.tmp/*
+.tmp/
 
 # All Outputs
 outputs/resume/*
