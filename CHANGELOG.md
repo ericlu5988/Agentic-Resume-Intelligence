@@ -10,10 +10,16 @@ All notable changes to the **Agentic Resume Intelligence** project during the Fe
 - **Security Testing Suite**: Added `rules/tests/` to validate the structural integrity and effectiveness of security rules.
 
 ### 🛠️ Infrastructure & Hardening
+- **LaTeX Search Path Resolution**: Updated `compile_resume.py` to automatically include `templates/` and `templates/built-in/` in the `TEXINPUTS` environment variable, ensuring custom `.cls` and `.sty` files are found during compilation.
+- **Fidelity Auditor Schema Hardening**: Enhanced `fidelity_auditor.py` to support nested `resume` keys in source JSON, ensuring accurate experience counting and content validation for all template types.
 - **Container Hardening**: Switched to the non-root `texlive` user for all Docker executions to mitigate root-escape risks.
 - **Subprocess Sanitization**: Refactored `ari.py` and `compile_resume.py` to use `shutil.which()` for absolute path resolution, preventing command hijacking.
 - **Jinja2 SSTI Protection**: Hardened `importer_engine.py` with `autoescape` and custom LaTeX-safe escaping logic.
 - **Path Traversal Shield**: Hardened `validate_master_path` in `lib/utils.py` to strictly prevent filesystem access outside the project root.
+
+### 🧠 Agentic Skills
+- **Universal Resume Importer**: Unified the PDF and DOCX importer skills into a single, high-fidelity `resume-importer` skill that autonomously handles hybrid sourcing and format-specific extraction logic.
+- **Obsolete Skill Removal**: Deprecated and removed the standalone `pdf-resume-importer` and `docx-resume-importer` skills to reduce architectural redundancy.
 
 ## [1.1.1] - 2026-02-13
 

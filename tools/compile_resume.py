@@ -21,6 +21,16 @@ def compile_latex(tex_file_path):
     # Securely find xelatex path
     xelatex_bin = shutil.which("xelatex") or "xelatex"
 
+    # Set up environment to include templates in TEXINPUTS
+    env = os.environ.copy()
+    project_root = Path(__file__).resolve().parent.parent
+    templates_built_in = str(project_root / "templates" / "built-in")
+    templates_bespoke = str(project_root / "templates")
+    
+    # Prepend template paths to TEXINPUTS (empty trailing colon means default paths follow)
+    current_texinputs = env.get("TEXINPUTS", "")
+    env["TEXINPUTS"] = f".:{templates_built_in}:{templates_bespoke}:{current_texinputs}"
+
     # Assumes we are running in an environment with xelatex (via ARI)
     local_cmd = [
         xelatex_bin, "-interaction=nonstopmode", f"-jobname={jobname}", filename
@@ -28,7 +38,7 @@ def compile_latex(tex_file_path):
     
     try:
         # Run twice for cross-references if needed
-        result = subprocess.run(local_cmd, cwd=work_dir, capture_output=True, text=True)  # nosec B603
+        result = subprocess.run(local_cmd, cwd=work_dir, capture_output=True, text=True, env=env)  # nosec B603
         if result.returncode != 0:
             print("LaTeX compilation failed.")
             print("STDOUT:", result.stdout)

@@ -32,6 +32,9 @@ def audit(source_json_path, target_pdf_path):
     with open(source_p, 'r', encoding='utf-8') as f:
         source_data = json.load(f)
     
+    # Extract actual data payload (handle optional 'resume' wrapper)
+    resume_data = source_data.get('resume', source_data)
+    
     target_geo = extract_geo_text(target_pdf_path)
     # Sort words by Page, then Top (vertical), then X-coordinate (horizontal)
     # This preserves natural reading order for both single and multi-column
@@ -65,13 +68,13 @@ def audit(source_json_path, target_pdf_path):
             if best_score < 90:
                 issues.append(f"MISSING CONTENT [{label}]: '{val}' (Fuzzy: {best_score:.1f})")
 
-    check_exists(source_data.get('name'), "Name")
-    for i, exp in enumerate(source_data.get('experience', [])):
+    check_exists(resume_data.get('name'), "Name")
+    for i, exp in enumerate(resume_data.get('experience', [])):
         check_exists(exp.get('company'), f"Exp[{i}].company")
         check_exists(exp.get('bullets'), f"Exp[{i}].bullets")
 
     # Check custom sections if they exist
-    for i, section in enumerate(source_data.get('custom_sections', [])):
+    for i, section in enumerate(resume_data.get('custom_sections', [])):
         check_exists(section.get('title'), f"Custom[{i}].title")
         check_exists(section.get('content'), f"Custom[{i}].content")
 
@@ -81,7 +84,7 @@ def audit(source_json_path, target_pdf_path):
         "issues": issues,
         "metrics": {
             "target_word_count": len(target_geo),
-            "source_experience_count": len(source_data.get('experience', []))
+            "source_experience_count": len(resume_data.get('experience', []))
         }
     }
     return report
