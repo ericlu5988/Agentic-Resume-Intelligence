@@ -127,7 +127,7 @@
 ((% if resume.technical_skills %))
 \section*{TECHNICAL SKILLS}
 ((% for cat, skills in resume.technical_skills.items() %))
-\textbf{((( cat|latex_escape )))}: ((( skills|map('latex_escape')|join(' \textbullet{} ') ))) \\
+\textbf{((( cat|latex_escape )))}: ((( skills|join(' $\cdot$ ')|latex_escape ))) \\
 ((% endfor %))
 ((% endif %))
 
