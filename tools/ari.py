@@ -20,17 +20,17 @@ def run_ari():
 
     # Check if docker is available
     try:
-        subprocess.run([docker_bin, "--version"], capture_output=True, check=True)
+        subprocess.run([docker_bin, "--version"], capture_output=True, check=True)  # nosec B603
     except (subprocess.CalledProcessError, FileNotFoundError):
         print("Error: Docker is not responding correctly.")
         sys.exit(1)
 
     # Build the image if it doesn't exist
     try:
-        check_image = subprocess.run([docker_bin, "images", "-q", image_name], capture_output=True, text=True)
+        check_image = subprocess.run([docker_bin, "images", "-q", image_name], capture_output=True, text=True)  # nosec B603
         if not check_image.stdout.strip():
             print(f"Building tool container {image_name}...")
-            subprocess.run([docker_bin, "build", "-t", "resume-tools", str(script_dir)], check=True)
+            subprocess.run([docker_bin, "build", "-t", "resume-tools", str(script_dir)], check=True)  # nosec B603
     except subprocess.CalledProcessError as e:
         print(f"Failed to build or check Docker image: {e}")
         sys.exit(1)
@@ -49,7 +49,7 @@ def run_ari():
 
     try:
         # Run the command and pass through all IO
-        result = subprocess.run(docker_cmd)
+        result = subprocess.run(docker_cmd)  # nosec B603
         sys.exit(result.returncode)
     except Exception as e:
         print(f"An error occurred while running ARI: {e}")

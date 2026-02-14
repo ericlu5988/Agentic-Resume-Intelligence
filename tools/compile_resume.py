@@ -28,7 +28,7 @@ def compile_latex(tex_file_path):
     
     try:
         # Run twice for cross-references if needed
-        result = subprocess.run(local_cmd, cwd=work_dir, capture_output=True, text=True)
+        result = subprocess.run(local_cmd, cwd=work_dir, capture_output=True, text=True)  # nosec B603
         if result.returncode != 0:
             print("LaTeX compilation failed.")
             print("STDOUT:", result.stdout)

@@ -38,12 +38,23 @@ templates/*
 # Environment & Secrets
 .env
 *.log
+.venv/
+venv/
+ENV/
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
+rules/tests/coverage/
+
+# Security Artifacts
+*.bandit
+*.semgrep
+security_report.txt
+bandit_report.txt
+semgrep_report.txt
 
 # LaTeX Auxiliary Files (Global)
 *.aux
