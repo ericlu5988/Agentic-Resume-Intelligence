@@ -71,3 +71,6 @@ semgrep_report.txt
 # OS Specific
 .DS_Store
 Thumbs.db
+
+# Global whitelist for persistence
+!.gitkeep
