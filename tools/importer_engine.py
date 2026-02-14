@@ -25,6 +25,7 @@ def run_engine(data_path, template_path, output_path):
     template_file = Path(template_path).resolve()
     env = Environment(
         loader=FileSystemLoader(str(template_file.parent)),
+        autoescape=lambda _: False,  # Disable default HTML escaping
         block_start_string='((%',
         block_end_string='%))',
         variable_start_string='(((',

@@ -46,9 +46,15 @@ def escape_latex(text):
 
 def validate_master_path(path_str):
     """
-    Enforces the 'Source of Truth' standard for JSON files.
+    Enforces the 'Source of Truth' standard and prevents path traversal.
     """
     p = Path(path_str).resolve()
+    root = Path(__file__).parent.parent.parent.resolve()
+    
+    # Check for path traversal or access outside project root
+    if not str(p).startswith(str(root)):
+        raise PermissionError(f"Access denied: Path '{path_str}' is outside the project root.")
+
     if "data/json" not in str(p):
         print(f"WARNING: Path '{path_str}' is outside 'data/json/'.", file=sys.stderr)
         print("This violates the 'Source of Truth' standard.", file=sys.stderr)

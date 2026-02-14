@@ -20,6 +20,18 @@ Target specific roles without losing your voice. The agent surgically "sprinkles
 ### 4. Deterministic Fidelity Audit
 Character-perfect accuracy. Every generated document is validated by a deterministic Python auditor to ensure a **Fidelity Score of 100**, guaranteeing that the AI never hallucinates your experience or breaks your layout.
 
+### 5. Security-First Governance
+Hardened for high-stakes environments. The system includes an integrated **Security Conscience** (Core rules for OWASP, RAG, and AI Safety) and automated SAST scanning to ensure your data and code remain secure.
+
+---
+
+## 🛡️ Security Governance
+ARI is built on a **Security-First** philosophy. Every agent action is cross-referenced against a strict governance framework located in the `rules/` directory.
+
+- **Core Rules**: OWASP 2025, AI Security, and Agentic Agency.
+- **RAG Safety**: Input sanitization and indirect prompt injection prevention.
+- **Hardened Runtime**: Tools run in an isolated, non-root Docker container with path-traversal protection.
+
 ---
 
 ## 🏗️ The SAT Architecture
@@ -70,23 +82,23 @@ To demonstrate the system's full capability, we provide a complete end-to-end ex
 ---
 
 ## 🧪 Testing
-Verify the deterministic logic using the integrated test suite:
+Verify the deterministic logic and security posture using the integrated suite:
+
+### Functional Tests
 ```bash
-python3 tools/ari.py -m unittest discover tools/tests
+python3 tools/ari.py -m pytest tools/tests/
 ```
 
----
+### Security Scans (SAST)
+```bash
+python3 tools/ari.py -m bandit -r .
+python3 tools/ari.py /usr/local/bin/semgrep scan --config auto .
+```
 
-## 📖 How to Use
-
-### 1. Digitize
-Place your resume in `imports/` and say: *"Import my resume."* The agent will guide you through the **Template Selection Gate**.
-
-### 2. Research
-Identify a target and say: *"I have an interview at Palantir. Run the Career Strategist mission."* Strategy dossiers are saved to `outputs/dossiers/`.
-
-### 3. Target
-Once you have the intel, say: *"Target my resume for this Palantir role."* The agent will surgically update your LaTeX master and save the final PDF to `outputs/resume/`.
+### Rule Validation
+```bash
+python3 tools/ari.py -m pytest rules/tests/
+```
 
 ---
 *Created by Eric Lu for professionals who value precision over automation.*

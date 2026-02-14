@@ -3,6 +3,7 @@ import subprocess
 import os
 import sys
 import argparse
+import shutil
 from pathlib import Path
 
 def compile_latex(tex_file_path):
@@ -17,9 +18,12 @@ def compile_latex(tex_file_path):
 
     print(f"Compiling {filename} in {work_dir}...")
 
+    # Securely find xelatex path
+    xelatex_bin = shutil.which("xelatex") or "xelatex"
+
     # Assumes we are running in an environment with xelatex (via ARI)
     local_cmd = [
-        "xelatex", "-interaction=nonstopmode", f"-jobname={jobname}", filename
+        xelatex_bin, "-interaction=nonstopmode", f"-jobname={jobname}", filename
     ]
     
     try:

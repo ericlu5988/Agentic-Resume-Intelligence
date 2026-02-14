@@ -2,6 +2,19 @@
 
 All notable changes to the **Agentic Resume Intelligence** project during the February 2026 refactoring and improvement session.
 
+## [1.2.0] - 2026-02-14
+
+### 🛡️ Security & Governance
+- **Security Governance Framework**: Integrated `rules/` directory with standardized security rules for OWASP 2025, AI Security, and RAG operations.
+- **Automated SAST Integration**: Enabled `bandit` and `semgrep` scanning within the ARI toolset.
+- **Security Testing Suite**: Added `rules/tests/` to validate the structural integrity and effectiveness of security rules.
+
+### 🛠️ Infrastructure & Hardening
+- **Container Hardening**: Switched to the non-root `texlive` user for all Docker executions to mitigate root-escape risks.
+- **Subprocess Sanitization**: Refactored `ari.py` and `compile_resume.py` to use `shutil.which()` for absolute path resolution, preventing command hijacking.
+- **Jinja2 SSTI Protection**: Hardened `importer_engine.py` with `autoescape` and custom LaTeX-safe escaping logic.
+- **Path Traversal Shield**: Hardened `validate_master_path` in `lib/utils.py` to strictly prevent filesystem access outside the project root.
+
 ## [1.1.1] - 2026-02-13
 
 ### 🏗️ Architecture & Philosophy

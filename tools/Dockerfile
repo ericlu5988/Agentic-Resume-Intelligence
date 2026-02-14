@@ -15,5 +15,8 @@ COPY requirements.txt .
 RUN pip3 install --no-cache-dir --upgrade pip --break-system-packages && \
     pip3 install --no-cache-dir -r requirements.txt --break-system-packages
 
+# Use existing non-root user from base image
+USER texlive
+
 # Maintain compatibility with our scripts
 ENTRYPOINT ["python3"]
