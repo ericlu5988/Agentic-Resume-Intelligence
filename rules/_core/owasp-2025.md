@@ -368,58 +368,61 @@ def login():
 
 **Risk Level**: High
 
-### Rule: Implement Secure Session Management
+### Rule: Implement Robust Authentication
 
 **Level**: `strict`
 
-**When**: Handling user authentication, sessions, or tokens.
+**When**: Implementing user login, identity verification, or critical function access.
 
 **Do**:
 ```python
-from flask import session
-import secrets
-
-# Secure session configuration
-app.config.update(
-    SECRET_KEY=secrets.token_hex(32),
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
-    PERMANENT_SESSION_LIFETIME=1800,
-)
-
-# Regenerate session on login
-@app.route('/login', methods=['POST'])
-def login():
-    if authenticate(request.form['username'], request.form['password']):
-        session.clear()  # Prevent session fixation
-        session['user_id'] = user.id
-        session.regenerate()  # New session ID
-        return redirect('/dashboard')
-    return "Invalid credentials", 401
+# Use MFA and robust identity providers
+# Implement secure session management
+# Require authentication for all sensitive operations
 ```
 
 **Don't**:
 ```python
-# VULNERABLE: Weak session secret
-app.secret_key = 'secret'
-
-# VULNERABLE: No session regeneration on login
-@app.route('/login', methods=['POST'])
-def login():
-    if check_password(username, password):
-        session['logged_in'] = True  # Session fixation risk
+# VULNERABLE: Missing authentication for critical function
+def delete_user(user_id):
+    db.users.delete(user_id) # No check! - CWE-306
 ```
 
-**Why**: Weak authentication allows account takeover, credential stuffing, and session hijacking attacks.
+**Why**: Authentication failures allow attackers to impersonate users and access sensitive data. CWE-306 occurs when an application does not perform any authentication check for a critical functionality.
 
-**Refs**: OWASP A07:2025, CWE-287, CWE-384, NIST SP 800-63B
+**Refs**: OWASP A07:2025, CWE-287, CWE-306, CWE-307
 
 ---
 
 ## A08:2025 - Software and Data Integrity Failures
 
 **Risk Level**: High
+
+### Rule: Avoid Hardcoded Credentials
+
+**Level**: `strict`
+
+**When**: Handling API keys, passwords, or cryptographic secrets.
+
+**Do**:
+```python
+import os
+
+# Use environment variables or secret managers
+api_key = os.getenv("SERVICE_API_KEY")
+```
+
+**Don't**:
+```python
+# VULNERABLE: Hardcoded credentials in source code
+api_key = "sk-1234567890" # CWE-798
+```
+
+**Why**: Hardcoded credentials (CWE-798) expose sensitive access keys to anyone with source access, leading to immediate system compromise.
+
+**Refs**: OWASP A08:2025, CWE-798, CWE-259
+
+---
 
 ### Rule: Verify Code and Data Integrity
 

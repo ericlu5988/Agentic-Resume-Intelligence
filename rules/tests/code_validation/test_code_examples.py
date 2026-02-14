@@ -75,7 +75,7 @@ class TestPythonCodeExamples:
 
             for import_line in import_lines:
                 try:
-                    ast.parse(import_line)
+                    ast.parse(import_line.strip())
                 except SyntaxError as e:
                     errors.append(
                         f"Invalid import in rule '{rule_name}': "

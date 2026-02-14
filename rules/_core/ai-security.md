@@ -668,7 +668,7 @@ def require_internal_auth():
 ```
 
 **Don't**:
-```python
+```dockerfile
 # VULNERABLE: Running as root
 # Dockerfile
 USER root

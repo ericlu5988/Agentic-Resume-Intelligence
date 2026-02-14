@@ -15,7 +15,7 @@ import yaml
 
 
 # Project root directory
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 RULES_DIR = PROJECT_ROOT / "rules"
 
 

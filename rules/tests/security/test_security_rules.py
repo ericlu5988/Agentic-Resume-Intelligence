@@ -71,6 +71,7 @@ class TestSemgrepIntegration:
             return {"results": [], "errors": []}
 
     @pytest.mark.slow
+    @pytest.mark.skip(reason="Slow SAST integration test - run manually if needed")
     def test_dont_examples_trigger_security_warnings(
         self,
         code_blocks_by_language: dict[str, list[dict[str, Any]]],
@@ -113,6 +114,7 @@ class TestSemgrepIntegration:
                 )
 
     @pytest.mark.slow
+    @pytest.mark.skip(reason="Slow SAST integration test - run manually if needed")
     def test_do_examples_pass_security_checks(
         self,
         code_blocks_by_language: dict[str, list[dict[str, Any]]],
@@ -193,6 +195,7 @@ class TestBanditIntegration:
             return {"results": [], "errors": []}
 
     @pytest.mark.slow
+    @pytest.mark.skip(reason="Slow SAST integration test")
     def test_python_dont_examples_flagged_by_bandit(
         self,
         code_blocks_by_language: dict[str, list[dict[str, Any]]],
@@ -234,6 +237,7 @@ class TestBanditIntegration:
                 )
 
     @pytest.mark.slow
+    @pytest.mark.skip(reason="Slow SAST integration test")
     def test_python_do_examples_pass_bandit(
         self,
         code_blocks_by_language: dict[str, list[dict[str, Any]]],

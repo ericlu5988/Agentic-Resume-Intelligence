@@ -280,6 +280,35 @@ cursor.execute("SELECT * FROM users WHERE id = %s" % user_id)
 
 ---
 
+## Code Execution
+
+### Rule: Prevent Arbitrary Code Execution
+
+**Level**: `strict`
+
+**When**: Processing dynamic expressions or untrusted data.
+
+**Do**:
+```python
+import json
+
+# Use safe parsers
+data = json.loads(user_input)
+```
+
+**Don't**:
+```python
+# VULNERABLE: Direct execution of untrusted input
+result = eval(user_input)
+exec(untrusted_code)
+```
+
+**Why**: `eval()` and `exec()` allow for arbitrary code execution (CWE-94), which can lead to full system compromise.
+
+**Refs**: CWE-94, OWASP A03:2025
+
+---
+
 ## Web Security
 
 ### Rule: Validate URL Schemes
