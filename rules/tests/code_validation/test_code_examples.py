@@ -1,0 +1,517 @@
+"""
+Code example validation tests.
+
+These tests verify that code examples in security rules are
+syntactically valid and parseable.
+"""
+
+import ast
+import json
+import subprocess
+import tempfile
+from pathlib import Path
+from typing import Any
+
+import pytest
+
+
+class TestPythonCodeExamples:
+    """Tests for Python code example validity."""
+
+    def test_python_examples_are_syntactically_valid(
+        self, code_blocks_by_language: dict[str, list[dict[str, Any]]]
+    ) -> None:
+        """Verify all Python code examples parse correctly."""
+        python_blocks = code_blocks_by_language.get("python", [])
+
+        if not python_blocks:
+            pytest.skip("No Python code examples found")
+
+        errors = []
+
+        for block in python_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+            filepath = block["filepath"]
+
+            # Skip if code is clearly a snippet (e.g., starts with ...)
+            if code.strip().startswith("..."):
+                continue
+
+            try:
+                ast.parse(code)
+            except SyntaxError as e:
+                # Try to provide context about the error
+                errors.append(
+                    f"Python syntax error in rule '{rule_name}' "
+                    f"({filepath}):\n"
+                    f"  Line {e.lineno}: {e.msg}\n"
+                    f"  Code preview: {code[:100]}..."
+                )
+
+        if errors:
+            pytest.fail("\n\n".join(errors))
+
+    def test_python_imports_are_valid(
+        self, code_blocks_by_language: dict[str, list[dict[str, Any]]]
+    ) -> None:
+        """Verify Python import statements are syntactically correct."""
+        python_blocks = code_blocks_by_language.get("python", [])
+
+        if not python_blocks:
+            pytest.skip("No Python code examples found")
+
+        errors = []
+
+        for block in python_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            # Extract import lines
+            import_lines = [
+                line for line in code.split("\n")
+                if line.strip().startswith(("import ", "from "))
+            ]
+
+            for import_line in import_lines:
+                try:
+                    ast.parse(import_line)
+                except SyntaxError as e:
+                    errors.append(
+                        f"Invalid import in rule '{rule_name}': "
+                        f"{import_line.strip()} - {e.msg}"
+                    )
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+
+class TestJavaScriptCodeExamples:
+    """Tests for JavaScript/TypeScript code example validity."""
+
+    @pytest.fixture
+    def node_available(self) -> bool:
+        """Check if Node.js is available for validation."""
+        try:
+            result = subprocess.run(
+                ["node", "--version"],
+                capture_output=True,
+                timeout=5
+            )
+            return result.returncode == 0
+        except (subprocess.SubprocessError, FileNotFoundError):
+            return False
+
+    def test_javascript_examples_parse_correctly(
+        self,
+        code_blocks_by_language: dict[str, list[dict[str, Any]]],
+        node_available: bool
+    ) -> None:
+        """Verify JavaScript code examples are parseable."""
+        js_blocks = (
+            code_blocks_by_language.get("javascript", []) +
+            code_blocks_by_language.get("js", [])
+        )
+
+        if not js_blocks:
+            pytest.skip("No JavaScript code examples found")
+
+        if not node_available:
+            pytest.skip("Node.js not available for JavaScript validation")
+
+        errors = []
+
+        for block in js_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            # Use Node.js to check syntax
+            check_script = f"""
+            try {{
+                new Function({json.dumps(code)});
+                process.exit(0);
+            }} catch (e) {{
+                console.error(e.message);
+                process.exit(1);
+            }}
+            """
+
+            try:
+                result = subprocess.run(
+                    ["node", "-e", check_script],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+
+                if result.returncode != 0:
+                    errors.append(
+                        f"JavaScript syntax error in rule '{rule_name}': "
+                        f"{result.stderr.strip()}"
+                    )
+            except subprocess.TimeoutExpired:
+                errors.append(
+                    f"JavaScript validation timeout for rule '{rule_name}'"
+                )
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+    def test_typescript_examples_parse_correctly(
+        self,
+        code_blocks_by_language: dict[str, list[dict[str, Any]]],
+        node_available: bool
+    ) -> None:
+        """Verify TypeScript code examples are parseable."""
+        ts_blocks = (
+            code_blocks_by_language.get("typescript", []) +
+            code_blocks_by_language.get("ts", [])
+        )
+
+        if not ts_blocks:
+            pytest.skip("No TypeScript code examples found")
+
+        # Check if TypeScript compiler is available
+        try:
+            result = subprocess.run(
+                ["npx", "tsc", "--version"],
+                capture_output=True,
+                timeout=10
+            )
+            tsc_available = result.returncode == 0
+        except (subprocess.SubprocessError, FileNotFoundError):
+            tsc_available = False
+
+        if not tsc_available:
+            pytest.skip("TypeScript compiler not available")
+
+        errors = []
+
+        for block in ts_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            with tempfile.NamedTemporaryFile(
+                suffix=".ts", mode="w", delete=False
+            ) as f:
+                f.write(code)
+                temp_path = f.name
+
+            try:
+                result = subprocess.run(
+                    ["npx", "tsc", "--noEmit", "--allowJs", temp_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+
+                if result.returncode != 0:
+                    # Filter out common false positives
+                    stderr = result.stderr
+                    if "Cannot find module" not in stderr:
+                        errors.append(
+                            f"TypeScript error in rule '{rule_name}': "
+                            f"{stderr.strip()}"
+                        )
+            except subprocess.TimeoutExpired:
+                errors.append(
+                    f"TypeScript validation timeout for rule '{rule_name}'"
+                )
+            finally:
+                Path(temp_path).unlink(missing_ok=True)
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+
+class TestYamlJsonExamples:
+    """Tests for YAML and JSON code example validity."""
+
+    def test_yaml_examples_are_valid(
+        self, code_blocks_by_language: dict[str, list[dict[str, Any]]]
+    ) -> None:
+        """Verify YAML code examples parse correctly."""
+        import yaml
+
+        yaml_blocks = (
+            code_blocks_by_language.get("yaml", []) +
+            code_blocks_by_language.get("yml", [])
+        )
+
+        if not yaml_blocks:
+            pytest.skip("No YAML code examples found")
+
+        errors = []
+
+        for block in yaml_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            try:
+                yaml.safe_load(code)
+            except yaml.YAMLError as e:
+                errors.append(
+                    f"YAML syntax error in rule '{rule_name}': {e}"
+                )
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+    def test_json_examples_are_valid(
+        self, code_blocks_by_language: dict[str, list[dict[str, Any]]]
+    ) -> None:
+        """Verify JSON code examples parse correctly."""
+        json_blocks = code_blocks_by_language.get("json", [])
+
+        if not json_blocks:
+            pytest.skip("No JSON code examples found")
+
+        errors = []
+
+        for block in json_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            try:
+                json.loads(code)
+            except json.JSONDecodeError as e:
+                errors.append(
+                    f"JSON syntax error in rule '{rule_name}': "
+                    f"Line {e.lineno}: {e.msg}"
+                )
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+
+class TestHclExamples:
+    """Tests for HCL (Terraform) code example validity."""
+
+    def test_hcl_examples_parse_correctly(
+        self, code_blocks_by_language: dict[str, list[dict[str, Any]]]
+    ) -> None:
+        """Verify HCL/Terraform code examples are valid."""
+        hcl_blocks = (
+            code_blocks_by_language.get("hcl", []) +
+            code_blocks_by_language.get("terraform", []) +
+            code_blocks_by_language.get("tf", [])
+        )
+
+        if not hcl_blocks:
+            pytest.skip("No HCL/Terraform code examples found")
+
+        try:
+            import hcl2
+        except ImportError:
+            pytest.skip("python-hcl2 not installed")
+
+        errors = []
+
+        for block in hcl_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            try:
+                import io
+                hcl2.load(io.StringIO(code))
+            except Exception as e:
+                errors.append(
+                    f"HCL syntax error in rule '{rule_name}': {e}"
+                )
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+
+class TestShellExamples:
+    """Tests for shell script code example validity."""
+
+    @pytest.fixture
+    def shellcheck_available(self) -> bool:
+        """Check if shellcheck is available."""
+        try:
+            result = subprocess.run(
+                ["shellcheck", "--version"],
+                capture_output=True,
+                timeout=5
+            )
+            return result.returncode == 0
+        except (subprocess.SubprocessError, FileNotFoundError):
+            return False
+
+    def test_shell_examples_have_valid_syntax(
+        self,
+        code_blocks_by_language: dict[str, list[dict[str, Any]]],
+        shellcheck_available: bool
+    ) -> None:
+        """Verify shell script examples have valid syntax."""
+        shell_blocks = (
+            code_blocks_by_language.get("bash", []) +
+            code_blocks_by_language.get("sh", []) +
+            code_blocks_by_language.get("shell", [])
+        )
+
+        if not shell_blocks:
+            pytest.skip("No shell script code examples found")
+
+        if not shellcheck_available:
+            pytest.skip("shellcheck not available")
+
+        errors = []
+
+        for block in shell_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            with tempfile.NamedTemporaryFile(
+                suffix=".sh", mode="w", delete=False
+            ) as f:
+                f.write(code)
+                temp_path = f.name
+
+            try:
+                result = subprocess.run(
+                    ["shellcheck", "-s", "bash", temp_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+
+                # Only report errors, not warnings
+                if result.returncode == 1:
+                    # Filter for actual errors
+                    error_lines = [
+                        line for line in result.stdout.split("\n")
+                        if "error" in line.lower()
+                    ]
+                    if error_lines:
+                        errors.append(
+                            f"Shell script error in rule '{rule_name}': "
+                            f"{'; '.join(error_lines)}"
+                        )
+            except subprocess.TimeoutExpired:
+                errors.append(
+                    f"Shell validation timeout for rule '{rule_name}'"
+                )
+            finally:
+                Path(temp_path).unlink(missing_ok=True)
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+
+class TestSqlExamples:
+    """Tests for SQL code example validity."""
+
+    def test_sql_examples_have_basic_validity(
+        self, code_blocks_by_language: dict[str, list[dict[str, Any]]]
+    ) -> None:
+        """Verify SQL examples have basic structural validity."""
+        sql_blocks = code_blocks_by_language.get("sql", [])
+
+        if not sql_blocks:
+            pytest.skip("No SQL code examples found")
+
+        # Basic SQL keywords that should be present
+        sql_keywords = [
+            "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE",
+            "ALTER", "DROP", "GRANT", "REVOKE"
+        ]
+
+        errors = []
+
+        for block in sql_blocks:
+            code = block["code"].upper()
+            rule_name = block["rule_name"]
+
+            # Check if it contains at least one SQL keyword
+            has_keyword = any(keyword in code for keyword in sql_keywords)
+
+            if not has_keyword:
+                errors.append(
+                    f"SQL example in rule '{rule_name}' "
+                    f"doesn't appear to be valid SQL"
+                )
+
+            # Check for basic syntax issues
+            if code.count("(") != code.count(")"):
+                errors.append(
+                    f"Unbalanced parentheses in SQL example "
+                    f"for rule '{rule_name}'"
+                )
+
+        if errors:
+            pytest.fail("\n".join(errors))
+
+
+class TestGoExamples:
+    """Tests for Go code example validity."""
+
+    @pytest.fixture
+    def go_available(self) -> bool:
+        """Check if Go is available."""
+        try:
+            result = subprocess.run(
+                ["go", "version"],
+                capture_output=True,
+                timeout=5
+            )
+            return result.returncode == 0
+        except (subprocess.SubprocessError, FileNotFoundError):
+            return False
+
+    def test_go_examples_compile(
+        self,
+        code_blocks_by_language: dict[str, list[dict[str, Any]]],
+        go_available: bool
+    ) -> None:
+        """Verify Go code examples compile correctly."""
+        go_blocks = code_blocks_by_language.get("go", [])
+
+        if not go_blocks:
+            pytest.skip("No Go code examples found")
+
+        if not go_available:
+            pytest.skip("Go not available")
+
+        errors = []
+
+        for block in go_blocks:
+            code = block["code"]
+            rule_name = block["rule_name"]
+
+            # Wrap code in package if not present
+            if "package " not in code:
+                code = "package main\n\n" + code
+
+            with tempfile.NamedTemporaryFile(
+                suffix=".go", mode="w", delete=False
+            ) as f:
+                f.write(code)
+                temp_path = f.name
+
+            try:
+                result = subprocess.run(
+                    ["go", "build", "-o", "/dev/null", temp_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+
+                if result.returncode != 0:
+                    # Filter out import errors (common in examples)
+                    stderr = result.stderr
+                    if "could not import" not in stderr:
+                        errors.append(
+                            f"Go compilation error in rule '{rule_name}': "
+                            f"{stderr.strip()}"
+                        )
+            except subprocess.TimeoutExpired:
+                errors.append(
+                    f"Go compilation timeout for rule '{rule_name}'"
+                )
+            finally:
+                Path(temp_path).unlink(missing_ok=True)
+
+        if errors:
+            pytest.fail("\n".join(errors))

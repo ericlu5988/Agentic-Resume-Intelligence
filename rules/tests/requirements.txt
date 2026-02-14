@@ -1,0 +1,25 @@
+# Core testing framework
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-xdist>=3.0.0  # Parallel test execution
+
+# YAML/JSON parsing
+pyyaml>=6.0.0
+
+# Markdown parsing
+markdown-it-py>=3.0.0
+
+# Security analysis tools
+semgrep>=1.0.0
+bandit>=1.7.0
+
+# HCL (Terraform) parsing
+python-hcl2>=4.0.0
+
+# Code quality
+mypy>=1.0.0
+ruff>=0.1.0
+
+# Optional: additional validators
+# esprima>=4.0.0  # JavaScript AST parsing (alternative to Node.js)
+# tree-sitter>=0.20.0  # Multi-language parsing

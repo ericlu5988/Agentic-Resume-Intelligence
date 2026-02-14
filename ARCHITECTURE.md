@@ -20,11 +20,15 @@ We prioritize maintaining original visual/textual intent. Tailoring is additive 
 ### Agent-Led Mapping (Context over Rigidity)
 Tools provide **Rich Raw Data**. The Agent uses its contextual intelligence to map that data into the schema.
 
+### Security-First & Governance
+The system incorporates a robust security framework located in `rules/`. All development MUST adhere to the standards defined in `rules/_core/` (OWASP 2025, AI Security, Agent Security) and language-specific rules. Security is not an afterthought but a prerequisite for every plan.
+
 ## 3. Structural Standards
 
 ### Directory Hierarchy
 - **`data/json/`**: Git-ignored. Stores the immutable JSON snapshot from the initial import.
 - **`data/latex/`**: Git-ignored. Stores the **Living Master** `.tex` files (User's primary playground).
+- **`rules/`**: Version-tracked. Security governance framework and rules.
 - **`skills/`**: Version-tracked. Agentic capabilities and SOPs.
 - **`tools/`**: Version-tracked. Deterministic cross-platform scripts.
 - **`templates/built-in/`**: Version-tracked. Immutable core blueprints used for the initial digitization.

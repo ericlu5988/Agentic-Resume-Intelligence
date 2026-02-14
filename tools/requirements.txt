@@ -4,3 +4,8 @@ pathlib
 jinja2
 rapidfuzz
 python-docx
+pytest
+bandit
+pyyaml
+markdown-it-py
+semgrep
