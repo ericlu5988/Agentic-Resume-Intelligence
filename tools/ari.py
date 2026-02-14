@@ -5,6 +5,10 @@ import sys
 import shutil
 from pathlib import Path
 
+# Import shared utils
+sys.path.append(str(Path(__file__).parent))
+from lib.utils import log_security_event
+
 def run_ari():
     script_dir = Path(__file__).parent.resolve()
     project_root = script_dir.parent.resolve()
@@ -44,15 +48,52 @@ def run_ari():
         "resume-tools"
     ]
     
+    # --- PHASE 1: Secure Tool Interface (Allowlist & Validation) ---
+    args = sys.argv[1:]
+    if not args:
+        print("Usage: ari.py <script|module> [args...]")
+        sys.exit(1)
+
+    executable = args[0]
+    
+    # Approved tools and modules
+    ALLOWLIST = {
+        # Core Engines
+        "tools/importer_engine.py", 
+        "tools/compile_resume.py",
+        "tools/pdf_parser.py",
+        "tools/docx_parser.py",
+        "tools/fidelity_auditor.py",
+        "tools/setup.py",
+        # Security & Testing Modules
+        "-m", "pytest", "bandit", "semgrep", "id", "/usr/local/bin/semgrep"
+    }
+
+    # Validation logic
+    is_module_call = executable == "-m" and len(args) > 1
+    target = args[1] if is_module_call else executable
+
+    if target not in ALLOWLIST:
+        print(f"SECURITY ERROR: '{target}' is not in the execution allowlist.")
+        sys.exit(1)
+
+    # Path Traversal Check for all arguments
+    for arg in args:
+        if ".." in arg or arg.startswith("/etc") or arg.startswith("/var"):
+            print(f"SECURITY ERROR: Path traversal or unauthorized access detected in argument: {arg}")
+            sys.exit(1)
+
     # Append the arguments passed to this script
-    docker_cmd.extend(sys.argv[1:])
+    docker_cmd.extend(args)
 
     try:
         # Run the command and pass through all IO
         result = subprocess.run(docker_cmd)  # nosec B603
+        log_security_event(target, args, result.returncode)
         sys.exit(result.returncode)
     except Exception as e:
         print(f"An error occurred while running ARI: {e}")
+        log_security_event(target, args, 1)
         sys.exit(1)
 
 if __name__ == "__main__":

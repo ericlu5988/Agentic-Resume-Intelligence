@@ -78,3 +78,26 @@ def normalize_text(text):
         text = text.replace(k, v)
         
     return re.sub(r'\s+', '', text).lower()
+
+def log_security_event(tool, args, exit_code):
+    """
+    Records a tool execution event for audit purposes.
+    """
+    from datetime import datetime
+    import json
+    import os
+    
+    log_dir = Path(__file__).parent.parent.parent / "logs"
+    log_dir.mkdir(exist_ok=True)
+    log_file = log_dir / "security.audit.log"
+    
+    event = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "tool": tool,
+        "args": [str(a) for a in args],
+        "exit_code": exit_code,
+        "user_id": os.getuid() if hasattr(os, 'getuid') else 1000
+    }
+    
+    with open(log_file, "a", encoding="utf-8") as f:
+        f.write(json.dumps(event) + "\n")

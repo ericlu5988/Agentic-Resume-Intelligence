@@ -16,6 +16,9 @@ data/latex/*
 
 .tmp/
 
+# Logs
+logs/
+
 # All Outputs
 outputs/resume/*
 !outputs/resume/.gitkeep

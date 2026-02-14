@@ -8,6 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 # Import shared utils
 sys.path.append(str(Path(__file__).parent))
 from lib.utils import escape_latex, validate_master_path
+from lib.ai_safety import validate_dossier_schema
 
 def run_engine(data_path, template_path, output_path):
     # Path Validation: Enforce Source of Truth
@@ -16,6 +17,13 @@ def run_engine(data_path, template_path, output_path):
     # Load data
     with open(data_p, 'r', encoding='utf-8') as f:
         data = json.load(f)
+
+    # Optional: Deterministic Dossier Validation
+    if "Strategy_Dossier" in str(data_p):
+        is_valid, error = validate_dossier_schema(data)
+        if not is_valid:
+            print(f"SECURITY/SCHEMA ERROR: {error}", file=sys.stderr)
+            sys.exit(1)
 
     # Self-healing
     if "resume" in data and len(data) == 1:
