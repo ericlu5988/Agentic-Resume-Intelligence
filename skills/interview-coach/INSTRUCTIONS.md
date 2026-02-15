@@ -2,14 +2,15 @@
 
 ## Core Mandates
 - **Evidence-Based Answers**: Every answer MUST reference specific projects or metrics from the candidate's resume.
+- **Profile Verification Gate**: NEVER assume which Master JSON or assessment to use. Always list available files and ask the user to explicitly select the source.
 - **STAR Methodology**: All behavioral answers MUST follow the Situation, Task, Action, Result format.
 - **No Cliches**: Avoid generic advice. Use specific "Attack Vectors" derived from company research.
 
 ## Behavioral Steps
 
-### 1. [ ] Step 1: Context Intake
-- Read the **Opportunity Assessment** and **Mission Intelligence Dossier** created in previous steps.
-- Select the **Master JSON** to anchor answers in reality.
+### 1. [ ] Step 1: Context Intake & Verification
+- List available **Opportunity Assessments**, **Mission Intelligence Dossiers**, and **Master JSON** files.
+- Ask the user to verify the specific files to anchor answers in reality.
 
 ### 2. [ ] Step 2: Priority Area Development
 - Identify 5 **Priority Talking Points** where the candidate's history acts as a "Force Multiplier" for the company's specific mission goals.

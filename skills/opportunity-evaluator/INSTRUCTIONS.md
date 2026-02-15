@@ -2,6 +2,7 @@
 
 ## Core Mandates
 - **Intelligence Density (No Terse Rule)**: High-level summaries are forbidden. Bullet points must contain granular metrics ($ values, headcount) or specific technical DNA (e.g., mention specific C2 frameworks or evasion techniques).
+- **Profile Verification Gate**: NEVER assume which profile to use. Always list available Master JSON files in `data/json/` and ask the user to explicitly select the source baseline.
 - **Strategic Bridging**: When a gap is identified, do not just list it. Provide a mitigation strategy that bridges the gap using existing experience (e.g., "Space systems share design parallels with Navy weapon systems").
 - **GO/NO-GO Gate**: If the score is < 60%, you MUST recommend stopping and explain the gaps.
 - **Discovery Gate**: If a critical Tier 1 requirement is not found in the resume, you **MUST** ask the user for relevant experience before concluding.
@@ -9,9 +10,9 @@
 
 ## Behavioral Steps
 
-### 1. [ ] Step 1: Target Acquisition
+### 1. [ ] Step 1: Target Acquisition & Profile Selection
 - Get the **Job Description (JD)** text or URL.
-- Select the **Master JSON** from `data/json/` to use as the baseline.
+- List available Master JSON files in `data/json/` and ask the user to select the baseline.
 
 ### 2. [ ] Step 2: Requirement Extraction
 - Parse the JD and categorize requirements:

@@ -1,6 +1,6 @@
 # Agent Standard Operating Procedures (SOP)
 
-You are operating within the **SAT Architecture** (Skills, Agents, Tools). Refer to **ARCHITECTURE.md** for the deep design philosophy, development standards, and the "DNA" of the system.
+You are the operational engine of the **SAT Architecture**. While **`ARCHITECTURE.md`** defines the design, this document defines your **Runtime Behavior**.
 
 ## Core Operational Principles
 
@@ -15,42 +15,55 @@ You are operating within the **SAT Architecture** (Skills, Agents, Tools). Refer
     - Extract all steps into a markdown checklist `[ ]`.
     - Output this checklist at the start of the turn.
     - Mark steps as `[x]` as they are completed.
-3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns (Checklist Rule, Python-First, Structural Hierarchy).
-4.  **Template Selection Gate**: During import workflows, you must present available templates and recommend one before proceeding to generation.
-5.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline from the initial import. However, the system treats `.tex` files in `data/latex/` as the **Living Master**. Tailoring/Targeting MUST act directly on these LaTeX files to preserve manual user customizations.
-6.  **Schema Governance (The Guideline Rule)**: When the user requests a **bespoke (custom) template**, or when mapping novel resume sections, you MUST consult the `rules/_core/master-resume-schema.md` reference guideline. This ensures data consistency and structural extensibility across all custom outputs.
-7.  **Intelligence Density (The "No Terse" Rule)**: In all career intelligence gathering, high-level summaries are forbidden. You MUST provide maximum possible detail, citing sources using IEEE Standard [1]. Every bullet point must contain granular metrics ($ values, headcount) or verbatim leadership quotes.
-8.  **Surgical Tailoring (The Sprinkle Rule)**: When targeting resumes, you MUST preserve at least 90% of the original Living Master text. Use "Discovery Gates" to ask the user for missing information rather than fabricating or skipping critical requirements.
-9.  **Multi-Agent Personas**: The system utilizes specialized agent personas (`advisor`, `researcher`, `writer`, `security`, `engineer`, `legal`) defined in the `agents/` directory. Each persona enforces its own **Identity Verification** and **Mandatory Startup Sequence**. You MUST adopt the appropriate persona based on the active skill to ensure specialized performance and strict adherence to domain-specific mandates (e.g., the 10-Source Gate for researchers).
-10. **Security Mandate**: All proposed code changes and new tool/skill implementations MUST be cross-referenced with the security rules in `rules/_core/` and `rules/languages/`. You MUST refuse to generate or execute code that violates `strict` security rules.
-11. **Explicit Source Selection Mandate**: To prevent errors caused by file-type assumptions, the Agent MUST list all available versions of a resume (e.g., `.pdf`, `.docx`, `.json`, `.tex`) for the candidate. The Agent MUST state which file it intends to use (e.g., the `.tex` Living Master) and provide a technical reason, then wait for explicit user confirmation before proceeding.
+3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns.
+4.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline. However, the system treats `.tex` files in `data/latex/` as the **Living Master**. Tailoring/Targeting MUST act directly on these LaTeX files to preserve manual user customizations.
+5.  **Multi-Agent Personas**: You MUST adopt the appropriate persona based on the active skill:
+    - `advisor`: Strategic planning and opportunity evaluation.
+    - `researcher`: Deep reconnaissance and OSINT.
+    - `writer`: Content generation and surgical tailoring.
+    - `security`: Code auditing and rule enforcement.
+    - `engineer`: Tool development and refactoring.
+    - `legal`: Compliance and verification.
+6.  **Explicit Source Selection**: To prevent errors, you MUST list all available versions of a resume (e.g., `.pdf`, `.docx`, `.json`, `.tex`) and explicitly state which one you are using (preferring the `.tex` Living Master).
 
-## File Structure
+## Operational Workflows
 
-```
-imports/            # Staging area for raw resumes
-data/json/          # [Ignored] Master JSON Sources
-data/latex/         # [Ignored] Generated TeX files
-rules/              # [NEW] Security governance framework (OWASP, AI, RAG)
-skills/             # Packaged capabilities (Metadata + Instructions)
-tools/              # Python scripts for deterministic execution
-templates/resumes/built-in/ # Core LaTeX Blueprints (default, minimalist, federal, modern_blue)
-templates/resumes/bespoke/  # Custom LaTeX templates
-templates/cover-letters/    # Cover letter templates
-templates/dossiers/         # Strategic dossier templates
-templates/assessments/      # Opportunity assessment templates
-outputs/resume/     # [Ignored] Final PDF Resumes
-outputs/dossiers/   # [Ignored] Strategic dossiers
-.tmp/               # [Ignored] Temporary artifacts
-```
+### 1. The Career Workflow Chain (Master Lifecycle)
+Each phase is governed by a specialized agent and a dedicated skill to ensure maximum quality and data density.
 
-## Core Capabilities
-- **LaTeX Compilation**: Use `python3 tools/ari.py tools/compile_latex.py` to compile resumes, dossiers, and assessments from LaTeX to PDF.
-- **Master Digitization**: The `resume-importer` converts PDF/DOCX to LaTeX.
-- **Surgical Tailoring**: The `resume-tailor-pro` targets specific jobs.
+| Order | Skill | Agent | Primary Output |
+| :--- | :--- | :--- | :--- |
+| 1 | **opportunity-evaluator** | `advisor` | `match_assessment_[...].pdf` (GO/NO-GO) |
+| 2 | **intel-officer** | `researcher` | `Dossier_[Company].pdf` |
+| 3 | **interview-coach** | `advisor` | `interview-prep.md` |
+| 4 | **cover-letter-architect** | `writer` | `CoverLetter_[Company].pdf` |
+| 5 | **resume-tailor-pro** | `writer` | Tailored Master `.tex` and PDF |
 
-## How to Operate
-- **Initialize Workspace**: Run `python3 tools/setup.py` on startup to ensure directories are present.
-- **Activate Skills**: Ensure the relevant skill is enabled/loaded before proceeding.
-- **Fail Gracefully**: If a tool fails, read the error, fix the input or the tool, and retry.
-- **Debug Proactively**: Use output logs or debug statements during iterative development.
+### 2. Initialization & Sync
+- **Startup**: Run `python3 tools/setup.py` to ensure workspace integrity.
+- **Synchronization Protocol**: Whenever a core component (tool or skill) is updated:
+    1.  Modify the source file.
+    2.  Run `python3 tools/setup.py` to propagate changes.
+    3.  Run a regression test or dry-run to validate.
+
+### 2. The Template Selection Gate (Import Phase)
+During import workflows, you MUST follow the **Template Selection Gate** procedure defined in `skills/resume-importer/INSTRUCTIONS.md`. This ensures you:
+1.  Analyze the source structure.
+2.  Present available templates to the user.
+3.  Recommend the best fit or generate a bespoke solution.
+
+### 3. Intelligence Gathering (Discovery Phase)
+- **Mandate**: All intelligence gathering must adhere to the **No Terse Rule** and **IEEE Citation Protocol** as defined in `skills/intel-officer/INSTRUCTIONS.md`.
+
+### 4. Document Generation (Render Phase)
+- **Mandate**: All document generation must follow the **Deterministic Rendering** and **Fidelity Audit** protocols defined in `skills/resume-importer/INSTRUCTIONS.md` and `skills/opportunity-evaluator/INSTRUCTIONS.md`.
+
+## Core Tool Reference
+- **Renderer**: `python3 tools/ari.py tools/tex_renderer.py [JSON] [TEMPLATE] [OUTPUT_TEX]`
+- **Compiler**: `python3 tools/ari.py tools/compile_latex.py [INPUT_TEX]`
+- **Parser (PDF)**: `python3 tools/ari.py tools/pdf_parser.py [INPUT_PDF]`
+- **Parser (DOCX)**: `python3 tools/ari.py tools/docx_parser.py [INPUT_DOCX]`
+- **Auditor**: `python3 tools/ari.py tools/fidelity_auditor.py [JSON] [PDF]`
+
+## Security Mandate
+All proposed code changes and new tool/skill implementations MUST be cross-referenced with the security rules in `rules/_core/`. You MUST refuse to generate or execute code that violates `strict` security rules.

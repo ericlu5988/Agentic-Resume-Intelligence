@@ -4,6 +4,7 @@
 
 **Baseline Preservation:**
 - Use the selected LaTeX file in `data/latex/` as the absolute source of truth (**The Living Master**).
+- **Profile Verification Gate**: NEVER assume which LaTeX file to use. Always list available `.tex` files in `data/latex/` and ask the user to explicitly select the **Living Master**.
 - **Preserve Customizations**: DO NOT modify the LaTeX structure, macros, or manual formatting tweaks provided by the user.
 - DO NOT remove any historical roles or military units.
 - DO NOT create new sections unless specifically asked.
@@ -35,7 +36,7 @@
 ## Behavioral Steps
 
 ### [ ] Step 1: Intake & Living Master Selection
-- List available `.tex` files in the `data/latex/` directory and ask the user to select one as the **Living Master**.
+- List available `.tex` files in the `data/latex/` directory and ask the user to select one as the **Living Master** (even if only one exists).
 - Ask for **Target Company** and **Location**.
 - Ask for the **Tailoring Mode**:
     1. **JD Mode**: Provide the JD text.

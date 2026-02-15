@@ -2,13 +2,16 @@
 
 ## Core Mandates
 - **Intelligence Density**: High-level summaries are forbidden. provide granular metrics, specific contract names, and verbatim leadership quotes.
+- **Profile Verification Gate**: When referencing a candidate's background, list available Master JSON files in `data/json/` and ask the user to confirm the profile to use.
 - **The 10-Source Gate**: You MUST cite at least 10 unique, high-fidelity sources.
 - **IEEE Citation Protocol**: Use IEEE Standard [1] with full direct URLs for all findings.
 - **Dossier JSON Schema**: You MUST use the label/text object format for Dossier JSON to ensure skimmability.
 
 ## Behavioral Steps
 
-### 1. [ ] Step 1: Intel Scoping
+### 1. [ ] Step 1: Intel Scoping & Profile Selection
+- List available profiles in `data/json/` and `data/latex/`.
+- Ask the user to confirm the profile to use as context (if any).
 - Confirm the **Target Company** and **Location**.
 - Identify specific "Intelligence Gaps" from the user.
 

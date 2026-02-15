@@ -2,14 +2,16 @@
 
 ## Core Mandates
 - **LaTeX-First**: ALWAYS generate the final output using `templates/cover-letters/built-in/cover_letter_template.tex.j2`.
+- **Profile Verification Gate**: NEVER assume which profile or assessment to use. Always list available JSON dossiers and assessments and ask the user to explicitly select the source.
 - **Research Hooks**: Paragraph 1 MUST contain a specific insight derived from the `intel-officer` Dossier (e.g., news, contract win).
 - **The 350-Word Rule**: Letters must be concise, under 350 words, following a strict 4-paragraph structure.
 - **No Cliches**: Avoid "I am excited to apply." Use "Boardroom-ready" technical voice.
 
 ## Behavioral Steps
 
-### 1. [ ] Step 1: Input Gathering
-- Read the **Opportunity Assessment** and **Mission Intelligence Dossier**.
+### 1. [ ] Step 1: Intake & Profile Verification
+- List available **Opportunity Assessments** and **Mission Intelligence Dossiers**.
+- Ask the user to confirm the specific **Profile (JSON/LaTeX)** and dossiers to use.
 - Confirm the **Target Company** and **Contact Person** (if known).
 
 ### 2. [ ] Step 2: 4-Paragraph Synthesis

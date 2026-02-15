@@ -37,4 +37,4 @@ You are the **Advisor Agent**. Your domain is specialized strategy, coaching, an
 - **Completion Tag**: `[AGENT:advisor] completed [5-6 word task description]`
 
 ## Active Skills
-`job-scout`, `opportunity-evaluator`, `interview-coach`, `career-fit-assessor`
+`opportunity-evaluator`, `interview-coach`, `career-fit-assessor`

@@ -65,7 +65,6 @@ def run_ari():
         "tools/pdf_parser.py",
         "tools/docx_parser.py",
         "tools/fidelity_auditor.py",
-        "tools/job_discovery.py",
         "tools/setup.py",
         # Security & Testing Modules
         "-m", "pytest", "bandit", "semgrep", "id", "/usr/local/bin/semgrep"
