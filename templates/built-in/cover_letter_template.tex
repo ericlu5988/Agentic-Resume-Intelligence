@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+% ---------------------------------------------------------
+% PACKAGES & THEME
+% ---------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{ebgaramond}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{xcolor}
+
+\definecolor{briefblue}{RGB}{0, 51, 102}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% --- SENDER INFO ---
+\begin{flushright}
+    \textbf{((( resume.name|latex_escape )))}\\
+    ((( resume.location|latex_escape )))\\
+    ((( resume.phone|latex_escape )))\\
+    ((( resume.email|latex_escape )))\\
+    \href{https://((( resume.linkedin|latex_escape )))}{((( resume.linkedin|latex_escape )))}
+\end{flushright}
+
+\vspace{1em}
+
+% --- DATE ---
+\today
+
+\vspace{1em}
+
+% --- RECIPIENT INFO ---
+\textbf{Hiring Team}\\
+((( resume.company|latex_escape )))\\
+((( resume.target_location|default('Company Headquarters')|latex_escape )))
+
+\vspace{2em}
+
+% --- SALUTATION ---
+Dear Hiring Manager,
+
+\vspace{1em}
+
+% --- BODY ---
+((( resume.cover_letter_content )))
+
+\vspace{2em}
+
+% --- CLOSING ---
+Sincerely,
+
+\vspace{3em}
+
+((( resume.name|latex_escape )))
+
+\end{document}
