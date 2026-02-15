@@ -20,6 +20,9 @@ We prioritize maintaining original visual/textual intent. Tailoring is additive 
 ### Agent-Led Mapping (Context over Rigidity)
 Tools provide **Rich Raw Data**. The Agent uses its contextual intelligence to map that data into the schema.
 
+### Schema Governance (Extensibility Guideline)
+The system maintains a **Master Resume Schema** (`rules/_core/master-resume-schema.md`) which acts as a reference guideline for the Agent. This is primarily used during bespoke template generation and for the topological preservation of novel resume sections via the `custom_sections` catch-all protocol.
+
 ### Security-First & Governance
 The system incorporates a robust security framework located in `rules/`. All development MUST adhere to the standards defined in `rules/_core/` (OWASP 2025, AI Security, Agent Security) and language-specific rules. Security is not an afterthought but a prerequisite for every plan.
 

@@ -18,7 +18,8 @@ You are operating within the **SAT Architecture** (Skills, Agents, Tools). Refer
 3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns (Checklist Rule, Python-First, Structural Hierarchy).
 4.  **Template Selection Gate**: During import workflows, you must present available templates and recommend one before proceeding to generation.
 5.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline from the initial import. However, the system treats `.tex` files in `data/latex/` as the **Living Master**. Tailoring/Targeting MUST act directly on these LaTeX files to preserve manual user customizations.
-6.  **Security Mandate**: All proposed code changes and new tool/skill implementations MUST be cross-referenced with the security rules in `rules/_core/` and `rules/languages/`. You MUST refuse to generate or execute code that violates `strict` security rules.
+6.  **Schema Governance (The Guideline Rule)**: When the user requests a **bespoke (custom) template**, or when mapping novel resume sections, you MUST consult the `rules/_core/master-resume-schema.md` reference guideline. This ensures data consistency and structural extensibility across all custom outputs.
+7.  **Security Mandate**: All proposed code changes and new tool/skill implementations MUST be cross-referenced with the security rules in `rules/_core/` and `rules/languages/`. You MUST refuse to generate or execute code that violates `strict` security rules.
 
 ## File Structure
 
