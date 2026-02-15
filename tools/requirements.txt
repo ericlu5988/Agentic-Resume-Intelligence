@@ -9,4 +9,3 @@ bandit
 pyyaml
 markdown-it-py
 semgrep
-playwright

@@ -5,8 +5,11 @@ This document defines the core "DNA" of the **Agentic Resume Intelligence** syst
 ## 1. The SAT Architecture
 The system is built on the **SAT (Skills, Agents, Tools)** framework, which enforces a strict separation between probabilistic reasoning and deterministic execution.
 
+### Multi-Agent Modularization
+Skills are deconstructed into granular functional modules, each governed by a specialized **Agent Persona** (`advisor`, `researcher`, `writer`). This ensures that specific domain mandates (e.g., the 10-Source Gate for researchers, or the Sprinkle Rule for writers) are strictly enforced without cross-contamination of logic.
+
 - **Skills (The Instructions)**: Domain-specific SOPs (Standard Operating Procedures). They define *how* a task should be approached but do not perform the execution themselves.
-- **Agents (The Decision-Maker)**: The AI (Gemini, Claude, etc.) that interprets user intent and orchestrates the skills and tools.
+- **Agents (The Decision-Maker)**: The AI (Gemini, Claude, etc.) that adopts specialized personas based on the active skill to orchestrate the lifecycle.
 - **Tools (The Execution)**: Deterministic Python scripts that perform heavy lifting. Tools are environment-agnostic and logic-pure.
 
 ## 2. Core Philosophies
@@ -37,18 +40,21 @@ The system incorporates a robust security framework located in `rules/`. All dev
 - **`rules/`**: Version-tracked. Security governance framework and rules.
 - **`skills/`**: Version-tracked. Agentic capabilities and SOPs.
 - **`tools/`**: Version-tracked. Deterministic cross-platform scripts.
-- **`templates/built-in/`**: Version-tracked. Immutable core blueprints used for the initial digitization.
-- **`templates/`**: Git-ignored (except `built-in/`). Bespoke/Custom templates.
+- **`templates/resumes/built-in/`**: Version-tracked. Immutable core resume blueprints.
+- **`templates/resumes/bespoke/`**: Git-ignored. Custom resume templates.
+- **`templates/cover-letters/built-in/`**: Version-tracked. Cover letter blueprints.
+- **`templates/dossiers/built-in/`**: Version-tracked. Strategy dossier blueprints.
+- **`templates/assessments/built-in/`**: Version-tracked. Opportunity assessment blueprints.
 - **`outputs/resume/`**: Git-ignored. Final compiled PDF resumes.
-- **`outputs/dossiers/`**: Git-ignored. High-fidelity PDF strategy dossiers generated from the `strategy_dossier_template.tex`.
+- **`outputs/dossiers/`**: Git-ignored. High-fidelity PDF strategy dossiers generated from the `strategy_dossier_template.tex.j2`.
 - **`.tmp/`**: Git-ignored. Temporary processing scratchpad.
 
 ## 4. The Template Selection Gate
 During the import process, agents MUST implement a Selection Gate:
 1. **Analyze**: Examine the source resume for structural cues (Federal keywords, Word-style formatting).
-2. **Present**: List all available templates in `templates/` and `templates/built-in/`.
+2. **Present**: List all available templates in `templates/resumes/built-in/` and `templates/resumes/bespoke/`.
 3. **Recommend**: Mark the recommended template with a reason.
-4. **Bespoke Action**: If built-in options are insufficient, analyze unique source features and generate a new `.tex` file in `templates/` using standard LaTeX packages.
+4. **Bespoke Action**: If built-in options are insufficient, analyze unique source features and generate a new `.tex.j2` file in `templates/resumes/bespoke/` using standard LaTeX packages.
 
 ## 5. Development Standards
 

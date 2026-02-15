@@ -28,10 +28,9 @@ outputs/dossiers/*
 !outputs/dossiers/.gitkeep
 !outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf
 
-# Templates (Only built-in are tracked)
-templates/*
-!templates/built-in/
-!templates/built-in/**
+# Templates (Track built-in, ignore bespoke)
+templates/**/bespoke/*
+!templates/**/bespoke/.gitkeep
 
 # Agent Runtime Data
 .gemini/

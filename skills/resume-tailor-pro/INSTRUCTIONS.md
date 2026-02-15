@@ -54,11 +54,11 @@
 - Extract candidate's name from the LaTeX source for filename generation.
 - **Surgical Edit**: Perform direct text replacements within the selected `.tex` file. 
 - Save the tailored version to `outputs/resume/Resume_[Name]_[Company]_[Date].tex`.
-- Execute `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`.
+- Execute `python3 tools/ari.py tools/compile_latex.py [OUTPUT_TEX]`.
 
 ### [ ] Step 5: Length Optimization (Iterative)
 - Re-compile and verify until the "Goldilocks" zone (1.9 - 2.0 pages) is met by surgically adjusting spacing macros if they exist in the file.
 
 ## Tool Reference (ARI)
-- **compile_resume.py**: `python3 tools/ari.py tools/compile_resume.py [OUTPUT_TEX]`
+- **compile_latex.py**: `python3 tools/ari.py tools/compile_latex.py [OUTPUT_TEX]`
 - **pdf_parser.py**: `python3 tools/ari.py tools/pdf_parser.py [OUTPUT_PDF]` - Used to verify page counts and line density.

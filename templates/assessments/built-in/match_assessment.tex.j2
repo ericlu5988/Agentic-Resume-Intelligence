@@ -1,0 +1,132 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{ebgaramond}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% Professional Blue Theme
+\definecolor{briefblue}{RGB}{0, 51, 102}
+\definecolor{matchgreen}{RGB}{34, 139, 34}
+\definecolor{gapred}{RGB}{178, 34, 34}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize \textcolor{gray}{Opportunity Evaluation: ((( resume.job_title|latex_escape )))}}
+\rhead{\footnotesize \textcolor{gray}{ ((( resume.assessment_date|latex_escape ))) }}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section Styles
+\titleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{8pt}
+\titleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% COVER PAGE
+% ---------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \bfseries \textcolor{briefblue}{Opportunity Evaluation Report}}
+    
+    \vspace{1cm}
+    {\huge ((( resume.job_title|latex_escape )))}
+    
+    \vspace{0.5cm}
+    {\Large ((( resume.company|latex_escape )))}
+    
+    \vfill
+    \begin{center}
+        \large \textbf{Match Score: ((( resume.overall_score )))\%} \\
+        \textcolor{matchgreen}{\Huge \textbf{ ((( resume.decision ))) }}
+    \end{center}
+    
+    \vfill
+    \begin{flushleft}
+    \textbf{Candidate:} ((( resume.candidate|latex_escape )))\\
+    \textbf{Date:} ((( resume.assessment_date|latex_escape )))\\
+    \textbf{Classification:} Internal / Candidate Strategy Portfolio
+    \end{flushleft}
+\end{titlepage}
+
+% ---------------------------------------------------------
+\section*{Executive Summary}
+((( resume.strategic_recommendation|latex_escape )))
+
+% ---------------------------------------------------------
+\section*{1. Weighted Scoring Matrix}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{l c c c X}
+\toprule
+\textbf{Category} & \textbf{Weight} & \textbf{Score} & \textbf{Weighted} & \textbf{Rationale} \\
+\midrule
+Required Skills & ((( resume.scoring_breakdown.required_skills.weight )))\% & ((( resume.scoring_breakdown.required_skills.score )))\% & ((( "%.1f"|format(resume.scoring_breakdown.required_skills.weight * resume.scoring_breakdown.required_skills.score / 100) ))) \% & ((( resume.scoring_breakdown.required_skills.details|latex_escape ))) \\
+Experience Level & ((( resume.scoring_breakdown.experience_level.weight )))\% & ((( resume.scoring_breakdown.experience_level.score )))\% & ((( "%.1f"|format(resume.scoring_breakdown.experience_level.weight * resume.scoring_breakdown.experience_level.score / 100) ))) \% & ((( resume.scoring_breakdown.experience_level.details|latex_escape ))) \\
+Nice-to-Have & ((( resume.scoring_breakdown.nice_to_have.weight )))\% & ((( resume.scoring_breakdown.nice_to_have.score )))\% & ((( "%.1f"|format(resume.scoring_breakdown.nice_to_have.weight * resume.scoring_breakdown.nice_to_have.score / 100) ))) \% & ((( resume.scoring_breakdown.nice_to_have.details|latex_escape ))) \\
+Industry Match & ((( resume.scoring_breakdown.industry_match.weight )))\% & ((( resume.scoring_breakdown.industry_match.score )))\% & ((( "%.1f"|format(resume.scoring_breakdown.industry_match.weight * resume.scoring_breakdown.industry_match.score / 100) ))) \% & ((( resume.scoring_breakdown.industry_match.details|latex_escape ))) \\
+\midrule
+\textbf{TOTAL} & \textbf{100\%} & - & \textbf{ ((( resume.overall_score )))\% } & \textbf{Final Fit Score} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ---------------------------------------------------------
+\section*{2. Critical Strengths}
+
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for strength in resume.strengths %))
+  \item ((( strength|latex_escape )))
+((% endfor %))
+\end{itemize}
+
+% ---------------------------------------------------------
+\section*{3. Gap Analysis \& Mitigation}
+
+((% for gap in resume.gaps %))
+\subsection*{ ((( gap.area|latex_escape ))) }
+\textbf{Status:} \textcolor{gapred}{ ((( gap.impact|latex_escape ))) }. \\
+\textbf{Mitigation:} ((( gap.mitigation|latex_escape )))
+((% endfor %))
+
+% ---------------------------------------------------------
+\section*{4. Red Flag Verification}
+
+\begin{itemize}[leftmargin=0.2in, label=--]
+  \item \textbf{Certification Gap}: ((( resume.red_flags.certification_gap|latex_escape )))
+  \item \textbf{Experience Gap}: ((( resume.red_flags.experience_gap|latex_escape )))
+  \item \textbf{Tech Stack Mismatch}: ((( resume.red_flags.tech_stack_mismatch|latex_escape )))
+  \item \textbf{Location Conflict}: ((( resume.red_flags.location_conflict|latex_escape )))
+\end{itemize}
+
+% ---------------------------------------------------------
+\section*{5. Priority Emphasis Areas}
+
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for area in resume.priority_emphasis_areas %))
+  \item ((( area|latex_escape )))
+((% endfor %))
+\end{itemize}
+
+\vfill
+\begin{center}
+\textit{This assessment is based on the provided Job Description and the baseline resume as of ((( resume.assessment_date|latex_escape ))).}
+\end{center}
+
+\end{document}

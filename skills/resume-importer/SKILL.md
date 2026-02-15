@@ -1,6 +1,7 @@
 ---
 name: resume-importer
 description: Universal high-fidelity digitization of PDF and DOCX resumes into professional, ATS-optimized LaTeX templates.
+agent: writer
 ---
 
 # Skill: Resume Importer

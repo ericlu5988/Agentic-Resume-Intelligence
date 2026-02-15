@@ -12,7 +12,11 @@ def setup_workspace(gemini_sync=False):
         "imports", 
         "data/json", 
         "data/latex", 
-        "templates/built-in", 
+        "templates/resumes/built-in", 
+        "templates/resumes/bespoke",
+        "templates/cover-letters/built-in",
+        "templates/dossiers/built-in",
+        "templates/assessments/built-in",
         "outputs/resume", 
         "outputs/dossiers", 
         ".tmp"

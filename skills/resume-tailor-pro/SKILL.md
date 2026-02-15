@@ -1,6 +1,7 @@
 ---
 name: resume-tailor-pro
 description: Surgical tailoring of master LaTeX resumes for specific job descriptions. Use when the user wants to tailor, update, or match their resume to a job description.
+agent: writer
 ---
 
 # Skill: Resume Tailor Pro

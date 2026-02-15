@@ -9,14 +9,14 @@ class TestImporterRegression(unittest.TestCase):
         Ensures the engine produces character-perfect output compared to the Gold Master.
         """
         json_path = "data/json/johnny_silverhand.json"
-        template_path = "templates/built-in/default_template.tex"
+        template_path = "templates/resumes/built-in/default_template.tex.j2"
         gold_master_path = "data/latex/johnny_silverhand.tex"
         temp_output_path = "tools/tests/temp_regression_output.tex"
 
         # Run the engine
         cmd = [
             "python3", 
-            "tools/importer_engine.py",
+            "tools/tex_renderer.py",
             json_path,
             template_path,
             temp_output_path

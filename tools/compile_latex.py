@@ -24,12 +24,13 @@ def compile_latex(tex_file_path):
     # Set up environment to include templates in TEXINPUTS
     env = os.environ.copy()
     project_root = Path(__file__).resolve().parent.parent
-    templates_built_in = str(project_root / "templates" / "built-in")
-    templates_bespoke = str(project_root / "templates")
+    templates_root = str(project_root / "templates")
     
-    # Prepend template paths to TEXINPUTS (empty trailing colon means default paths follow)
+    # Prepend template paths to TEXINPUTS (// means recursive search in some TeX dists, 
+    # but we will just add the main template roots for safety)
     current_texinputs = env.get("TEXINPUTS", "")
-    env["TEXINPUTS"] = f".:{templates_built_in}:{templates_bespoke}:{current_texinputs}"
+    # Adding // at the end of a path tells TeX to search recursively
+    env["TEXINPUTS"] = f".:{templates_root}//:{current_texinputs}"
 
     # Assumes we are running in an environment with xelatex (via ARI)
     local_cmd = [

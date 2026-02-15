@@ -77,7 +77,7 @@ If the source resume contains a section header that is **not** covered by the ke
 ```
 
 ## 4. Bespoke Template Syntax
-When the Agent generates a bespoke LaTeX template, it should use the following Jinja2 syntax to remain compatible with `importer_engine.py`:
+When the Agent generates a bespoke LaTeX template, it should use the following Jinja2 syntax to remain compatible with `tex_renderer.py`:
 
 - **Variable Access**: `((( resume.key|latex_escape )))`
 - **Loops**: `((% for item in resume.experience %)) ... ((% endfor %))`

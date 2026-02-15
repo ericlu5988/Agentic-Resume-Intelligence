@@ -59,8 +59,9 @@ def run_ari():
     # Approved tools and modules
     ALLOWLIST = {
         # Core Engines
-        "tools/importer_engine.py", 
-        "tools/compile_resume.py",
+                "tools/tex_renderer.py",
+         
+        "tools/compile_latex.py",
         "tools/pdf_parser.py",
         "tools/docx_parser.py",
         "tools/fidelity_auditor.py",

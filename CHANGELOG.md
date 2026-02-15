@@ -10,11 +10,11 @@ All notable changes to the **Agentic Resume Intelligence** project during the Fe
 - **Security Testing Suite**: Added `rules/tests/` to validate the structural integrity and effectiveness of security rules.
 
 ### 🛠️ Infrastructure & Hardening
-- **LaTeX Search Path Resolution**: Updated `compile_resume.py` to automatically include `templates/` and `templates/built-in/` in the `TEXINPUTS` environment variable, ensuring custom `.cls` and `.sty` files are found during compilation.
+- **LaTeX Search Path Resolution**: Updated `compile_latex.py` to automatically include `templates/` and `templates/built-in/` in the `TEXINPUTS` environment variable, ensuring custom `.cls` and `.sty` files are found during compilation.
 - **Fidelity Auditor Schema Hardening**: Enhanced `fidelity_auditor.py` to support nested `resume` keys in source JSON, ensuring accurate experience counting and content validation for all template types.
 - **Container Hardening**: Switched to the non-root `texlive` user for all Docker executions to mitigate root-escape risks.
-- **Subprocess Sanitization**: Refactored `ari.py` and `compile_resume.py` to use `shutil.which()` for absolute path resolution, preventing command hijacking.
-- **Jinja2 SSTI Protection**: Hardened `importer_engine.py` with `autoescape` and custom LaTeX-safe escaping logic.
+- **Subprocess Sanitization**: Refactored `ari.py` and `compile_latex.py` to use `shutil.which()` for absolute path resolution, preventing command hijacking.
+- **Jinja2 SSTI Protection**: Hardened `tex_renderer.py` with `autoescape` and custom LaTeX-safe escaping logic.
 - **Path Traversal Shield**: Hardened `validate_master_path` in `lib/utils.py` to strictly prevent filesystem access outside the project root.
 
 ### 🧠 Agentic Skills
@@ -31,10 +31,10 @@ All notable changes to the **Agentic Resume Intelligence** project during the Fe
     - Implemented vertical-first (Y-then-X) word sorting to accurately preserve reading order in both single and multi-column layouts.
     - Enhanced matching logic with `token_set_ratio` and `partial_ratio` to robustly handle squashed or justified PDF text layers.
 - **Dossier Schema Validation**: Codified the `career-strategist` dossier JSON schema to prevent downstream LaTeX compilation errors.
-- **Deterministic Generation**: Enforced the use of `importer_engine` for career dossiers to ensure consistent LaTeX output.
+- **Deterministic Generation**: Enforced the use of `tex_renderer.py` for career dossiers to ensure consistent LaTeX output.
 
 ### 🧠 Agentic Skills
-- **Modern Blue Template**: Added `modern_blue_template.tex` to the built-in library, offering a modern, high-density layout with dynamic highlight labels.
+- **Modern Blue Template**: Added `modern_blue_template.tex.j2` to the built-in library, offering a modern, high-density layout with dynamic highlight labels.
 
 ## [1.1.0] - 2026-02-11
 
@@ -48,7 +48,7 @@ All notable changes to the **Agentic Resume Intelligence** project during the Fe
 - **Cross-Platform ARI**: Replaced the Bash-based Agent Run Interface with a universal Python version (`tools/ari.py`) for Linux, macOS, and Windows compatibility.
 - **Automated Setup**: Created `tools/setup.py` to initialize workspace directories and synchronize agent skills.
 - **Shared Utils Library**: Centralized LaTeX escaping, text normalization, and path validation into `tools/lib/utils.py`.
-- **Streamlined Compilation**: Simplified `compile_resume.py` to run natively within the containerized environment.
+- **Streamlined Compilation**: Simplified `compile_latex.py` to run natively within the containerized environment.
 - **Test Suite Restoration**: Repaired and expanded the unit test suite, ensuring all core utilities and parsers pass in the ARI environment.
 
 ### 🧠 Agentic Skills
