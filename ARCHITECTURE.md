@@ -35,15 +35,17 @@ Security is not an afterthought but a prerequisite. The system incorporates a ro
 ## 3. Structural Standards
 
 ### Directory Hierarchy
-- **`data/json/`**: Git-ignored. Stores the immutable JSON snapshot from the initial import.
-- **`data/latex/`**: Git-ignored. Stores the **Living Master** `.tex` files.
+- **`data/`**: Git-ignored. Stores all intermediate artifacts.
+    - **`<category>/json/`**: Immutable JSON snapshots and assessment data.
+    - **`<category>/tex/`**: Generated LaTeX files and Living Masters.
+- **`outputs/`**: Git-ignored. Final compiled PDF artifacts, categorized by skill (e.g., `resume/`, `company-research/`, `match-assessment/`, `interview-prep/`, `cover-letter/`).
+- **`templates/`**: Version-tracked blueprints.
+    - **`<category>/built-in/`**: Immutable core blueprints.
+    - **`<category>/bespoke/`**: Git-ignored custom templates.
 - **`rules/`**: Version-tracked. Security governance framework and rules.
 - **`skills/`**: Version-tracked. Agentic capabilities and SOPs.
 - **`tools/`**: Version-tracked. Deterministic cross-platform scripts.
-- **`templates/resumes/built-in/`**: Version-tracked. Immutable core resume blueprints.
-- **`templates/resumes/bespoke/`**: Git-ignored. Custom resume templates.
-- **`templates/assessments/built-in/`**: Version-tracked. Opportunity assessment blueprints.
-- **`outputs/`**: Git-ignored. Final compiled PDF artifacts.
+- **`imports/`**: Git-ignored. Staging area for raw source documents.
 - **`.tmp/`**: Git-ignored. Temporary processing scratchpad.
 
 ## 4. Development Standards

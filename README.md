@@ -42,12 +42,12 @@ This repository is built on the **SAT (Skills, Agents, Tools)** framework. For a
 ## 🏗️ Standardized Data Flow
 The system distinguishes between **digitization** (one-time) and **targeting** (per job).
 
-`imports/ -> Digitization -> data/latex/ (The Living Master) -> Targeting -> outputs/resume/`
+`imports/ -> Digitization -> data/resume/tex/ (The Living Master) -> Targeting -> outputs/resume/`
 
 1.  **Digitization (Entry Points)**:
     - **Legacy**: Place existing PDF/DOCX resumes in `imports/` to be converted.
-    - **LaTeX Native**: If you already have a LaTeX resume, place it directly in `data/latex/`.
-2.  **The Living Master**: Your `.tex` file in `data/latex/` is your primary workspace. **Perfect your design here once; it serves as the baseline for all future targeting.**
+    - **LaTeX Native**: If you already have a LaTeX resume, place it directly in `data/resume/tex/`.
+2.  **The Living Master**: Your `.tex` file in `data/resume/tex/` is your primary workspace. **Perfect your design here once; it serves as the baseline for all future targeting.**
 3.  **Targeting (Tailoring)**: When targeting a job, the agent surgically edits your "Living Master" LaTeX to match the company's specific mission profile.
 
 ---
@@ -56,9 +56,9 @@ The system distinguishes between **digitization** (one-time) and **targeting** (
 To demonstrate the system's full capability, we provide a complete end-to-end example using the **Johnny Silverhand** persona. This showcases the transformation from a legacy document into a surgically-tailored executive output.
 
 1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf) (Raw document)
-2.  **Extracted JSON**: [data/json/johnny_silverhand.json](./data/json/johnny_silverhand.json) (Geometric-aware data)
-3.  **Living Master (LaTeX)**: [data/latex/johnny_silverhand.tex](./data/latex/johnny_silverhand.tex) (The editable master)
-4.  **Strategic Intelligence**: [outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf](./outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf) (Research)
+2.  **Extracted JSON**: [data/resume/json/johnny_silverhand.json](./data/resume/json/johnny_silverhand.json) (Geometric-aware data)
+3.  **Living Master (LaTeX)**: [data/resume/tex/johnny_silverhand.tex](./data/resume/tex/johnny_silverhand.tex) (The editable master)
+4.  **Strategic Intelligence**: [outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf](./outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf) (Research)
 5.  **Tailored Result**: [outputs/resume/Resume_Johnny_Silverhand_Lockheed_Martin_2026-02-12.pdf](./outputs/resume/Resume_Johnny_Silverhand_Lockheed_Martin_2026-02-12.pdf) (Surgical output)
 
 ---

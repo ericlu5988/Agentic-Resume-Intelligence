@@ -9,7 +9,7 @@
 ## Behavioral Steps
 
 ### 1. [ ] Step 1: Context Intake & Verification
-- List available **Opportunity Assessments**, **Mission Intelligence Dossiers**, and **Master JSON** files.
+- List available **Opportunity Assessments** (`data/match-assessment/json/`), **Mission Intelligence Dossiers** (`data/company-research/json/`), and **Master JSON** files (`data/resume/json/`).
 - Ask the user to verify the specific files to anchor answers in reality.
 
 ### 2. [ ] Step 2: Priority Area Development
@@ -30,5 +30,38 @@
     - Top 3 gaps to address proactively (with positive framing).
     - Company-specific hooks (news, initiatives).
 
-### 6. [ ] Step 6: Handoff
+### 6. [ ] Step 6: Persistence
+- Save the final interview preparation data to a structured JSON file in `data/interview-prep/json/`.
+- Use the filename format: `interview_prep_<candidate>_<company>.json`.
+- Ensure all fields in the **JSON Schema Requirements** below are populated.
+
+### 7. [ ] Step 7: Document Generation
+- Run the rendering engine to apply the Jinja2 template:
+  ```bash
+  python3 tools/ari.py tools/tex_renderer.py data/interview-prep/json/interview_prep_<candidate>_<company>.json templates/interview-prep/built-in/interview_prep_template.tex.j2 data/interview-prep/tex/interview_prep_<candidate>_<company>.tex
+  ```
+- Compile the resulting LaTeX into a professional PDF:
+  ```bash
+  python3 tools/ari.py tools/compile_latex.py data/interview-prep/tex/interview_prep_<candidate>_<company>.tex
+  ```
+- Move the final PDF to `outputs/interview-prep/`.
+
+### 8. [ ] Step 8: Handoff
 - **Handoff Logic**: Instruct the user to trigger the `cover-letter-architect` or `resume-tailor-pro` skills to finalize submission materials.
+
+## JSON Schema Requirements
+The `tex_renderer.py` tool expects the following structure:
+- `candidate_name`, `company`, `job_title`, `date`
+- `priority_talking_points`: List of objects with:
+    - `topic`: String
+    - `context`: String
+    - `talking_points`: List of strings
+- `interview_questions`: Object with:
+    - `technical`: List of objects with `question` and `answer`
+    - `behavioral`: List of objects with `question` and `answer`
+    - `strategic`: List of objects with `question` and `answer`
+- `questions_to_ask`: List of strings
+- `quick_reference`: Object with:
+    - `top_strengths`: List of 3 strings
+    - `top_gaps`: List of 3 strings
+    - `hooks`: List of 3 strings

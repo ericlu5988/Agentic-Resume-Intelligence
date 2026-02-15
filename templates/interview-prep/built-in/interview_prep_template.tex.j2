@@ -1,0 +1,123 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{ebgaramond}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% Professional Blue Theme
+\definecolor{briefblue}{RGB}{0, 51, 102}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize 	extcolor{gray}{Interview Preparation: ((( resume.job_title|latex_escape ))) at ((( resume.company|latex_escape )))}}
+head{\footnotesize 	extcolor{gray}{ ((( resume.date|latex_escape ))) }}
+\cfoot{	hepage}
+enewcommand{\headrulewidth}{0.4pt}
+
+% Section Styles
+	itleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[	itlerule]
+	itlespacing*{\section}{0pt}{12pt}{8pt}
+	itleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% COVER PAGE
+% ---------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \bfseries 	extcolor{briefblue}{Interview Preparation Guide}}
+    
+    \vspace{1cm}
+    {\huge ((( resume.job_title|latex_escape )))}
+    
+    \vspace{0.5cm}
+    {\Large ((( resume.company|latex_escape )))}
+    
+    \vfill
+    \begin{flushleft}
+    	extbf{Candidate:} ((( resume.candidate_name|latex_escape )))
+    	extbf{Date:} ((( resume.date|latex_escape )))
+    	extbf{Classification:} Confidential / For Internal Performance Coaching
+    \end{flushleft}
+\end{titlepage}
+
+% ---------------------------------------------------------
+\section*{1. Priority Talking Points (Force Multipliers)}
+
+((% for point in resume.priority_talking_points %))
+\subsection*{ ((( point.topic|latex_escape ))) }
+	extbf{Context:} ((( point.context|latex_escape )))
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for tp in point.talking_points %))
+  \item ((( tp|latex_escape )))
+((% endfor %))
+\end{itemize}
+((% endfor %))
+
+% ---------------------------------------------------------
+\section*{2. Anticipated Interview Questions}
+
+\subsection*{Technical Questions}
+((% for item in resume.interview_questions.technical %))
+	extbf{Q: ((( item.question|latex_escape )))} 
+	extbf{A:} ((( item.answer|latex_escape ))) 
+\vspace{0.5em}
+((% endfor %))
+
+\subsection*{Behavioral Questions (STAR Method)}
+((% for item in resume.interview_questions.behavioral %))
+	extbf{Q: ((( item.question|latex_escape )))} 
+	extbf{A:} ((( item.answer|latex_escape ))) 
+\vspace{0.5em}
+((% endfor %))
+
+\subsection*{Strategic Questions}
+((% for item in resume.interview_questions.strategic %))
+	extbf{Q: ((( item.question|latex_escape )))} 
+	extbf{A:} ((( item.answer|latex_escape ))) 
+\vspace{0.5em}
+((% endfor %))
+
+% ---------------------------------------------------------
+\section*{3. Strategic Questions to Ask}
+
+\begin{itemize}[leftmargin=0.2in, label=--]
+((% for q in resume.questions_to_ask %))
+  \item ((( q|latex_escape )))
+((% endfor %))
+\end{itemize}
+
+% ---------------------------------------------------------
+\section*{4. Quick Reference Card}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{	extwidth}{X X X}
+	oprule
+	extbf{Top 3 Strengths} & 	extbf{Top 3 Gaps (Reframed)} & 	extbf{Company Hooks} 
+\midrule
+((% for i in range(3) %))
+ ((( resume.quick_reference.top_strengths[i]|latex_escape if i < resume.quick_reference.top_strengths|length else "" ))) & 
+ ((( resume.quick_reference.top_gaps[i]|latex_escape if i < resume.quick_reference.top_gaps|length else "" ))) & 
+ ((( resume.quick_reference.hooks[i]|latex_escape if i < resume.quick_reference.hooks|length else "" ))) 
+((% endfor %))
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

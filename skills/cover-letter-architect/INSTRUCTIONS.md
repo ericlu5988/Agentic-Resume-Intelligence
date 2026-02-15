@@ -23,7 +23,7 @@
 ### 3. [ ] Step 3: LaTeX Generation
 - Map content to a temporary JSON.
 - Compile the PDF:
-  `python3 tools/ari.py tools/tex_renderer.py [JSON] templates/cover-letters/built-in/cover_letter_template.tex.j2 data/latex/CoverLetter_[Company].tex && python3 tools/ari.py tools/compile_latex.py data/latex/CoverLetter_[Company].tex`
+  `python3 tools/ari.py tools/tex_renderer.py [JSON] templates/cover-letter/built-in/cover_letter_template.tex.j2 data/cover-letter/tex/CoverLetter_[Company].tex && python3 tools/ari.py tools/compile_latex.py data/cover-letter/tex/CoverLetter_[Company].tex`
 
 ### 4. [ ] Step 4: Final Move
-- Move the PDF to `outputs/resume/`.
+- Move the PDF to `outputs/cover-letter/`.

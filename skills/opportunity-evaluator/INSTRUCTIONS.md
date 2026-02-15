@@ -2,7 +2,7 @@
 
 ## Core Mandates
 - **Intelligence Density (No Terse Rule)**: High-level summaries are forbidden. Bullet points must contain granular metrics ($ values, headcount) or specific technical DNA (e.g., mention specific C2 frameworks or evasion techniques).
-- **Profile Verification Gate**: NEVER assume which profile to use. Always list available Master JSON files in `data/json/` and ask the user to explicitly select the source baseline.
+- **Profile Verification Gate**: NEVER assume which profile to use. Always list available Master JSON files in `data/resume/json/` and ask the user to explicitly select the source baseline.
 - **Strategic Bridging**: When a gap is identified, do not just list it. Provide a mitigation strategy that bridges the gap using existing experience (e.g., "Space systems share design parallels with Navy weapon systems").
 - **GO/NO-GO Gate**: If the score is < 60%, you MUST recommend stopping and explain the gaps.
 - **Discovery Gate**: If a critical Tier 1 requirement is not found in the resume, you **MUST** ask the user for relevant experience before concluding.
@@ -12,7 +12,7 @@
 
 ### 1. [ ] Step 1: Target Acquisition & Profile Selection
 - Get the **Job Description (JD)** text or URL.
-- List available Master JSON files in `data/json/` and ask the user to select the baseline.
+- List available Master JSON files in `data/resume/json/` and ask the user to select the baseline.
 
 ### 2. [ ] Step 2: Requirement Extraction
 - Parse the JD and categorize requirements:
@@ -43,20 +43,20 @@ Check for auto-reject triggers:
 - **Handoff Logic**: If GO, instruct the user to trigger the `intel-officer` skill for deep reconnaissance.
 
 ### 7. [ ] Step 7: Persistence
-- Save the final assessment data to a structured JSON file in `outputs/`.
+- Save the final assessment data to a structured JSON file in `data/match-assessment/json/`.
 - Use the filename format: `match_assessment_<candidate>_<company>.json`.
 - Ensure all fields in the **JSON Schema Requirements** below are populated.
 
 ### 8. [ ] Step 8: Document Generation
 - Run the rendering engine to apply the Jinja2 template:
   ```bash
-  python3 tools/tex_renderer.py outputs/match_assessment_<candidate>_<company>.json templates/assessments/built-in/match_assessment.tex.j2 data/latex/match_assessment_<candidate>_<company>.tex
+  python3 tools/tex_renderer.py data/match-assessment/json/match_assessment_<candidate>_<company>.json templates/match-assessment/built-in/match_assessment.tex.j2 data/match-assessment/tex/match_assessment_<candidate>_<company>.tex
   ```
 - Compile the resulting LaTeX into a professional PDF:
   ```bash
-  python3 tools/ari.py tools/compile_latex.py data/latex/match_assessment_<candidate>_<company>.tex
+  python3 tools/ari.py tools/compile_latex.py data/match-assessment/tex/match_assessment_<candidate>_<company>.tex
   ```
-- Move the final PDF to `outputs/dossiers/`.
+- Move the final PDF to `outputs/match-assessment/`.
 
 ### 9. [ ] Step 9: Proofreading & Validation
 - Open the generated PDF and verify:

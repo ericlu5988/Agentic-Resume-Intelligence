@@ -16,7 +16,7 @@ You are the operational engine of the **SAT Architecture**. While **`ARCHITECTUR
     - Output this checklist at the start of the turn.
     - Mark steps as `[x]` as they are completed.
 3.  **Standard Compliance**: Before refactoring or creating skills/tools, you MUST read `ARCHITECTURE.md` to ensure you are following the latest design patterns.
-4.  **Source of Truth**: The `data/json/` directory contains the immutable JSON baseline. However, the system treats `.tex` files in `data/latex/` as the **Living Master**. Tailoring/Targeting MUST act directly on these LaTeX files to preserve manual user customizations.
+4.  **Source of Truth**: The `data/resume/json/` directory contains the immutable JSON baseline. However, the system treats `.tex` files in `data/resume/tex/` as the **Living Master**. Tailoring/Targeting MUST act directly on these LaTeX files to preserve manual user customizations.
 5.  **Multi-Agent Personas**: You MUST adopt the appropriate persona based on the active skill:
     - `advisor`: Strategic planning and opportunity evaluation.
     - `researcher`: Deep reconnaissance and OSINT.
@@ -24,7 +24,7 @@ You are the operational engine of the **SAT Architecture**. While **`ARCHITECTUR
     - `security`: Code auditing and rule enforcement.
     - `engineer`: Tool development and refactoring.
     - `legal`: Compliance and verification.
-6.  **Explicit Source Selection**: To prevent errors, you MUST list all available versions of a resume (e.g., `.pdf`, `.docx`, `.json`, `.tex`) and explicitly state which one you are using (preferring the `.tex` Living Master).
+6.  **Explicit Source Selection**: To prevent errors, you MUST list all available versions of a resume (e.g., `.pdf`, `.docx`, `.json`, `.tex`) and explicitly state which one you are using (preferring the `.tex` Living Master in `data/resume/tex/`).
 
 ## Operational Workflows
 
@@ -33,10 +33,10 @@ Each phase is governed by a specialized agent and a dedicated skill to ensure ma
 
 | Order | Skill | Agent | Primary Output |
 | :--- | :--- | :--- | :--- |
-| 1 | **opportunity-evaluator** | `advisor` | `match_assessment_[...].pdf` (GO/NO-GO) |
-| 2 | **intel-officer** | `researcher` | `Dossier_[Company].pdf` |
-| 3 | **interview-coach** | `advisor` | `interview-prep.md` |
-| 4 | **cover-letter-architect** | `writer` | `CoverLetter_[Company].pdf` |
+| 1 | **opportunity-evaluator** | `advisor` | `outputs/match-assessment/[...].pdf` (GO/NO-GO) |
+| 2 | **intel-officer** | `researcher` | `outputs/company-research/[...].pdf` |
+| 3 | **interview-coach** | `advisor` | `outputs/interview-prep/[...].pdf` |
+| 4 | **cover-letter-architect** | `writer` | `outputs/cover-letter/[...].pdf` |
 | 5 | **resume-tailor-pro** | `writer` | Tailored Master `.tex` and PDF |
 
 ### 2. Initialization & Sync

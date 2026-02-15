@@ -4,15 +4,15 @@ imports/*
 !imports/johnny_silverhand.pdf
 
 # Data Sources & LaTeX Artifacts
-data/json/*
-!data/json/.gitkeep
-!data/json/johnny_silverhand.json
-!data/json/palantir_johnny_silverhand_dossier.json
+data/**/json/*
+!data/**/json/.gitkeep
+!data/resume/json/johnny_silverhand.json
+!data/company-research/json/palantir_johnny_silverhand_dossier.json
 
-data/latex/*
-!data/latex/.gitkeep
-!data/latex/johnny_silverhand.tex
-!data/latex/Strategy_Dossier_Palantir_Silverhand.tex
+data/**/tex/*
+!data/**/tex/.gitkeep
+!data/resume/tex/johnny_silverhand.tex
+!data/company-research/tex/Strategy_Dossier_Palantir_Silverhand.tex
 
 .tmp/
 
@@ -21,12 +21,13 @@ logs/
 
 # All Outputs
 outputs/resume/*
-!outputs/resume/.gitkeep
+outputs/company-research/*
+outputs/match-assessment/*
+outputs/interview-prep/*
+outputs/cover-letter/*
+!outputs/**/.gitkeep
 !outputs/resume/johnny_silverhand.pdf
-
-outputs/dossiers/*
-!outputs/dossiers/.gitkeep
-!outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf
+!outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf
 
 # Templates (Track built-in, ignore bespoke)
 templates/**/bespoke/*
@@ -67,7 +68,7 @@ semgrep_report.txt
 *.pdf
 !imports/johnny_silverhand.pdf
 !outputs/resume/johnny_silverhand.pdf
-!outputs/dossiers/Strategy_Dossier_Palantir_Silverhand.pdf
+!outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf
 *.synctex.gz
 
 # OS Specific
