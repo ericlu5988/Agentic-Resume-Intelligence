@@ -27,3 +27,6 @@
 
 ### 4. [ ] Step 4: Final Move
 - Move the PDF to `outputs/cover-letter/`.
+
+### 5. [ ] Step 5: Handoff
+- **Handoff Logic**: Instruct the user to trigger the `interview-coach` skill for final performance preparation using all generated materials.

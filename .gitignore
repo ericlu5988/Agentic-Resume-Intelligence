@@ -19,15 +19,32 @@ data/**/tex/*
 # Logs
 logs/
 
-# All Outputs
+# All Outputs (Deny by default, whitelist specific categories)
+outputs/*
+!outputs/.gitkeep
+!outputs/resume/
+!outputs/company-research/
+!outputs/match-assessment/
+!outputs/interview-prep/
+!outputs/cover-letter/
+
+# Ignore contents of whitelisted folders but keep structure and examples
 outputs/resume/*
-outputs/company-research/*
-outputs/match-assessment/*
-outputs/interview-prep/*
-outputs/cover-letter/*
-!outputs/**/.gitkeep
+!outputs/resume/.gitkeep
 !outputs/resume/johnny_silverhand.pdf
+
+outputs/company-research/*
+!outputs/company-research/.gitkeep
 !outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf
+
+outputs/match-assessment/*
+!outputs/match-assessment/.gitkeep
+
+outputs/interview-prep/*
+!outputs/interview-prep/.gitkeep
+
+outputs/cover-letter/*
+!outputs/cover-letter/.gitkeep
 
 # Templates (Track built-in, ignore bespoke)
 templates/**/bespoke/*

@@ -46,8 +46,9 @@
   ```
 - Move the final PDF to `outputs/interview-prep/`.
 
-### 8. [ ] Step 8: Handoff
-- **Handoff Logic**: Instruct the user to trigger the `cover-letter-architect` or `resume-tailor-pro` skills to finalize submission materials.
+### 8. [ ] Step 8: Final Delivery
+- Present the final PDF path in `outputs/interview-prep/`.
+- **Handoff Logic**: Inform the user that the high-fidelity application mission is complete. Recommend a final review of all materials in `outputs/` before submission.
 
 ## JSON Schema Requirements
 The `tex_renderer.py` tool expects the following structure:

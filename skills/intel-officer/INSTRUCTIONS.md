@@ -34,4 +34,4 @@ Research and analyze the following 6 mandatory categories:
 
 ### 5. [ ] Step 5: Handoff
 - Present the final PDF path in `outputs/company-research/`.
-- **Handoff Logic**: Instruct the user to trigger the `interview-coach` skill for performance preparation.
+- **Handoff Logic**: Instruct the user to trigger the `resume-tailor-pro` skill for surgical targeting based on the identified attack vectors.

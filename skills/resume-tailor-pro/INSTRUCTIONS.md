@@ -60,6 +60,9 @@
 ### [ ] Step 5: Length Optimization (Iterative)
 - Re-compile and verify until the "Goldilocks" zone (1.9 - 2.0 pages) is met by surgically adjusting spacing macros if they exist in the file.
 
+### [ ] Step 6: Handoff
+- **Handoff Logic**: Instruct the user to trigger the `cover-letter-architect` skill to generate a research-hooked cover letter that references the newly tailored resume points.
+
 ## Tool Reference (ARI)
 - **compile_latex.py**: `python3 tools/ari.py tools/compile_latex.py [OUTPUT_TEX]`
 - **pdf_parser.py**: `python3 tools/ari.py tools/pdf_parser.py [OUTPUT_PDF]` - Used to verify page counts and line density.

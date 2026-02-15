@@ -25,54 +25,17 @@ Hardened for high-stakes environments. The system includes an integrated **Secur
 
 ---
 
-## 🛡️ Security Governance
-ARI is built on a **Security-First** philosophy. Every agent action is cross-referenced against a strict governance framework located in the `rules/` directory.
-
-- **Core Rules**: OWASP 2025, AI Security, and Agentic Agency.
-- **RAG Safety**: Input sanitization and indirect prompt injection prevention.
-- **Hardened Runtime**: Tools run in an isolated, non-root Docker container with path-traversal protection.
-
----
-
-## 🏗️ The SAT Architecture
-This repository is built on the **SAT (Skills, Agents, Tools)** framework. For a deep dive into the design philosophy and development standards, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
-
----
-
-## 🏗️ Standardized Data Flow
-The system distinguishes between **digitization** (one-time) and **targeting** (per job).
-
-`imports/ -> Digitization -> data/resume/tex/ (The Living Master) -> Targeting -> outputs/resume/`
-
-1.  **Digitization (Entry Points)**:
-    - **Legacy**: Place existing PDF/DOCX resumes in `imports/` to be converted.
-    - **LaTeX Native**: If you already have a LaTeX resume, place it directly in `data/resume/tex/`.
-2.  **The Living Master**: Your `.tex` file in `data/resume/tex/` is your primary workspace. **Perfect your design here once; it serves as the baseline for all future targeting.**
-3.  **Targeting (Tailoring)**: When targeting a job, the agent surgically edits your "Living Master" LaTeX to match the company's specific mission profile.
-
----
-
-## 🧪 System Baseline & Example
-To demonstrate the system's full capability, we provide a complete end-to-end example using the **Johnny Silverhand** persona. This showcases the transformation from a legacy document into a surgically-tailored executive output.
-
-1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf) (Raw document)
-2.  **Extracted JSON**: [data/resume/json/johnny_silverhand.json](./data/resume/json/johnny_silverhand.json) (Geometric-aware data)
-3.  **Living Master (LaTeX)**: [data/resume/tex/johnny_silverhand.tex](./data/resume/tex/johnny_silverhand.tex) (The editable master)
-4.  **Strategic Intelligence**: [outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf](./outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf) (Research)
-5.  **Tailored Result**: [outputs/resume/Resume_Johnny_Silverhand_Lockheed_Martin_2026-02-12.pdf](./outputs/resume/Resume_Johnny_Silverhand_Lockheed_Martin_2026-02-12.pdf) (Surgical output)
-
----
-
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
-- **AI Agent Framework**: Gemini CLI, Claude Code, or any markdown-capable agent.
+- **AI Agent**: Gemini CLI (preferred), Claude Code, or Windsurf.
 - **Docker**: Required for deterministic tool execution and LaTeX compilation.
+- **Python 3.10+**: Required for workspace orchestration.
 
-### Setup
+### Initial Setup
 1. **Initialize Workspace**:
    ```bash
-   python3 tools/setup.py --gemini  # Use --gemini flag if using Gemini CLI
+   python3 tools/setup.py --gemini  # Use --gemini flag for Gemini CLI
    ```
 2. **Build Tool Container**:
    ```bash
@@ -81,24 +44,46 @@ To demonstrate the system's full capability, we provide a complete end-to-end ex
 
 ---
 
-## 🧪 Testing
-Verify the deterministic logic and security posture using the integrated suite:
+## 🚀 Quick Start: The Career Workflow
+ARI operates as a chain of specialized agents. Follow this sequence to transform your application from a raw document into a high-fidelity submission.
 
-### Functional Tests
-```bash
-python3 tools/ari.py -m pytest tools/tests/
-```
+| Phase | Skill Triggers | What the Agent Does | Output |
+| :--- | :--- | :--- | :--- |
+| **1. Digitize** | "Import my resume", "Convert PDF to LaTeX" | Extracts geometric data and creates your **Living Master**. | `data/resume/tex/` |
+| **2. Assess** | "Should I apply?", "Analyze this job description" | Performs a **Weighted Match Score** and GO/NO-GO gate. | `outputs/match-assessment/` |
+| **3. Research** | "Gather mission intel", "Research [Company]" | Deep-dives into OSINT, leadership DNA, and technical stack. | `outputs/company-research/` |
+| **4. Tailor** | "Tailor my resume", "/resume-tailor-pro" | Surgically targets your resume for the specific mission. | `outputs/resume/` |
+| **5. Architect** | "Write a cover letter", "/cover-letter-architect" | Hooks your letter using research and tailored strengths. | `outputs/cover-letter/` |
+| **6. Prepare** | "Prepare me for interview", "/interview-coach" | Synthesizes all data into talking points and STAR Q&A. | `outputs/interview-prep/` |
 
-### Security Scans (SAST)
-```bash
-python3 tools/ari.py -m bandit -r .
-python3 tools/ari.py /usr/local/bin/semgrep scan --config auto .
-```
+---
 
-### Rule Validation
-```bash
-python3 tools/ari.py -m pytest rules/tests/
-```
+## 📂 Categorical Data Flow
+The system distinguishes between **Data** (interim artifacts) and **Outputs** (final deliverables).
+
+`imports/ -> Digitization -> data/resume/tex/ (Living Master) -> Targeting -> outputs/resume/`
+
+- **`data/`**: Stores immutable JSON snapshots and editable LaTeX masters.
+- **`outputs/`**: Dedicated strictly to final, boardroom-ready **PDF** artifacts.
+- **`templates/`**: Professional blueprints for resumes, dossiers, and assessments.
+
+---
+
+## 🧪 System Baseline & Example
+Experience the full transformation using the **Johnny Silverhand** example persona:
+
+1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf)
+2.  **Extracted JSON**: [data/resume/json/johnny_silverhand.json](./data/resume/json/johnny_silverhand.json)
+3.  **Living Master (LaTeX)**: [data/resume/tex/johnny_silverhand.tex](./data/resume/tex/johnny_silverhand.tex)
+4.  **Strategic Intelligence**: [outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf](./outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf)
+5.  **Tailored Result**: [outputs/resume/Resume_Eric_Lu_Lockheed_Martin_2026-02-12.pdf](./outputs/resume/Resume_Eric_Lu_Lockheed_Martin_2026-02-12.pdf)
+
+---
+
+## 🏗️ Architecture & Security
+ARI is built on the **SAT (Skills, Agents, Tools)** framework, enforcing a strict separation between AI reasoning and deterministic execution. Security is Prerequisite—every action is cross-referenced against our **Security Governance** framework (`rules/`) to ensure AI safety and RAG integrity.
+
+For a deep dive, see **[ARCHITECTURE.md](./ARCHITECTURE.md)** and **[AGENT.md](./AGENT.md)**.
 
 ---
 *Created by Eric Lu for professionals who value precision over automation.*
