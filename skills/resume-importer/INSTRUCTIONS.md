@@ -22,13 +22,16 @@
 - **Discovery**: Check the `imports/` directory for files if no path is provided.
 - **Action (PDF)**: 
     - Run extraction with optimal tolerance for digital PDFs:
-      `python3 tools/ari.py tools/pdf_parser.py [PDF_PATH] --x-tolerance 1.5 | python3 -c "import json, sys; d=json.load(sys.stdin); print(json.dumps({'full_text': d['full_text'], 'metadata': d.get('metadata', {})}, indent=2))"`
-    - **Critical Sanity Check**: Inspect the first 500 characters of `full_text`. If you see "squashed" words (e.g., "ActiveTS/SCI" instead of "Active TS/SCI"), retry with `--x-tolerance 1.0`.
-    - **Agent Action**: Capture the filtered output for mapping.
+      `python3 tools/ari.py tools/pdf_parser.py [PDF_PATH] --x-tolerance 1.0`
+    - **Data Synthesis**: Convert the geometric output to flat text for mapping:
+      `python3 tools/ari.py tools/pdf_parser.py [PDF_PATH] --x-tolerance 1.0 | python3 -c "import json, sys; d=json.load(sys.stdin); full_text = '\n'.join(['\n'.join([l['text'] for l in p['lines']]) for p in d['pages']]); print(json.dumps({'full_text': full_text, 'metadata': d.get('metadata', {})}, indent=2))"`
+    - **Critical Sanity Check**: Inspect the first 500 characters of `full_text`. If you see "squashed" words (e.g., "ActiveTS/SCI" instead of "Active TS/SCI"), ensure `--x-tolerance` is set to `1.0` or lower.
+    - **Agent Action**: Capture the synthesized `full_text` and metadata for mapping.
 - **Action (DOCX)**: 
     - Run the extraction:
       `python3 tools/ari.py tools/docx_parser.py [DOCX_PATH]`
-    - **Agent Action**: Capture the paragraph and run data. Analyze the metadata to distinguish headers, roles, and bullet points.
+    - **Data Synthesis**: Capture the `blocks` and `metadata`. Use the `text` field within each block to build the content context.
+    - **Agent Action**: Analyze the paragraph and run data. Analyze the metadata (bold, size, alignment) to distinguish headers, roles, and bullet points.
 
 ### 2. [ ] Step 2: Template Selection Gate
 - **List**: Show the user all templates in `templates/built-in/` and any in `templates/`.
