@@ -4,7 +4,11 @@
 % PACKAGES
 % ---------------------------------------------------------
 \usepackage[margin=1in]{geometry}
-\usepackage{ebgaramond}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\setmainfont{EB Garamond}[
+  Mapping=
+]
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \usepackage{titlesec}
@@ -21,15 +25,15 @@
 % Header/Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\footnotesize 	extcolor{gray}{Interview Preparation: ((( resume.job_title|latex_escape ))) at ((( resume.company|latex_escape )))}}
-head{\footnotesize 	extcolor{gray}{ ((( resume.date|latex_escape ))) }}
-\cfoot{	hepage}
-enewcommand{\headrulewidth}{0.4pt}
+\lhead{\footnotesize \textcolor{gray}{Interview Preparation: ((( resume.job_title|latex_escape ))) at ((( resume.company|latex_escape )))}}
+\rhead{\footnotesize \textcolor{gray}{ ((( resume.date|latex_escape ))) }}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
 
 % Section Styles
-	itleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[	itlerule]
-	itlespacing*{\section}{0pt}{12pt}{8pt}
-	itleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
+\titleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{8pt}
+\titleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
 
 % ---------------------------------------------------------
 \begin{document}
@@ -40,7 +44,7 @@
 \begin{titlepage}
     \centering
     \vspace*{2cm}
-    {\Huge \bfseries 	extcolor{briefblue}{Interview Preparation Guide}}
+    {\Huge \bfseries \textcolor{briefblue}{Interview Preparation Guide}}
     
     \vspace{1cm}
     {\huge ((( resume.job_title|latex_escape )))}
@@ -50,9 +54,9 @@
     
     \vfill
     \begin{flushleft}
-    	extbf{Candidate:} ((( resume.candidate_name|latex_escape )))
-    	extbf{Date:} ((( resume.date|latex_escape )))
-    	extbf{Classification:} Confidential / For Internal Performance Coaching
+        \textbf{Candidate:} ((( resume.candidate_name|latex_escape )))\\
+        \textbf{Date:} ((( resume.date|latex_escape )))\\
+        \textbf{Classification:} Confidential / For Internal Performance Coaching
     \end{flushleft}
 \end{titlepage}
 
@@ -61,7 +65,7 @@
 
 ((% for point in resume.priority_talking_points %))
 \subsection*{ ((( point.topic|latex_escape ))) }
-	extbf{Context:} ((( point.context|latex_escape )))
+\textbf{Context:} ((( point.context|latex_escape )))
 \begin{itemize}[leftmargin=0.2in, label=--]
 ((% for tp in point.talking_points %))
   \item ((( tp|latex_escape )))
@@ -74,22 +78,22 @@
 
 \subsection*{Technical Questions}
 ((% for item in resume.interview_questions.technical %))
-	extbf{Q: ((( item.question|latex_escape )))} 
-	extbf{A:} ((( item.answer|latex_escape ))) 
+\textbf{Q: ((( item.question|latex_escape )))} \\
+\textbf{A:} ((( item.answer|latex_escape ))) 
 \vspace{0.5em}
 ((% endfor %))
 
 \subsection*{Behavioral Questions (STAR Method)}
 ((% for item in resume.interview_questions.behavioral %))
-	extbf{Q: ((( item.question|latex_escape )))} 
-	extbf{A:} ((( item.answer|latex_escape ))) 
+\textbf{Q: ((( item.question|latex_escape )))} \\
+\textbf{A:} ((( item.answer|latex_escape ))) 
 \vspace{0.5em}
 ((% endfor %))
 
 \subsection*{Strategic Questions}
 ((% for item in resume.interview_questions.strategic %))
-	extbf{Q: ((( item.question|latex_escape )))} 
-	extbf{A:} ((( item.answer|latex_escape ))) 
+\textbf{Q: ((( item.question|latex_escape )))} \\
+\textbf{A:} ((( item.answer|latex_escape ))) 
 \vspace{0.5em}
 ((% endfor %))
 
@@ -107,14 +111,14 @@
 
 \begin{table}[h]
 \centering
-\begin{tabularx}{	extwidth}{X X X}
-	oprule
-	extbf{Top 3 Strengths} & 	extbf{Top 3 Gaps (Reframed)} & 	extbf{Company Hooks} 
+\begin{tabularx}{\textwidth}{X X X}
+\toprule
+\textbf{Top 3 Strengths} & \textbf{Top 3 Gaps (Reframed)} & \textbf{Company Hooks} \\
 \midrule
 ((% for i in range(3) %))
  ((( resume.quick_reference.top_strengths[i]|latex_escape if i < resume.quick_reference.top_strengths|length else "" ))) & 
  ((( resume.quick_reference.top_gaps[i]|latex_escape if i < resume.quick_reference.top_gaps|length else "" ))) & 
- ((( resume.quick_reference.hooks[i]|latex_escape if i < resume.quick_reference.hooks|length else "" ))) 
+ ((( resume.quick_reference.hooks[i]|latex_escape if i < resume.quick_reference.hooks|length else "" ))) \\
 ((% endfor %))
 \bottomrule
 \end{tabularx}

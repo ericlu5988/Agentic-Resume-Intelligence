@@ -12,7 +12,7 @@ from docx.oxml.ns import qn
 
 # Import shared utils
 sys.path.append(str(Path(__file__).parent))
-from lib.utils import escape_latex
+from lib.utils import escape_latex, sanitize_text
 
 FONT_MAP = {
     "Garamond": "EB Garamond",
@@ -29,7 +29,7 @@ def get_rich_run(run):
     if run._element.xpath('.//w:tab'):
         return {"text": " TAB_MARKER ", "metadata": {}}
     
-    text = run.text
+    text = sanitize_text(run.text)
     if not text: return None
     
     metadata = {
@@ -94,7 +94,7 @@ def parse_docx_rich(docx_path):
                     "alignment": "center" if para.alignment == WD_ALIGN_PARAGRAPH.CENTER else "flushleft",
                     "is_list": is_list,
                     "border_height": border_height,
-                    "text": para.text,
+                    "text": sanitize_text(para.text),
                     "runs": runs_data
                 })
 
@@ -102,7 +102,7 @@ def parse_docx_rich(docx_path):
                 table = Table(item, doc)
                 table_block = {"type": "table", "rows": []}
                 for row in table.rows:
-                    row_data = [cell.text for cell in row.cells]
+                    row_data = [sanitize_text(cell.text) for cell in row.cells]
                     table_block["rows"].append(row_data)
                 data["blocks"].append(table_block)
 

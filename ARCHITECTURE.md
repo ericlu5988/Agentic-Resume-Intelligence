@@ -27,7 +27,7 @@ Tools provide **Rich Raw Data**. The Agent uses its contextual intelligence to m
 The system maintains a **Master Resume Schema** (`rules/_core/master-resume-schema.md`) which acts as the Golden Path for data structure. This ensures consistency for built-in templates and provides a blueprint for bespoke customizations.
 
 ### Intelligence Density (The "No Terse" Rule)
-High-level summaries are considered a failure state. The system prioritizes data density, requiring granular metrics, cited sources (IEEE Standard), and specific technical DNA in all mission intelligence dossiers.
+High-level summaries are considered a failure state. The system prioritizes data density, requiring granular metrics, cited sources (IEEE Standard), and specific technical DNA in all mission intelligence reports.
 
 ### Security-First Governance
 Security is not an afterthought but a prerequisite. The system incorporates a robust security framework located in `rules/`. All development MUST adhere to the standards defined in `rules/_core/` (OWASP 2025, AI Security, Agent Security).

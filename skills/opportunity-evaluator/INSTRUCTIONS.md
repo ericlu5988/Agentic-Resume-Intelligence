@@ -11,8 +11,9 @@
 ## Behavioral Steps
 
 ### 1. [ ] Step 1: Target Acquisition & Profile Selection
-- Get the **Job Description (JD)** text or URL.
-- List available Master JSON files in `data/resume/json/` and ask the user to select the baseline.
+- **$profiles**: List all available profiles in `data/resume/json/` and `data/resume/tex/`.
+- **Selection Gate**: Prompt the user to select from a list containing ALL `$profiles` AND an option to import a new resume using the `resume-importer` skill. This step must be completed by the user; **NO assumptions can be made.** Do not proceed until a baseline is EXPLICITLY selected.
+- **Job Intake**: Get the **Job Description (JD)** text or URL.
 
 ### 2. [ ] Step 2: Requirement Extraction
 - Parse the JD and categorize requirements:
@@ -40,7 +41,7 @@ Check for auto-reject triggers:
 ### 6. [ ] Step 6: Fit Report
 - Present the final score and a **GO/NO-GO** decision.
 - Provide a granular gap analysis with **Strategic Bridging**.
-- **Handoff Logic**: If GO, instruct the user to trigger the `intel-officer` skill for deep reconnaissance.
+- **Handoff Logic**: If GO, instruct the user to trigger the `company-researcher` skill for deep reconnaissance.
 
 ### 7. [ ] Step 7: Persistence
 - Save the final assessment data to a structured JSON file in `data/match-assessment/json/`.
@@ -59,10 +60,10 @@ Check for auto-reject triggers:
 - Move the final PDF to `outputs/match-assessment/`.
 
 ### 9. [ ] Step 9: Proofreading & Validation
-- Open the generated PDF and verify:
-    - Weighted Scoring Matrix math is correct.
-    - Content meets "Intelligence Density" standards.
-    - Formatting is professional and free of LaTeX artifacts.
+- **Content Integrity**: Review the generated assessment for logical flow, grammatical precision, and alignment with the candidate's actual experience.
+- **Technical Verification**: Ensure the LaTeX source is free of syntax errors, broken macros, or unescaped characters (e.g., &, %, $) that would compromise document structure.
+- **Strategic Impact**: Confirm that the "Strategic Bridging" and gap analysis effectively communicate the candidate's potential to the target employer.
+- **Document Quality**: Verify the final visual output for professional formatting, consistent styling, and absence of rendering artifacts.
 
 ## JSON Schema Requirements
 The `render_assessment.py` tool expects the following structure:

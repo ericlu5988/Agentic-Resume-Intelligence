@@ -35,32 +35,38 @@
 
 ## Behavioral Steps
 
-### [ ] Step 1: Intake & Living Master Selection
+### 1. [ ] Step 1: Intake & Living Master Selection
 - List available `.tex` files in the `data/resume/tex/` directory and ask the user to select one as the **Living Master** (even if only one exists).
 - Ask for **Target Company** and **Location**.
 - Ask for the **Tailoring Mode**:
     1. **JD Mode**: Provide the JD text.
     2. **Networking Mode**: Tailor based on company research.
 
-### [ ] Step 2: Analysis & Intelligence Gathering
+### 2. [ ] Step 2: Analysis & Intelligence Gathering
 - **JD Mode**: Identify keywords and categorize into **Tier 1 (Hard)** and **Tier 2 (Preferred)**.
 - **Networking Mode**: Research local contracts, major programs, and technical DNA. Present an **Intelligence Brief**.
 
-### [ ] Step 3: Precise Gap Analysis & Discovery Gate
+### 3. [ ] Step 3: Precise Gap Analysis & Discovery Gate
 - **Discovery Gate**: If a critical requirement is not met, ask "Discovery Questions" to tease out relevant experience.
 - **Optimization Phase**: Offer to incorporate Tier 2/Bonus qualifications if the user provides details.
 - **Proposed Changes**: Identify specific text strings or bullet points in the LaTeX file to update. Present proposed changes for approval.
 
-### [ ] Step 4: Surgical Drafting & Compilation
+### 4. [ ] Step 4: Surgical Drafting & Compilation
 - Extract candidate's name from the LaTeX source for filename generation.
 - **Surgical Edit**: Perform direct text replacements within the selected `.tex` file. 
 - Save the tailored version to `outputs/resume/Resume_[Name]_[Company]_[Date].tex`.
 - Execute `python3 tools/ari.py tools/compile_latex.py [OUTPUT_TEX]`.
 
-### [ ] Step 5: Length Optimization (Iterative)
+### 5. [ ] Step 5: Length Optimization (Iterative)
 - Re-compile and verify until the "Goldilocks" zone (1.9 - 2.0 pages) is met by surgically adjusting spacing macros if they exist in the file.
 
-### [ ] Step 6: Handoff
+### 6. [ ] Step 6: Proofreading & Validation
+- **Content Integrity**: Review the tailored text for logical flow, grammatical precision, and alignment with the "Sprinkle Rule" (90%+ master preservation).
+- **Technical Verification**: Ensure the LaTeX source is free of syntax errors, broken macros, or unescaped characters (e.g., &, %, $) that would compromise document structure.
+- **Strategic Impact**: Confirm that the "Sprinkled" keywords and technical reframing effectively bridge the identified gaps without fabricating experience.
+- **Document Quality**: Verify the final visual output for professional formatting, consistent styling, and compliance with the "Two-Page Rule."
+
+### 7. [ ] Step 7: Handoff
 - **Handoff Logic**: Instruct the user to trigger the `cover-letter-architect` skill to generate a research-hooked cover letter that references the newly tailored resume points.
 
 ## Tool Reference (ARI)

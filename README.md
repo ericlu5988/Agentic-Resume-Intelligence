@@ -11,8 +11,8 @@
 ### 1. Pain-Free Digitization
 Move your legacy resumes into the modern era instantly. Our geometric-aware parsers extract every detail from your **PDF** or **DOCX** files, preserving bolding, alignment, and structure to establish your "Living Master" LaTeX resume.
 
-### 2. Executive Intelligence Dossiers
-Don't just apply—dominate the conversation. The agent performs real-time research into your target company's contracts (TITAN, Maven, etc.), technical stack, and leadership DNA, outputting a **beautiful, boardroom-ready PDF dossier** with full IEEE-style citations for verification.
+### 2. Executive Intelligence Reports
+Don't just apply—dominate the conversation. The agent performs real-time research into your target company's contracts (TITAN, Maven, etc.), technical stack, and leadership DNA, outputting a **beautiful, boardroom-ready PDF intelligence report** with full IEEE-style citations for verification.
 
 ### 3. Surgical Targeting (Tailoring)
 Target specific roles without losing your voice. The agent surgically "sprinkles" high-impact keywords and metrics into your **Living Master LaTeX** file, ensuring you pass the ATS while maintaining 90% of your original narrative and 100% of your custom formatting.
@@ -51,7 +51,7 @@ ARI operates as a chain of specialized agents. Follow this sequence to transform
 | :--- | :--- | :--- | :--- |
 | **1. Digitize** | "Import my resume", "Convert PDF to LaTeX" | Extracts geometric data and creates your **Living Master**. | `data/resume/tex/` |
 | **2. Assess** | "Should I apply?", "Analyze this job description" | Performs a **Weighted Match Score** and GO/NO-GO gate. | `outputs/match-assessment/` |
-| **3. Research** | "Gather mission intel", "Research [Company]" | Deep-dives into OSINT, leadership DNA, and technical stack. | `outputs/company-research/` |
+| **3. Research** | "Gather mission intel", "/company-researcher" | Deep-dives into OSINT, leadership DNA, and technical stack. | `outputs/company-research/` |
 | **4. Tailor** | "Tailor my resume", "/resume-tailor-pro" | Surgically targets your resume for the specific mission. | `outputs/resume/` |
 | **5. Architect** | "Write a cover letter", "/cover-letter-architect" | Hooks your letter using research and tailored strengths. | `outputs/cover-letter/` |
 | **6. Prepare** | "Prepare me for interview", "/interview-coach" | Synthesizes all data into talking points and STAR Q&A. | `outputs/interview-prep/` |
@@ -65,18 +65,19 @@ The system distinguishes between **Data** (interim artifacts) and **Outputs** (f
 
 - **`data/`**: Stores immutable JSON snapshots and editable LaTeX masters.
 - **`outputs/`**: Dedicated strictly to final, boardroom-ready **PDF** artifacts.
-- **`templates/`**: Professional blueprints for resumes, dossiers, and assessments.
+- **`templates/`**: Professional blueprints for resumes, research reports, and assessments.
 
 ---
 
-## 🧪 System Baseline & Example
-Experience the full transformation using the **Johnny Silverhand** example persona:
+## 🧪 Mission Showcase: Johnny Silverhand vs. Palantir
+Experience the full ARI transformation using the combat-hardened **Johnny Silverhand** example persona targeting a **Security Controller** role at **Palantir**.
 
-1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf)
-2.  **Extracted JSON**: [data/resume/json/johnny_silverhand.json](./data/resume/json/johnny_silverhand.json)
-3.  **Living Master (LaTeX)**: [data/resume/tex/johnny_silverhand.tex](./data/resume/tex/johnny_silverhand.tex)
-4.  **Strategic Intelligence**: [outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf](./outputs/company-research/Strategy_Dossier_Palantir_Silverhand.pdf)
-5.  **Tailored Result**: [outputs/resume/Resume_Eric_Lu_Lockheed_Martin_2026-02-12.pdf](./outputs/resume/Resume_Eric_Lu_Lockheed_Martin_2026-02-12.pdf)
+1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf) (Legacy PDF)
+2.  **Assessment**: [Opportunity Assessment PDF](./outputs/match-assessment/match_assessment_johnny_silverhand_palantir.pdf) | [JSON](./data/match-assessment/json/match_assessment_johnny_silverhand_palantir.json)
+3.  **Intelligence**: [Mission Intelligence Report (PDF)](./outputs/company-research/Strategy_Report_Palantir_Silverhand.pdf) | [JSON](./data/company-research/json/Strategy_Report_Palantir_Silverhand.json)
+4.  **Tailored Master**: [Targeted Resume (PDF)](./outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.pdf) | [LaTeX Master](./outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.tex)
+5.  **Architecture**: [Research-Hooked Cover Letter](./outputs/cover-letter/CoverLetter_Palantir_Silverhand.pdf) | [LaTeX](./data/cover-letter/tex/CoverLetter_Palantir_Silverhand.tex)
+6.  **Preparation**: [Interview Coaching Guide](./outputs/interview-prep/interview_prep_johnny_silverhand_palantir.pdf) | [JSON](./data/interview-prep/json/interview_prep_johnny_silverhand_palantir.json)
 
 ---
 

@@ -1,0 +1,195 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\setmainfont{EB Garamond}[
+  Mapping=
+]
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% Professional Blue Theme
+\definecolor{briefblue}{RGB}{0, 51, 102}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize \textcolor{gray}{Interview Preparation: Security Controller at Palantir}}
+\rhead{\footnotesize \textcolor{gray}{ Monday, February 16, 2026 }}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section Styles
+\titleformat{\section}{\Large\bfseries\color{briefblue}}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{8pt}
+\titleformat{\subsection}{\large\bfseries\color{briefblue}}{}{0pt}{}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% COVER PAGE
+% ---------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \bfseries \textcolor{briefblue}{Interview Preparation Guide}}
+    
+    \vspace{1cm}
+    {\huge Security Controller}
+    
+    \vspace{0.5cm}
+    {\Large Palantir}
+    
+    \vfill
+    \begin{flushleft}
+        \textbf{Candidate:} Johnny Silverhand\\
+        \textbf{Date:} Monday, February 16, 2026\\
+        \textbf{Classification:} Confidential / For Internal Performance Coaching
+    \end{flushleft}
+\end{titlepage}
+
+% ---------------------------------------------------------
+\section*{1. Priority Talking Points (Force Multipliers)}
+
+
+\subsection*{ End-to-End Cryptographic Custodianship }
+\textbf{Context:} The JD's emphasis on managing the full lifecycle of cryptographic materials.
+\begin{itemize}[leftmargin=0.2in, label=--]
+
+  \item Discuss experience in the procurement, inventory control, and secure disposal of Type 1 cryptographic material during USMC and Militech-led missions.
+
+  \item Emphasize 100\% accountability records for sensitive field comms assets in high-threat zones.
+
+\end{itemize}
+
+\subsection*{ Vetting \& Clearance Program Management }
+\textbf{Context:} Managing the personnel clearance programme and secure facility access.
+\begin{itemize}[leftmargin=0.2in, label=--]
+
+  \item Reframe 'Tactical Team Leader' as a Personnel Security role responsible for the vetting and continuous evaluation of compartmented team members.
+
+  \item Align current PMC-based vetting experience with UKG DV and compartmented clearance eligibility.
+
+\end{itemize}
+
+\subsection*{ Operational Facility Hardening }
+\textbf{Context:} Leading the management and protection of classified materials and secure facilities.
+\begin{itemize}[leftmargin=0.2in, label=--]
+
+  \item Leverage OSINT on Palantir's European HQ to discuss physical security systems, SOP development, and incident response latency.
+
+  \item Reference the 'adversary perspective' to identify physical-layer vulnerabilities in air-gapped mainframes.
+
+\end{itemize}
+
+\subsection*{ Inter-Agency Liaison (MoD/Intel) }
+\textbf{Context:} Serving as the principal liaison with UK Intelligence and Defence partners.
+\begin{itemize}[leftmargin=0.2in, label=--]
+
+  \item Highlight successful strategic coordination with high-tier partners (Rogue, Blackhand) to align security objectives across competing interests.
+
+  \item Commitment to the 'Western Superiority' mission logic and the ethical auditing of national security systems.
+
+\end{itemize}
+
+\subsection*{ Zero-Latency Incident Response }
+\textbf{Context:} The 60-minute response time and after-hours/weekend on-call duties.
+\begin{itemize}[leftmargin=0.2in, label=--]
+
+  \item Proven ability to maintain mission readiness 24/7 in 'Always-On' tactical environments.
+
+  \item Discuss managing high-intensity field extractions where response time was measured in seconds, not minutes.
+
+\end{itemize}
+
+
+% ---------------------------------------------------------
+\section*{2. Anticipated Interview Questions}
+
+\subsection*{Technical Questions}
+
+\textbf{Q: How do you manage the procurement and distribution of cryptographic materials while maintaining 100\% policy compliance?} \\
+\textbf{A:} I implement a strict provenance-tracking protocol that matches Palantir's own data lineage standards. My approach involves redundant auditing of procurement logs and real-time inventory tracking, ensuring that every sensitive asset is accounted for from arrival at the facility to its secure disposal. I view the physical asset as a unit of data that must remain encrypted through custody. 
+\vspace{0.5em}
+
+\textbf{Q: Explain your process for conducting a security briefing for personnel entering a compartmented facility.} \\
+\textbf{A:} My briefings focus on 'The Human Perimeter.' I don't just read the SOP; I ensure personnel understand the specific threat vectors relevant to their mission. I emphasize the 'Least Privilege' principle and ensure that all staff are aware of their personal accountability in maintaining the facility's DV-cleared integrity. 
+\vspace{0.5em}
+
+
+\subsection*{Behavioral Questions (STAR Method)}
+
+\textbf{Q: Give an example of a time you identified a flaw in a security process and corrected it.} \\
+\textbf{A:} (STAR) Situation: During a Militech-backed extraction mission, I noticed a latency gap in our real-time cryptographic asset tracking. Task: Harden the tracking protocol without increasing operational friction. Action: I implemented a 'Dual-Key' field audit system that mirrored secure facility protocols. Result: Eliminated tracking drift and ensured 100\% material extraction during a high-fire rooftop extraction. 
+\vspace{0.5em}
+
+\textbf{Q: Describe a high-pressure situation where you had to liaise between multiple stakeholders with conflicting priorities.} \\
+\textbf{A:} (STAR) Situation: Coordinating an assault on Arasaka Tower with multiple PMC and independent teams. Task: Align security and communications protocols across four distinct organizations. Action: I served as the central Security Command, establishing a unified cryptographic standard and a clear chain of command for incident response. Result: Successfully integrated intelligence requirements across the organization, achieving the objective with 0\% friendly-fire incidents. 
+\vspace{0.5em}
+
+
+\subsection*{Strategic Questions}
+
+\textbf{Q: How would you handle a situation where a high-tier Palantir executive requested a bypass of a standard security protocol?} \\
+\textbf{A:} I adhere to Alex Karp's philosophy of 'Accountability over Apathy.' In a high-clearance environment, there are no 'bypasses.' I would professionally deny the request based on the risk to the mission's UKG integrity and immediately document the event. A Security Controller's role is to be the systems' most rigorous auditor, regardless of rank. 
+\vspace{0.5em}
+
+\textbf{Q: What is the strategic value of maintaining a 60-minute response time for Palantir's UK mission?} \\
+\textbf{A:} It is about 'Technical Latency.' Palantir's advantage is speed and decision-quality. If the physical security command has a latency of more than 60 minutes, it creates a window of opportunity for adversaries to compromise the very systems (Foundry/Gotham) that the MoD relies on. I ensure the physical perimeter is as fast as the digital one. 
+\vspace{0.5em}
+
+
+% ---------------------------------------------------------
+\section*{3. Strategic Questions to Ask}
+
+\begin{itemize}[leftmargin=0.2in, label=--]
+
+  \item How does the Security Controller role interface with the Apollo CI/CD team when deploying software to air-gapped MoD environments?
+
+  \item With the £750M MoD expansion, what are the current KPIs for scaling the personnel clearance programme without losing vetting depth?
+
+  \item Can you describe the internal incident response hierarchy when a facility anomaly is detected after-hours?
+
+  \item How does the London office balance the 'Forward Deployed' culture with the stringent physical security requirements of a UKG-cleared facility?
+
+\end{itemize}
+
+% ---------------------------------------------------------
+\section*{4. Quick Reference Card}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{X X X}
+\toprule
+\textbf{Top 3 Strengths} & \textbf{Top 3 Gaps (Reframed)} & \textbf{Company Hooks} \\
+\midrule
+
+ Field-Hardened Cryptographic material handling (Type 1). & 
+ Explicit UKNDS training (Ready for immediate certification). & 
+ £750M MoD AI platform expansion (Strategic Growth). \\
+
+ Expertise in High-Latency Liaison \& Tactical Coordination. & 
+ UKG DV-Clearance (Eligible via high-stakes PMC Vetting history). & 
+ Apollo Engine air-gapped deployments (Technical Challenge). \\
+
+ Uncompromising dedication to Mission Integrity \& Ethical Auditing. & 
+ Night City location (Relocation ready to within the 60-minute radius). & 
+ Alex Karp's 'Patriotic Tech' philosophy (Cultural Match). \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

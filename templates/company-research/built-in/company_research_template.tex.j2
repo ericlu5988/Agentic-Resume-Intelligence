@@ -4,7 +4,11 @@
 % PACKAGES
 % ---------------------------------------------------------
 \usepackage[margin=1in]{geometry}
-\usepackage{ebgaramond}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\setmainfont{EB Garamond}[
+  Mapping=
+]
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl} % Allow long URLs to break anywhere
 \usepackage{titlesec}
@@ -19,7 +23,7 @@
 % Header/Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\footnotesize \textcolor{gray}{Mission Intelligence Dossier: ((( resume.company|latex_escape )))}}
+\lhead{\footnotesize \textcolor{gray}{Mission Intelligence Report: ((( resume.company|latex_escape )))}}
 \rhead{\footnotesize \textcolor{gray}{((( resume.date|latex_escape )))}}
 \cfoot{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -38,7 +42,7 @@
 \begin{titlepage}
     \centering
     \vspace*{2cm}
-    {\Huge \bfseries \textcolor{briefblue}{Mission Intelligence Dossier}}
+    {\Huge \bfseries \textcolor{briefblue}{Mission Intelligence Report}}
     
     \vspace{1cm}
     {\huge ((( resume.company|latex_escape )))}

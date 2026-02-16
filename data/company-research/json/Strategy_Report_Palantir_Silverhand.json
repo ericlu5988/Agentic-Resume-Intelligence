@@ -1,0 +1,50 @@
+{
+  "company": "Palantir",
+  "location": "London, UK / Global",
+  "candidate_name": "Johnny Silverhand",
+  "date": "Monday, February 16, 2026",
+  "executive_summary": "Palantir is aggressively expanding its footprint as the primary data-infrastructure layer for the UK's most sensitive government functions. With a recent £750M MoD commitment and the controversial £330M NHS FDP contract, the company is pivoting from a US-centric 'defense tech' firm to a global provider of sovereign data mission logic. For a candidate like Johnny Silverhand, this environment demands a unique synthesis of tactical field experience and an uncompromising approach to system integrity and ethical auditing, aligning with Palantir's rejection of consumer-grade 'shallow' security models.",
+  "local_mission_portfolio": [
+    { "label": "MoD Strategic Expansion", "text": "A five-year, £750 million deal to integrate Palantir's AI platform across British military and law enforcement systems, emphasizing real-time intelligence and targeting [5][6]." },
+    { "label": "NHS Federated Data Platform (FDP)", "text": "A seven-year, £330 million contract to design and operate a sovereign data platform for patient records, requiring extreme vetting and cryptographic integrity [1][8][12]." },
+    { "label": "London European HQ", "text": "Establishing a centralized European command center in London as part of a £1.5 billion strategic investment in UK technical infrastructure [9][10]." }
+  ],
+  "enterprise_bi": [
+    { "label": "FY 2025 Revenue", "text": "$4.475 billion, a 56% year-over-year increase, driven largely by government contract growth and the Apollo CI/CD engine [20]." },
+    { "label": "Karp's 'Patriotic Tech' DNA", "text": "CEO Alex Karp's philosophy prioritizes Western defense and national sovereignty, rejecting the commercial models of traditional Big Tech in favor of mission-first engineering [2][4][6]." },
+    { "label": "UK Operating Revenue", "text": "The UK market now accounts for over 10.6% of total global operating revenue, marking it as Palantir's most critical non-US theater [3]." }
+  ],
+  "strategic_context": [
+    { "label": "High-Intensity Culture", "text": "Glassdoor and Reddit reports indicate 60+ hour work weeks and a high-stakes 'Forward Deployed Engineer' (FDE) mindset [10]." },
+    { "label": "DV-Cleared Vetting", "text": "Operates at the highest levels of UKG security (Developed Vetting), requiring Security Controllers to maintain absolute personnel and facility integrity [6][7]." },
+    { "label": "Public/Ethical Scrutiny", "text": "Ongoing national debate regarding data privacy, historical ICE contracts, and the 'revolving door' between the MoD and Palantir leadership [9][11][17]." }
+  ],
+  "technical_stack_dna": [
+    { "label": "Gotham & Foundry", "text": "Advanced data integration and intelligence platforms utilizing semantic 'Ontology' models and strict provenance tracking [11][13]." },
+    { "label": "Apollo Engine", "text": "The CI/CD underpinning for IL6 and air-gapped deployments, enabling autonomous software delivery to the 'edge' of contested environments [15][16]." },
+    { "label": "Cryptographic Standard", "text": "Mandatory encryption at rest/transit with granular, attribute-based access controls (ABAC) down to the row/column level [1][2][5]." }
+  ],
+  "strategic_fit": [
+    { "label": "Adversary Logic as Defense", "text": "Johnny's history of tactical sabotage provides the authentic 'Red-Team' mindset needed to harden Palantir's Gotham deployments against sophisticated state actors." },
+    { "label": "Air-Gapped Field Leadership", "text": "Experience in off-grid, high-threat tactical raids translates to securing the physical and digital perimeters of Apollo's disconnected edge deployments." },
+    { "label": "Accountability Engineering", "text": "Johnny's dedication to exposing systemic corruption aligns with the requirement for Security Controllers to act as the most rigorous internal auditors of national security systems." }
+  ],
+  "interview_recon": "Expect technical briefings that challenge your understanding of 'Western Superiority' and the ethical boundaries of sovereign data. Focus on your experience with Type 1 Cryptography and your ability to maintain 100% mission readiness under the 60-minute response mandate. Reframe anti-establishment history as an uncompromising commitment to system accountability.",
+  "sources": [
+    "cryptopolitan.com, 'Palantir UK Government Contracts 2023-2025,' 2024. [Online].",
+    "quartr.com, 'Alex Karp Technical Philosophy and Patriotic Tech,' 2024. [Online].",
+    "thestreet.com, 'Palantir Revenue Guidance and UK Growth,' 2024. [Online].",
+    "medium.com, 'Understanding Palantir Security Model and Ontology,' 2023. [Online].",
+    "palantir.com, 'Palantir Security Infrastructure and Compliance,' 2025. [Online].",
+    "dataconomy.com, 'Palantir and UK Ministry of Defence Partnership,' 2025. [Online].",
+    "techradar.com, 'Palantir NHS Federated Data Platform Contract Details,' 2023. [Online].",
+    "theregister.com, 'Palantir UK MoD £240M Data Analytics Deal,' 2025. [Online].",
+    "dsei.co.uk, 'Palantir European Defense HQ in London,' 2025. [Online].",
+    "reddit.com, 'r/Palantir - FDE Culture and Work-Life Balance,' 2024. [Online].",
+    "wikipedia.org, 'Palantir Technologies - Corporate Philosophy and Gotham,' 2026. [Online].",
+    "gov.uk, 'UK Government Strategic Partnership with Palantir,' 2025. [Online].",
+    "palantir.com, 'Apollo: The Engine for Continuous Delivery,' 2025. [Online].",
+    "carahsoft.com, 'DoD Impact Level 6 and Palantir Apollo,' 2024. [Online].",
+    "youtube.com, 'Palantir Q4 2025 Earnings Call Summary,' 2026. [Online]."
+  ]
+}

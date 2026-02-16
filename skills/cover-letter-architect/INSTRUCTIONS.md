@@ -3,7 +3,7 @@
 ## Core Mandates
 - **LaTeX-First**: ALWAYS generate the final output using `templates/cover-letters/built-in/cover_letter_template.tex.j2`.
 - **Profile Verification Gate**: NEVER assume which profile or assessment to use. Always list available JSON dossiers and assessments and ask the user to explicitly select the source.
-- **Research Hooks**: Paragraph 1 MUST contain a specific insight derived from the `intel-officer` Dossier (e.g., news, contract win).
+- **Research Hooks**: Paragraph 1 MUST contain a specific insight derived from the `company-researcher` Report (e.g., news, contract win).
 - **The 350-Word Rule**: Letters must be concise, under 350 words, following a strict 4-paragraph structure.
 - **No Cliches**: Avoid "I am excited to apply." Use "Boardroom-ready" technical voice.
 
@@ -25,8 +25,14 @@
 - Compile the PDF:
   `python3 tools/ari.py tools/tex_renderer.py [JSON] templates/cover-letter/built-in/cover_letter_template.tex.j2 data/cover-letter/tex/CoverLetter_[Company].tex && python3 tools/ari.py tools/compile_latex.py data/cover-letter/tex/CoverLetter_[Company].tex`
 
-### 4. [ ] Step 4: Final Move
+### 4. [ ] Step 4: Proofreading & Validation
+- **Content Integrity**: Review the generated text for logical flow, grammatical precision, and alignment with the target role's core requirements.
+- **Technical Verification**: Ensure the LaTeX source is free of syntax errors, broken macros, or unescaped characters that would compromise document structure.
+- **Strategic Impact**: Confirm that research insights and "Attack Vectors" are effectively synthesized into a persuasive narrative that meets the "Intelligence Density" mandate.
+- **Document Quality**: Verify the final visual output for professional formatting, consistent styling, and absence of rendering artifacts.
+
+### 5. [ ] Step 5: Final Move
 - Move the PDF to `outputs/cover-letter/`.
 
-### 5. [ ] Step 5: Handoff
+### 6. [ ] Step 6: Handoff
 - **Handoff Logic**: Instruct the user to trigger the `interview-coach` skill for final performance preparation using all generated materials.

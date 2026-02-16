@@ -11,29 +11,23 @@ from lib.utils import escape_latex, validate_master_path
 from lib.ai_safety import validate_dossier_schema
 
 def run_engine(data_path, template_path, output_path):
-    # Path Validation: Enforce Source of Truth
     data_p = validate_master_path(data_path)
-
-    # Load data
     with open(data_p, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    # Optional: Deterministic Dossier Validation
-    if "Strategy_Dossier" in str(data_p):
+    if any(keyword in str(data_p) for keyword in ["Strategy_Dossier", "Strategy_Report", "Company_Research"]):
         is_valid, error = validate_dossier_schema(data)
         if not is_valid:
             print(f"SECURITY/SCHEMA ERROR: {error}", file=sys.stderr)
             sys.exit(1)
 
-    # Self-healing
     if "resume" in data and len(data) == 1:
         data = data["resume"]
 
-    # Setup Jinja2 environment
     template_file = Path(template_path).resolve()
     env = Environment(
         loader=FileSystemLoader(str(template_file.parent)),
-        autoescape=lambda _: False,  # nosec B701: LaTeX requires special escaping, not HTML
+        autoescape=lambda _: False,
         block_start_string='((%',
         block_end_string='%))',
         variable_start_string='(((',
@@ -42,22 +36,17 @@ def run_engine(data_path, template_path, output_path):
         comment_end_string='#))'
     )
     env.filters['latex_escape'] = escape_latex
-
     template = env.get_template(Path(template_path).name)
-    
-    # Render
     rendered = template.render(resume=data)
 
-    # Save
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(rendered)
     print(f"Successfully generated: {output_path}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Deterministic LaTeX Resume Generator.")
-    parser.add_argument("json_data", help="Path to structured resume JSON")
-    parser.add_argument("template", help="Path to LaTeX Jinja2 template")
-    parser.add_argument("output", help="Path to save generated .tex file")
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument("json_data")
+    parser.add_argument("template")
+    parser.add_argument("output")
     args = parser.parse_args()
     run_engine(args.json_data, args.template, args.output)

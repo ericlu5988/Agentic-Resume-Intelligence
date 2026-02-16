@@ -55,6 +55,10 @@
 - **Action (PDF)**: **Geometric Audit**: Validate every PDF with `tools/fidelity_auditor.py`. Every entity must pass, and the layout drift must be < 10%.
 - Run: `python3 tools/ari.py tools/fidelity_auditor.py data/resume/json/[name]_master.json outputs/resume/[name]_master.pdf`
 - **Rigor Rule**: Any score < 95 requires a correction to the JSON in Step 3 and a re-run of Step 4. **Repeat until the requirement is met.**
+- **General Validation**:
+    - **Content Integrity**: Ensure verbatim extraction of dates, companies, and metrics.
+    - **Technical Verification**: Verify the LaTeX source is free of syntax errors or unescaped character artifacts.
+    - **Document Quality**: Verify the final visual output matches the selected template's professional standards.
 
 ### 6. [ ] Step 6: Final Delivery
 - Present final paths and the **Topological Integrity Score**.

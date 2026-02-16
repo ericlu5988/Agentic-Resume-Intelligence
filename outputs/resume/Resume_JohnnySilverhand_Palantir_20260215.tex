@@ -1,0 +1,206 @@
+\documentclass[9pt]{article}
+
+% ---------------------------------------------------------
+% USER CONFIGURATION
+% ---------------------------------------------------------
+\newcommand{\myname}{Johnny Silverhand}
+\newcommand{\myclearance}{DV-Eligible Vetting Baseline (PMC Transition)}
+\newcommand{\mylocation}{London, UK (Relocation Ready)}
+\newcommand{\myphone}{N/A - Off-Grid}
+\newcommand{\myemail}{burnitdown@samurai.nc}
+\newcommand{\mylinkedin}{linkedin.com/in/johnnysilverhand}
+
+% ---------------------------------------------------------
+% FONT & FORMATTING
+% ---------------------------------------------------------
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\setmainfont{EB Garamond}[
+  Mapping=
+]
+
+\usepackage{enumitem}
+\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt}
+
+\usepackage{multicol}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\usepackage{setspace}
+\singlespacing
+ 
+\setlength{\parindent}{0pt}
+\setstretch{1.05}
+
+% Bullet formatting
+\setlist[itemize]{leftmargin=0.3in, itemsep=2pt}
+
+\usepackage{titlesec}
+
+% Section formatting
+\titleformat*{\section}{\centering\large\bfseries}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+
+% ---------------------------------------------------------
+% CUSTOM ENVIRONMENTS / COMMANDS
+% ---------------------------------------------------------
+
+% Consistent list environment for resume bullets
+\newenvironment{resumeItemList}{%
+  \begin{itemize}[leftmargin=0.25in, itemsep=2pt, topsep=2pt]
+}{%
+  \end{itemize}
+}
+
+% Handy macro for role header lines:
+\newcommand{\role}[5]{%
+  \textbf{#1} -- #2 \quad\textbar\quad \textit{\textbf{#3}} \quad\textbar\quad #4 -- #5%
+}
+
+% ---------------------------------------------------------
+\begin{document}
+
+% ---------------------------------------------------------
+% HEADER
+% ---------------------------------------------------------
+\begin{center}
+    {\Large \textbf{\myname}}\\[4pt]
+    \myclearance \quad\textbar\quad \mylocation \\
+    \myphone \quad\textbar\quad \href{mailto:\myemail}{\myemail} \quad\textbar\quad \href{https://\mylinkedin}{\mylinkedin}
+\end{center}
+
+\vspace{0.5em}
+\hrule
+\vspace{0.75em}
+
+% ---------------------------------------------------------
+\section*{PROFESSIONAL SUMMARY}
+
+High-integrity tactical specialist and Security Controller with extensive experience in \textbf{Compartmented Security Operations}, personnel vetting, and \textbf{managing cryptographic lifecycles}. Proven track record in the oversight of highly classified assets within contested air-gapped environments. Expert in applying \textbf{adversary logic} to harden physical and digital perimeters, ensuring absolute mission integrity for UKG-aligned defense and intelligence systems. Committed to Alex Karp's 'Patriotic Tech' mission and the protection of national digital sovereignty.
+
+% ---------------------------------------------------------
+
+\section*{SKILLS}
+
+\setlength{\columnsep}{1em}
+\begin{multicols}{3}
+\begin{itemize}[leftmargin=*, rightmargin=0pt, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+\small
+
+  \item Cryptographic Custodian
+
+  \item Personnel Vetting (DV-Level)
+
+  \item Facility Security CSO
+
+  \item Adversary Logic Red-Teaming
+
+  \item UKG Security Policy Alignment
+
+  \item Crisis Command & Control
+
+\end{itemize}
+\end{multicols}
+
+
+% ---------------------------------------------------------
+\section*{PROFESSIONAL EXPERIENCE}
+
+
+\role{Militech (Strategic Defense \& Intelligence Operations)}{London/NC}{Compartmented Security Lead}{Aug 2023}{Aug 2023}
+
+\begin{resumeItemList}
+
+  \item {Directed security briefings and personnel vetting for high-intensity extraction missions, ensuring 100\% integrity of DV-equivalent clearance protocols.}
+
+  \item {Served as the \textbf{Compartmented Security Officer (CSO)}, coordinating inter-agency strategic liaison between Militech command and independent tactical assets.}
+
+  \item {Managed the full lifecycle of \textbf{cryptographic Type 1 materials}, maintaining zero-latency accountability logs in high-threat, air-gapped environments.}
+
+\end{resumeItemList}
+\vspace{0.5em}
+
+\role{SAMURAI (Strategic Communications & Auditing)}{NC/Global}{Strategic Auditor & Frontman}{2003}{2008}
+
+\begin{resumeItemList}
+
+  \item {Utilized mass-market communications to achieve international shift in public perception, focusing on institutional accountability and veteran integration.}
+
+  \item {Exposed systemic institutional corruption through high-fidelity intelligence gathering, serving as a primary external auditor of corporate-state hegemony.}
+
+  \item {Managed high-visibility strategic operations, ensuring mission-critical security of internal communications and personnel metadata.}
+
+\end{resumeItemList}
+\vspace{0.5em}
+
+\role{U.S. Marine Corps (2nd Marine Division)}{Nicaragua}{Tactical Ops (Sensitive Materials)}{2003}{2003}
+
+\begin{resumeItemList}
+
+  \item {Deployed to contested environments, participating in tactical raids focused on the protection and extraction of sensitive field communications.}
+
+  \item {Maintained 100\% security of field-standard cryptographic material while operating under active fire and intense operational friction.}
+
+  \item {Successfully integrated advanced cybernetic mission logic (Silverhand identity) to maintain mission-readiness post-combat injury.}
+
+\end{resumeItemList}
+\vspace{0.5em}
+
+
+% ---------------------------------------------------------
+\section*{EDUCATION}
+
+\begin{center}
+
+\textbf{Tactical Survival \& Security Training} \quad\textbar\quad Streets of Night City / Nomad Clans \quad\textbar\quad 1988--2003 \\
+\textit{Focus: Cryptographic Material Handling, Survivalism, and Music Theory}\\
+
+\end{center}
+
+% ---------------------------------------------------------
+
+
+% ---------------------------------------------------------
+\section*{CERTIFICATIONS}
+
+\begin{multicols}{2}
+\centering
+\small
+
+DCRT (DoD Certified Red Team) --- Equivalent\\
+
+UKNDS Crypto Custodian (In-Progress/Willing)\\
+
+\end{multicols}
+
+% ---------------------------------------------------------
+
+\section*{TECHNICAL SKILLS}
+
+\begin{center}
+\small
+\textbf{Security Operations} \quad\textbar\quad Adversary Emulation • Gotham/Apollo Logic • Crypto Lifecycle • Red Teaming\\
+\textbf{Systems & Policy} \quad\textbar\quad UKG Standards Alignment • IL6/FedRAMP Awareness • Personnel Vetting\\
+\textbf{Cyberware Integration} \quad\textbar\quad Chromed Left Arm • Sandevistan Boost • Cyberoptics • Interface Plugs\\
+
+\end{center}
+
+
+% ---------------------------------------------------------
+
+\section*{AWARDS \& RECOGNITION}
+
+\begin{center}
+\small
+Night City Legend (Posthumous)\\
+Breathtaking Achievement (Apparel Collection)\\
+Ghost Story Status (Arasaka Corporation internal lore)\\
+
+\end{center}
+
+
+\end{document}

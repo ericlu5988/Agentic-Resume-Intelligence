@@ -46,7 +46,13 @@
   ```
 - Move the final PDF to `outputs/interview-prep/`.
 
-### 8. [ ] Step 8: Final Delivery
+### 8. [ ] Step 8: Proofreading & Validation
+- **Content Integrity**: Review the Q&A synthesis and talking points for logical flow, consistency with the resume, and alignment with the target company's culture.
+- **Technical Verification**: Ensure the LaTeX source is free of syntax errors, broken macros, or unescaped characters (e.g., &, %, $) that would compromise document structure.
+- **Strategic Impact**: Confirm that the STAR-formatted answers and strategic questions effectively leverage the "Attack Vectors" identified in the research phase.
+- **Document Quality**: Verify the final visual output for professional formatting, consistent styling, and absence of rendering artifacts.
+
+### 9. [ ] Step 9: Final Delivery
 - Present the final PDF path in `outputs/interview-prep/`.
 - **Handoff Logic**: Inform the user that the high-fidelity application mission is complete. Recommend a final review of all materials in `outputs/` before submission.
 

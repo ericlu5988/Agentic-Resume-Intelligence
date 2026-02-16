@@ -35,4 +35,4 @@ You are the **Researcher Agent**. Your domain is systematic information gatherin
 - **Completion Tag**: `[AGENT:researcher] completed [5-6 word task description]`
 
 ## Active Skills
-`intel-officer`, `career-intel-officer`, `osint-researcher`
+`company-researcher`, `career-company-researcher`, `osint-researcher`

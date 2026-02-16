@@ -4,6 +4,10 @@ import json
 import argparse
 from pathlib import Path
 
+# Import shared utils
+sys.path.append(str(Path(__file__).parent))
+from lib.utils import sanitize_text
+
 try:
     import pdfplumber
 except ImportError:
@@ -72,7 +76,7 @@ def process_line(words):
     """
     Combines words in a line and calculates average metadata.
     """
-    text = " ".join([w["text"] for w in words])
+    text = sanitize_text(" ".join([w["text"] for w in words]))
     avg_size = sum([float(w.get("size", 0)) for w in words]) / len(words)
     fonts = list(set([w.get("fontname", "unknown") for w in words]))
     is_bold = any("bold" in f.lower() for f in fonts)

@@ -36,7 +36,7 @@ Each phase is governed by a specialized agent and a dedicated skill to ensure ma
 | :--- | :--- | :--- | :--- |
 | 1 | **resume-importer** | `writer` | `data/resume/tex/` (Living Master) |
 | 2 | **opportunity-evaluator** | `advisor` | `outputs/match-assessment/[...].pdf` |
-| 3 | **intel-officer** | `researcher` | `outputs/company-research/[...].pdf` |
+| 3 | **company-researcher** | `researcher` | `outputs/company-research/[...].pdf` |
 | 4 | **resume-tailor-pro** | `writer` | Tailored Master `.tex` and PDF |
 | 5 | **cover-letter-architect** | `writer` | `outputs/cover-letter/[...].pdf` |
 | 6 | **interview-coach** | `advisor` | `outputs/interview-prep/[...].pdf` |
@@ -55,7 +55,7 @@ During import workflows, you MUST follow the **Template Selection Gate** procedu
 3.  Recommend the best fit or generate a bespoke solution.
 
 ### 3. Intelligence Gathering (Discovery Phase)
-- **Mandate**: All intelligence gathering must adhere to the **No Terse Rule** and **IEEE Citation Protocol** as defined in `skills/intel-officer/INSTRUCTIONS.md`.
+- **Mandate**: All intelligence gathering must adhere to the **No Terse Rule** and **IEEE Citation Protocol** as defined in `skills/company-researcher/INSTRUCTIONS.md`.
 
 ### 4. Document Generation (Render Phase)
 - **Mandate**: All document generation must follow the **Deterministic Rendering** and **Fidelity Audit** protocols defined in `skills/resume-importer/INSTRUCTIONS.md` and `skills/opportunity-evaluator/INSTRUCTIONS.md`.

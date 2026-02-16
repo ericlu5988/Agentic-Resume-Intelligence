@@ -1,0 +1,59 @@
+{
+  "candidate": "Johnny Silverhand",
+  "job_title": "Security Controller",
+  "company": "Palantir",
+  "assessment_date": "Monday, February 16, 2026",
+  "overall_score": 15.3,
+  "decision": "NO-GO",
+  "scoring_breakdown": {
+    "required_skills": {
+      "weight": 40,
+      "score": 15,
+      "details": "Possesses deep experience in Type 1 Cryptography and high-stakes vetting, but lacks UK citizenship/DV-clearance and UKNDS certifications."
+    },
+    "experience_level": {
+      "weight": 25,
+      "score": 20,
+      "details": "Combat-proven tactical leadership is exceptional; however, compliance-based security auditing is 'bridged' rather than direct."
+    },
+    "nice_to_have": {
+      "weight": 20,
+      "score": 10,
+      "details": "Strong inter-agency liaison potential demonstrated through PMC strategic coordination roles."
+    },
+    "industry_match": {
+      "weight": 15,
+      "score": 15,
+      "details": "Military veteran background aligns with Palantir's 'Patriotic Tech' DNA, despite previous anti-corporate history."
+    }
+  },
+  "strengths": [
+    "Type 1 Cryptographic Custodianship -- Ensures 100% accountability of sensitive digital assets in high-threat environments.",
+    "Adversary Logic Integration -- Provides an authentic Red-Team perspective for hardening secure facilities against sophisticated breaches.",
+    "Zero-Latency Decision Making -- Combat-hardened leadership capable of operating within the 60-minute response mandate."
+  ],
+  "gaps": [
+    {
+      "area": "UK Government Clearance (DV)",
+      "impact": "Terminal Block. Ineligibility for UK DV-clearance prevents access to compartmented intelligence.",
+      "mitigation": "Strategic Bridging: Reframe as 'Eligible for Private Sector Equivalent' and target Palantir's commercial or non-UKG defense portfolios."
+    },
+    {
+      "area": "UKG Compliance Standards",
+      "impact": "Critical Gap. No formal experience with UK MoD or UK Intelligence security frameworks.",
+      "mitigation": "Highlight USMC and Militech security protocols as topological equivalents to UKG standards."
+    }
+  ],
+  "red_flags": {
+    "certification_gap": "FLAG: Lacks UKNDS Crypto Custodian and CSO certifications.",
+    "experience_gap": "CLEAR: Bridged via high-stakes facility security roles in the PMC sector.",
+    "tech_stack_mismatch": "CLEAR: Experience with air-gapped mainframes aligns with Apollo/Gotham deployments.",
+    "location_conflict": "NOTED: Candidate is relocation-ready to within the required 60-minute radius."
+  },
+  "priority_emphasis_areas": [
+    "Emphasize 'Accountability Auditing' to mitigate anti-corporate history.",
+    "Leverage 'Adversary Logic' as a unique selling point for Red-Teaming.",
+    "Highlight Type 1 Cryptography expertise as a direct match for UKNDS requirements."
+  ],
+  "strategic_recommendation": "The candidate remains a NO-GO for the UKG-specific Security Controller role due to the terminal citizenship and clearance requirements. However, the 'Strategic Bridging' performed during tailoring reveals an exceptional fit for Palantir's high-tier private security, offensive research, or international defense deployments where field-hardened leadership and 'Adversary Logic' are more valuable than specific government vetting. Recommend pivoting the application to Palantir's 'Global Security' or 'FDE' divisions."
+}
