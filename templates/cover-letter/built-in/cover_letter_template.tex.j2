@@ -15,6 +15,21 @@
 
 \definecolor{briefblue}{RGB}{0, 51, 102}
 
+((# 
+  AGENT HINT: REQUIRED JSON SCHEMA
+  -------------------------------
+  {
+    "name": "Candidate Name",
+    "location": "Candidate City, ST",
+    "phone": "Candidate Phone",
+    "email": "Candidate Email",
+    "linkedin": "Candidate LinkedIn",
+    "company": "Target Company",
+    "target_location": "Target Location",
+    "paragraphs": ["Para 1", "Para 2", "Para 3", "Para 4"]
+  }
+#))
+
 % ---------------------------------------------------------
 \begin{document}
 
@@ -47,9 +62,13 @@ Dear Hiring Manager,
 \vspace{1em}
 
 % --- BODY ---
-((( resume.cover_letter_content )))
+((% for para in resume.paragraphs %))
+((( para|latex_escape )))
 
-\vspace{2em}
+\vspace{1em}
+((% endfor %))
+
+\vspace{1em}
 
 % --- CLOSING ---
 Sincerely,

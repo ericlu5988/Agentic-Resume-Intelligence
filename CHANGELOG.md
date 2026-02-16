@@ -2,6 +2,21 @@
 
 All notable changes to the **Agentic Resume Intelligence** project during the February 2026 refactoring and improvement session.
 
+## [1.3.1] - 2026-02-15
+
+### 🛠️ Tooling & Pipeline Hardening
+- **Strict Rendering Enforcement**: Enabled `StrictUndefined` in `tools/tex_renderer.py` to prevent silent rendering of empty variables. The system now fails fast and provides robust error messages if JSON data is missing keys required by the template.
+- **Adaptive Template Discovery**: Implemented a **Template Discovery** protocol in the `cover-letter-architect` skill, mandating that agents read the target `.tex.j2` file to dynamically identify required JSON keys before generation.
+- **Hint-Driven Templating**: Integrated **Agent Hints** (embedded comments) directly into `templates/cover-letter/built-in/cover_letter_template.tex.j2` to provide systemic guidance on required schema during the discovery phase.
+- **Paragraph Logic Restoration**: Refactored the cover letter template to utilize a `paragraphs` list structure, enabling precise control over layout and ensuring reliable `\vspace` between narrative blocks.
+- **Automated LaTeX Escaping**: Enforced the `|latex_escape` filter across all dynamic template variables to ensure special characters (e.g., `$`, `_`, `&`) do not break the LaTeX compilation process.
+
+### 📂 Standardization & Integrity
+- **Filename Standardization**: Standardized all generated artifacts across `data/` and `outputs/` to a unified `snake_case` naming convention (e.g., `company_research_palantir_silverhand.json`).
+- **Skill Mandate Alignment**: Updated instructions for `company-researcher`, `cover-letter-architect`, and `resume-tailor-pro` to explicitly enforce standardized output naming.
+- **Project-Wide Synchronization**: Updated `.gitignore` whitelists and `README.md` mission showcase links to align with the new naming standards.
+- **Intelligence Protocol Restoration**: Fully restored the high-fidelity **Career Strategist Protocol** to the `company-researcher` skill, re-integrating mandates for Maximum Density, Strategic Voice, and the "So What?" Principle.
+
 ## [1.3.0] - 2026-02-15
 
 ### 🧠 Core Agentic Skills Rollout

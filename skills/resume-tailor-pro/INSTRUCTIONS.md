@@ -54,7 +54,7 @@
 ### 4. [ ] Step 4: Surgical Drafting & Compilation
 - Extract candidate's name from the LaTeX source for filename generation.
 - **Surgical Edit**: Perform direct text replacements within the selected `.tex` file. 
-- Save the tailored version to `outputs/resume/Resume_[Name]_[Company]_[Date].tex`.
+- Save the tailored version to `outputs/resume/resume_tailored_[name]_[company]_[date].tex`.
 - Execute `python3 tools/ari.py tools/compile_latex.py [OUTPUT_TEX]`.
 
 ### 5. [ ] Step 5: Length Optimization (Iterative)

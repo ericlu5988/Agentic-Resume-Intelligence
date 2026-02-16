@@ -74,9 +74,9 @@ Experience the full ARI transformation using the combat-hardened **Johnny Silver
 
 1.  **Original Source**: [imports/johnny_silverhand.pdf](./imports/johnny_silverhand.pdf) (Legacy PDF)
 2.  **Assessment**: [Opportunity Assessment PDF](./outputs/match-assessment/match_assessment_johnny_silverhand_palantir.pdf) | [JSON](./data/match-assessment/json/match_assessment_johnny_silverhand_palantir.json)
-3.  **Intelligence**: [Mission Intelligence Report (PDF)](./outputs/company-research/Strategy_Report_Palantir_Silverhand.pdf) | [JSON](./data/company-research/json/Strategy_Report_Palantir_Silverhand.json)
-4.  **Tailored Master**: [Targeted Resume (PDF)](./outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.pdf) | [LaTeX Master](./outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.tex)
-5.  **Architecture**: [Research-Hooked Cover Letter](./outputs/cover-letter/CoverLetter_Palantir_Silverhand.pdf) | [LaTeX](./data/cover-letter/tex/CoverLetter_Palantir_Silverhand.tex)
+3.  **Intelligence**: [Mission Intelligence Report (PDF)](./outputs/company-research/company_research_palantir_silverhand.pdf) | [JSON](./data/company-research/json/company_research_palantir_silverhand.json)
+4.  **Tailored Master**: [Targeted Resume (PDF)](./outputs/resume/resume_tailored_johnnysilverhand_palantir_20260215.pdf) | [LaTeX Master](./outputs/resume/resume_tailored_johnnysilverhand_palantir_20260215.tex)
+5.  **Architecture**: [Research-Hooked Cover Letter](./outputs/cover-letter/cover_letter_palantir_silverhand.pdf) | [LaTeX](./data/cover-letter/tex/cover_letter_palantir_silverhand.tex)
 6.  **Preparation**: [Interview Coaching Guide](./outputs/interview-prep/interview_prep_johnny_silverhand_palantir.pdf) | [JSON](./data/interview-prep/json/interview_prep_johnny_silverhand_palantir.json)
 
 ---

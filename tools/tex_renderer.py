@@ -3,7 +3,7 @@ import json
 import sys
 import argparse
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 # Import shared utils
 sys.path.append(str(Path(__file__).parent))
@@ -28,6 +28,7 @@ def run_engine(data_path, template_path, output_path):
     env = Environment(
         loader=FileSystemLoader(str(template_file.parent)),
         autoescape=lambda _: False,
+        undefined=StrictUndefined,
         block_start_string='((%',
         block_end_string='%))',
         variable_start_string='(((',
@@ -37,7 +38,13 @@ def run_engine(data_path, template_path, output_path):
     )
     env.filters['latex_escape'] = escape_latex
     template = env.get_template(Path(template_path).name)
-    rendered = template.render(resume=data)
+    
+    try:
+        rendered = template.render(resume=data)
+    except Exception as e:
+        print(f"RENDERING ERROR: {e}", file=sys.stderr)
+        print(f"CRITICAL: One or more variables required by the template are missing from the JSON data.", file=sys.stderr)
+        sys.exit(1)
 
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(rendered)

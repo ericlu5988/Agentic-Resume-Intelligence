@@ -21,9 +21,10 @@
 - **Paragraph 4: Call to Action**: Professional closing and request for interview.
 
 ### 3. [ ] Step 3: LaTeX Generation
-- Map content to a temporary JSON.
-- Compile the PDF:
-  `python3 tools/ari.py tools/tex_renderer.py [JSON] templates/cover-letter/built-in/cover_letter_template.tex.j2 data/cover-letter/tex/CoverLetter_[Company].tex && python3 tools/ari.py tools/compile_latex.py data/cover-letter/tex/CoverLetter_[Company].tex`
+- **Template Discovery**: Read the target Jinja2 template (e.g., `templates/cover-letter/built-in/cover_letter_template.tex.j2`) to identify the required JSON keys (e.g., `resume.name`, `resume.paragraphs`).
+- **Data Mapping**: Generate a valid single-line JSON file mapping the synthesized content to the keys discovered in the template. **Mandate**: Use the `paragraphs` (list of strings) structure if defined in the template to ensure proper LaTeX rendering and escaping.
+- **Render & Compile**:
+  `python3 tools/ari.py tools/tex_renderer.py [JSON] [TEMPLATE] data/cover-letter/tex/cover_letter_[company]_[candidate].tex && python3 tools/ari.py tools/compile_latex.py data/cover-letter/tex/cover_letter_[company]_[candidate].tex`
 
 ### 4. [ ] Step 4: Proofreading & Validation
 - **Content Integrity**: Review the generated text for logical flow, grammatical precision, and alignment with the target role's core requirements.

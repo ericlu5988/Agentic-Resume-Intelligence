@@ -7,18 +7,18 @@ imports/*
 data/**/json/*
 !data/**/json/.gitkeep
 !data/resume/json/johnny_silverhand.json
-!data/company-research/json/Strategy_Report_Palantir_Silverhand.json
+!data/company-research/json/company_research_palantir_silverhand.json
 !data/match-assessment/json/match_assessment_johnny_silverhand_palantir.json
 !data/interview-prep/json/interview_prep_johnny_silverhand_palantir.json
-!data/cover-letter/json/CoverLetter_Palantir_Silverhand.json
+!data/cover-letter/json/cover_letter_palantir_silverhand.json
 
 data/**/tex/*
 !data/**/tex/.gitkeep
 !data/resume/tex/johnny_silverhand.tex
-!data/company-research/tex/Strategy_Report_Palantir_Silverhand.tex
+!data/company-research/tex/company_research_palantir_silverhand.tex
 !data/match-assessment/tex/match_assessment_johnny_silverhand_palantir.tex
 !data/interview-prep/tex/interview_prep_johnny_silverhand_palantir.tex
-!data/cover-letter/tex/CoverLetter_Palantir_Silverhand.tex
+!data/cover-letter/tex/cover_letter_palantir_silverhand.tex
 
 .tmp/
 TODO
@@ -39,12 +39,12 @@ outputs/*
 outputs/resume/*
 !outputs/resume/.gitkeep
 !outputs/resume/johnny_silverhand.pdf
-!outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.pdf
-!outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.tex
+!outputs/resume/resume_tailored_johnnysilverhand_palantir_20260215.pdf
+!outputs/resume/resume_tailored_johnnysilverhand_palantir_20260215.tex
 
 outputs/company-research/*
 !outputs/company-research/.gitkeep
-!outputs/company-research/Strategy_Report_Palantir_Silverhand.pdf
+!outputs/company-research/company_research_palantir_silverhand.pdf
 
 outputs/match-assessment/*
 !outputs/match-assessment/.gitkeep
@@ -56,7 +56,7 @@ outputs/interview-prep/*
 
 outputs/cover-letter/*
 !outputs/cover-letter/.gitkeep
-!outputs/cover-letter/CoverLetter_Palantir_Silverhand.pdf
+!outputs/cover-letter/cover_letter_palantir_silverhand.pdf
 
 # Templates (Track built-in, ignore bespoke)
 templates/**/bespoke/*
@@ -97,11 +97,11 @@ semgrep_report.txt
 *.pdf
 !imports/johnny_silverhand.pdf
 !outputs/resume/johnny_silverhand.pdf
-!outputs/resume/Resume_JohnnySilverhand_Palantir_20260215.pdf
-!outputs/company-research/Strategy_Report_Palantir_Silverhand.pdf
+!outputs/resume/resume_tailored_johnnysilverhand_palantir_20260215.pdf
+!outputs/company-research/company_research_palantir_silverhand.pdf
 !outputs/match-assessment/match_assessment_johnny_silverhand_palantir.pdf
 !outputs/interview-prep/interview_prep_johnny_silverhand_palantir.pdf
-!outputs/cover-letter/CoverLetter_Palantir_Silverhand.pdf
+!outputs/cover-letter/cover_letter_palantir_silverhand.pdf
 *.synctex.gz
 
 # OS Specific
